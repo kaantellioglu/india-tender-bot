@@ -20,16 +20,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Python kur
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
-
       - name: Bagimliliklari kur
         run: pip install -r requirements.txt
-
       - name: Taramayi calistir
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -40,10 +37,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -m src.main --max-pdf-parses 120
-
       - name: Dashboard JSON uret
         run: python -m scripts.export_to_json
-
       - name: Dashboard verisini dogrula
         run: |
           python - <<'PY'
@@ -52,21 +47,22 @@ jobs:
           p = Path("docs/data.json")
           if not p.exists():
               raise SystemExit("docs/data.json olusmadi")
-          data = json.loads(p.read_text(encoding="utf-8"))
+          raw = p.read_text(encoding="utf-8")
+          if len(raw.strip()) < 100:
+              raise SystemExit("docs/data.json bos veya gecersiz gorunuyor")
+          data = json.loads(raw)
           dashboard = data.get("dashboard", {})
           print("generated_at:", dashboard.get("generated_at"))
-          print("portal_count:", dashboard.get("portal_count"))
-          print("tender_count:", dashboard.get("tender_count"))
-          print("high_priority_count:", dashboard.get("high_priority_count"))
-          print("failure_count:", dashboard.get("failure_count"))
-          print("open_access_review_count:", dashboard.get("open_access_review_count"))
-          print("source_cleanup_count:", dashboard.get("source_cleanup_count"))
-          required = ["dashboard", "portals", "tenders", "price_intelligence", "portal_health", "source_failures", "access_queue", "source_cleanup"]
+          print("clean_tender_count:", dashboard.get("tender_count"))
+          print("raw_tender_count:", dashboard.get("raw_tender_count"))
+          print("review_tender_count:", dashboard.get("review_tender_count"))
+          print("rejected_tender_count:", dashboard.get("rejected_tender_count"))
+          print("price_row_count:", dashboard.get("price_row_count"))
+          required = ["dashboard", "portals", "tenders", "raw_tenders", "quality_review", "price_intelligence", "portal_health", "source_failures", "access_queue", "source_cleanup"]
           missing = [k for k in required if k not in data]
           if missing:
               raise SystemExit(f"data.json eksik alanlar: {missing}")
           PY
-
       - name: Guncellenen dosyalari commitle ve pushla
         run: |
           git config user.name "eska-tender-bot"
@@ -75,7 +71,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Degisiklik yok"
           else
-            git commit -m "Otomatik tarama ve dashboard: $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Otomatik clean market intelligence: $(date -u +'%Y-%m-%d %H:%M UTC')"
             git pull --rebase origin main
             git push origin main
           fi
