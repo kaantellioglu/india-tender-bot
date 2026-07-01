@@ -39,6 +39,43 @@ Excel dosyasina** (ayni sekme/kolon yapisiyla) ekler.
   `04 Tender Register` mantigi). Bot rakiplerin kendi fiyat listelerini veya
   gizli tekliflerini bulamaz — sadece kamuya acik ihale sonuc belgelerini.
 
+## Web arayüzü (GitHub Pages dashboard)
+
+`docs/index.html`, xlsx dosyasindaki veriyi okunabilir, filtrelenebilir bir
+web sayfasina cevirir. Tarayici xlsx'i dogrudan okuyamadigi icin,
+`scripts/export_to_json.py` xlsx'teki 4 ana sekmeyi (`04 Tender Register`,
+`06 Price Intelligence`, `01 Portal Master`, `07 Competitor DB`)
+`docs/data.json`'a cevirir; `index.html` bu JSON'u `fetch()` ile okuyup
+tablo halinde gosterir.
+
+**Ozellikler:** arama/filtre kutulari, sutun basligina tiklayarak siralama,
+ihale durumu icin renkli etiketler (Awarded/Docs Found/New Lead), portal
+tier filtreleri, ust kisimda ozet sayac paneli.
+
+### GitHub Pages'i acma (tek seferlik)
+
+1. Repo → **Settings → Pages**
+2. "Build and deployment" altinda **Source: Deploy from a branch** sec
+3. **Branch: `main`**, klasor: **`/docs`** sec, **Save**
+4. Birkac dakika icinde sayfa `https://<kullanici-adi>.github.io/india-tender-bot/`
+   adresinde yayinda olur
+
+Her `daily_scan.yml` calistiginda `docs/data.json` otomatik guncellenir ve
+commitlenir, yani dashboard **her gun kendiliginden tazelenir** — ayrica
+bir deploy adimina gerek yok (GitHub Pages, `/docs` klasorundeki
+degisiklikleri otomatik yayinlar).
+
+### Elle guncelleme (lokal test icin)
+
+```bash
+python -m src.main                 # taramayi calistir, xlsx'i guncelle
+python scripts/export_to_json.py   # docs/data.json'i uret
+# docs/index.html'i tarayicida acmak icin basit bir sunucu gerekir
+# (file:// ile acarsan fetch() CORS hatasi verir):
+python -m http.server 8000 --directory docs
+# tarayicida http://localhost:8000 adresini ac
+```
+
 ## Kurulum
 
 ```bash
@@ -104,9 +141,14 @@ india-tender-bot/
 │   │   └── notify.py        # E-posta / Telegram bildirimi
 │   ├── portal_loader.py     # config/*.yaml okuma
 │   └── main.py               # Orkestratör (CLI giris noktasi)
+├── scripts/
+│   └── export_to_json.py    # xlsx -> docs/data.json (dashboard verisi)
+├── docs/
+│   ├── index.html            # GitHub Pages dashboard (tek dosya, JS+CSS icinde)
+│   └── data.json             # index.html'in okudugu veri (otomatik uretilir)
 ├── data/
 │   └── India_Procurement_Intelligence_Database.xlsx  # Uzerine yazilan ana dosya
-└── .github/workflows/daily_scan.yml   # Gunluk otomatik calistirma
+└── .github/workflows/daily_scan.yml   # Gunluk otomatik calistirma + dashboard guncelleme
 ```
 
 ## Genisletme onerileri (sonraki adimlar)

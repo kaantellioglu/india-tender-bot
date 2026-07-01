@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESKA // India Tender Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0F1417;
+    --panel:#171E23;
+    --panel-2:#1D262C;
+    --line:#2A353D;
+    --amber:#FF8A3D;
+    --cyan:#4FB8D0;
+    --text:#EDEAE2;
+    --muted:#8B99A0;
+    --green:#6FCF97;
+    --red:#E8664F;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg-deep);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    min-height:100vh;
+  }
+  ::selection{background:var(--amber);color:#0F1417;}
+
+  /* ---------- Header / Nameplate ---------- */
+  header.nameplate{
+    padding:28px 32px 20px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(255,138,61,0.04), transparent 60%),
+      var(--panel);
+  }
+  .nameplate-inner{
+    max-width:1280px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;
+  }
+  .brand-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--amber); margin:0 0 6px;
+  }
+  h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:clamp(24px,3.4vw,38px);
+    letter-spacing:.01em;
+    margin:0;
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--cyan);}
+  .meta-block{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+    text-align:right;
+  }
+  .meta-block .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--green); margin-right:6px;
+    box-shadow:0 0 6px var(--green);
+  }
+
+  /* ---------- Pipeline divider (signature element) ---------- */
+  .flange-divider{
+    max-width:1280px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; gap:0;
+    height:18px;
+  }
+  .flange-divider::before,.flange-divider::after{content:none;}
+  .flange-line{
+    flex:1; height:1px; background:
+      repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);
+    position:relative;
+  }
+  .flange-bolt{
+    width:5px;height:5px;border-radius:50%;
+    background:var(--line); flex-shrink:0; margin:0 18px;
+  }
+
+  main{max-width:1280px; margin:0 auto; padding:24px 32px 60px;}
+
+  /* ---------- Stat gauges ---------- */
+  .gauges{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .gauge{
+    background:var(--panel); padding:16px 18px; position:relative;
+  }
+  .gauge .num{
+    font-family:'Oswald',sans-serif; font-size:30px; font-weight:600;
+    color:var(--text); line-height:1;
+  }
+  .gauge .num.accent{color:var(--amber);}
+  .gauge .lbl{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+    margin-top:6px;
+  }
+  .gauge .tick{
+    position:absolute; top:0; left:0; width:100%; height:3px;
+    background:linear-gradient(90deg, var(--amber), var(--cyan));
+    opacity:.6;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    display:flex; gap:2px; margin-bottom:16px; border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.05em;
+    text-transform:uppercase; color:var(--muted);
+    background:transparent; border:none; padding:11px 18px;
+    cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap;
+    transition:color .15s, border-color .15s;
+  }
+  .tab-btn:hover{color:var(--text);}
+  .tab-btn.active{color:var(--amber); border-bottom-color:var(--amber);}
+
+  .panel-view{display:none;}
+  .panel-view.active{display:block;}
+
+  /* ---------- Toolbar ---------- */
+  .toolbar{
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center;
+  }
+  input[type="text"], select{
+    background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    font-family:'Inter',sans-serif; font-size:13px; padding:8px 12px;
+    border-radius:var(--radius);
+  }
+  input[type="text"]{min-width:220px; flex:1;}
+  input[type="text"]:focus, select:focus{outline:1px solid var(--cyan); border-color:var(--cyan);}
+  .result-count{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted);
+    margin-left:auto; white-space:nowrap;
+  }
+
+  /* ---------- Table ---------- */
+  .table-wrap{
+    border:1px solid var(--line); overflow-x:auto; background:var(--panel);
+  }
+  table{width:100%; border-collapse:collapse; min-width:640px;}
+  thead th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.05em; text-transform:uppercase; color:var(--muted);
+    padding:10px 14px; border-bottom:1px solid var(--line);
+    background:var(--panel-2); position:sticky; top:0; cursor:pointer;
+    white-space:nowrap; user-select:none;
+  }
+  thead th:hover{color:var(--amber);}
+  thead th .arrow{opacity:.5; margin-left:4px; font-size:10px;}
+  tbody td{
+    padding:10px 14px; border-bottom:1px solid var(--line);
+    font-size:13px; vertical-align:top;
+  }
+  tbody tr:hover{background:rgba(79,184,208,0.05);}
+  tbody tr:last-child td{border-bottom:none;}
+  .mono{font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+  .muted{color:var(--muted);}
+  a.link{color:var(--cyan); text-decoration:none; border-bottom:1px dotted var(--cyan);}
+  a.link:hover{color:var(--amber); border-color:var(--amber);}
+
+  /* status pill (valve indicator) */
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.03em;
+    padding:3px 9px; border-radius:20px; border:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .pill .valve{width:6px;height:6px;border-radius:50%;}
+  .pill.awarded{color:var(--green);} .pill.awarded .valve{background:var(--green); box-shadow:0 0 5px var(--green);}
+  .pill.docs{color:var(--amber);} .pill.docs .valve{background:var(--amber); box-shadow:0 0 5px var(--amber);}
+  .pill.lead{color:var(--muted);} .pill.lead .valve{background:var(--muted);}
+  .pill.tier1{color:var(--amber); border-color:rgba(255,138,61,.35);}
+  .pill.tier2{color:var(--cyan); border-color:rgba(79,184,208,.35);}
+  .pill.tier3{color:var(--muted);}
+
+  .empty-state{
+    padding:48px 20px; text-align:center; color:var(--muted);
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+  }
+
+  footer{
+    max-width:1280px; margin:0 auto; padding:20px 32px 40px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    border-top:1px solid var(--line); margin-top:20px;
+  }
+
+  @media (max-width:640px){
+    header.nameplate, main, footer{padding-left:16px; padding-right:16px;}
+    .meta-block{text-align:left;}
+    .nameplate-inner{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nameplate">
+  <div class="nameplate-inner">
+    <div>
+      <p class="brand-eyebrow">ESKA &middot; Sales &amp; After-Sales Intelligence</p>
+      <h1>India Tender <span>Intelligence</span></h1>
+    </div>
+    <div class="meta-block">
+      <div><span class="dot"></span>son güncelleme: <span id="generatedAt">—</span></div>
+      <div id="statusLine" class="muted">veri yükleniyor…</div>
+    </div>
+  </div>
+</header>
+
+<div class="flange-divider"><div class="flange-line"></div><div class="flange-bolt"></div><div class="flange-line"></div><div class="flange-bolt"></div><div class="flange-line"></div></div>
+
+<main>
+
+  <section class="gauges" id="gauges">
+    <!-- JS ile doldurulacak -->
+  </section>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="tenders">İhale Kayıtları</button>
+    <button class="tab-btn" data-tab="price">Fiyat İstihbaratı</button>
+    <button class="tab-btn" data-tab="portals">Portallar</button>
+    <button class="tab-btn" data-tab="competitors">Rakipler</button>
+    <button class="tab-btn" data-tab="log">Tarama Günlüğü</button>
+  </nav>
+
+  <!-- ---------- TENDERS ---------- -->
+  <section class="panel-view active" id="view-tenders">
+    <div class="toolbar">
+      <input type="text" id="tendersSearch" placeholder="Ara: firma, ürün, kazanan, referans…">
+      <select id="tendersStatus">
+        <option value="">Tüm durumlar</option>
+      </select>
+      <span class="result-count" id="tendersCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="tendersTable">
+        <thead><tr>
+          <th data-key="tender_id">ID</th>
+          <th data-key="company">Firma</th>
+          <th data-key="tender_ref">Ref</th>
+          <th data-key="tender_date">Tarih</th>
+          <th data-key="status">Durum</th>
+          <th data-key="product_segment">Segment</th>
+          <th data-key="qty">Miktar</th>
+          <th data-key="winner">Kazanan</th>
+          <th data-key="unit_eur_incl_gst">Birim €(KDV dahil)</th>
+          <th data-key="source_url">Kaynak</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
+    </div>
+  </section>
+
+  <!-- ---------- PRICE INTELLIGENCE ---------- -->
+  <section class="panel-view" id="view-price">
+    <div class="toolbar">
+      <input type="text" id="priceSearch" placeholder="Ara: firma, segment, kazanan…">
+      <span class="result-count" id="priceCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="priceTable">
+        <thead><tr>
+          <th data-key="tender_id">ID</th>
+          <th data-key="company">Firma</th>
+          <th data-key="year">Yıl</th>
+          <th data-key="product_segment">Segment</th>
+          <th data-key="qty">Miktar</th>
+          <th data-key="winner">Kazanan</th>
+          <th data-key="total_eur_basic">Toplam € (Basic)</th>
+          <th data-key="unit_eur_basic">Birim €</th>
+          <th data-key="confidence">Güven</th>
+          <th data-key="source_url">Kaynak</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
+    </div>
+  </section>
+
+  <!-- ---------- PORTALS ---------- -->
+  <section class="panel-view" id="view-portals">
+    <div class="toolbar">
+      <input type="text" id="portalsSearch" placeholder="Ara: portal adı, tip…">
+      <select id="portalsTier">
+        <option value="">Tüm tier'lar</option>
+        <option value="Tier 1">Tier 1</option>
+        <option value="Tier 2">Tier 2</option>
+        <option value="Tier 3">Tier 3</option>
+      </select>
+      <span class="result-count" id="portalsCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="portalsTable">
+        <thead><tr>
+          <th data-key="tier">Tier</th>
+          <th data-key="name">Portal</th>
+          <th data-key="type">Tip</th>
+          <th data-key="relevance">Önem</th>
+          <th data-key="login_requirement">Giriş Gereksinimi</th>
+          <th data-key="website">Site</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
+    </div>
+  </section>
+
+  <!-- ---------- COMPETITORS ---------- -->
+  <section class="panel-view" id="view-competitors">
+    <div class="toolbar">
+      <input type="text" id="compSearch" placeholder="Ara: firma, ülke, segment…">
+      <span class="result-count" id="compCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="compTable">
+        <thead><tr>
+          <th data-key="name">Firma</th>
+          <th data-key="country">Ülke</th>
+          <th data-key="role">Rol</th>
+          <th data-key="segment">Segment</th>
+          <th data-key="relevance">Önem</th>
+          <th data-key="website">Site</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
+    </div>
+  </section>
+
+  <!-- ---------- SOURCE LOG ---------- -->
+  <section class="panel-view" id="view-log">
+    <div class="table-wrap">
+      <table id="logTable">
+        <thead><tr>
+          <th data-key="timestamp">Zaman</th>
+          <th data-key="message">Mesaj</th>
+          <th data-key="actor">Kaynak</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty-state" style="display:none;">Kayıt yok.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ESKA India Tender Bot &middot; data.json her otomatik taramadan sonra GitHub Actions ile güncellenir &middot;
+  <a class="link" href="https://github.com/kaantellioglu/india-tender-bot" target="_blank" rel="noopener">repo</a>
+</footer>
+
+<script>
+(function(){
+  const state = { data: null, sort: {}, };
+
+  const fmtNum = (v) => {
+    if(v === null || v === undefined || v === '') return '—';
+    const n = Number(v);
+    if(Number.isNaN(n)) return String(v);
+    return n.toLocaleString('en-US', {maximumFractionDigits: 2});
+  };
+
+  const linkCell = (url) => url ? `<a class="link" href="${url}" target="_blank" rel="noopener">açık ↗</a>` : '<span class="muted">—</span>';
+
+  const statusPill = (status) => {
+    const s = (status || '').toLowerCase();
+    let cls = 'lead', label = status || 'New Lead';
+    if(s === 'awarded'){ cls = 'awarded'; }
+    else if(s.includes('docs')){ cls = 'docs'; }
+    return `<span class="pill ${cls}"><span class="valve"></span>${label}</span>`;
+  };
+
+  const tierPill = (tier) => {
+    const cls = tier === 'Tier 1' ? 'tier1' : tier === 'Tier 2' ? 'tier2' : 'tier3';
+    return `<span class="pill ${cls}">${tier || '—'}</span>`;
+  };
+
+  function renderGauges(d){
+    const g = d.dashboard;
+    const items = [
+      {n:g.portal_count, l:'Taranan Portal', accent:false},
+      {n:g.tier1_count, l:'Tier 1 Portal', accent:false},
+      {n:g.tender_count, l:'İhale Kaydı', accent:false},
+      {n:g.awarded_count, l:'Sonuçlanmış (Awarded)', accent:true},
+      {n:g.price_row_count, l:'Fiyat İstihbaratı', accent:true},
+      {n:g.competitor_count, l:'İzlenen Rakip', accent:false},
+    ];
+    document.getElementById('gauges').innerHTML = items.map(it => `
+      <div class="gauge"><div class="tick"></div>
+        <div class="num${it.accent ? ' accent' : ''}">${it.n ?? 0}</div>
+        <div class="lbl">${it.l}</div>
+      </div>`).join('');
+  }
+
+  function applySort(rows, key, dir){
+    if(!key) return rows;
+    return [...rows].sort((a,b) => {
+      let av = a[key], bv = b[key];
+      const an = Number(av), bn = Number(bv);
+      const bothNum = av !== null && av !== '' && bv !== null && bv !== '' && !Number.isNaN(an) && !Number.isNaN(bn);
+      let cmp;
+      if(bothNum){ cmp = an - bn; }
+      else { cmp = String(av ?? '').localeCompare(String(bv ?? '')); }
+      return dir === 'desc' ? -cmp : cmp;
+    });
+  }
+
+  function wireSort(tableId, getRows, renderFn){
+    const table = document.getElementById(tableId);
+    table.querySelectorAll('thead th').forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.key;
+        const cur = state.sort[tableId];
+        const dir = (cur && cur.key === key && cur.dir === 'asc') ? 'desc' : 'asc';
+        state.sort[tableId] = {key, dir};
+        renderFn();
+      });
+    });
+  }
+
+  function getSorted(tableId, rows){
+    const s = state.sort[tableId];
+    return s ? applySort(rows, s.key, s.dir) : rows;
+  }
+
+  // ---------- TENDERS ----------
+  function renderTenders(){
+    const q = document.getElementById('tendersSearch').value.toLowerCase();
+    const statusFilter = document.getElementById('tendersStatus').value;
+    let rows = state.data.tenders.filter(t => {
+      const hay = `${t.company||''} ${t.product_segment||''} ${t.product_description||''} ${t.winner||''} ${t.tender_ref||''}`.toLowerCase();
+      const matchQ = !q || hay.includes(q);
+      const matchS = !statusFilter || t.status === statusFilter;
+      return matchQ && matchS;
+    });
+    rows = getSorted('tendersTable', rows);
+    document.getElementById('tendersCount').textContent = `${rows.length} / ${state.data.tenders.length} kayıt`;
+    document.querySelector('#view-tenders tbody').innerHTML = rows.map(t => `
+      <tr>
+        <td class="mono">${t.tender_id||''}</td>
+        <td>${t.company||''}</td>
+        <td class="mono muted">${t.tender_ref||'—'}</td>
+        <td class="mono">${t.tender_date||'—'}</td>
+        <td>${statusPill(t.status)}</td>
+        <td>${t.product_segment||'—'}</td>
+        <td class="mono">${t.qty ?? '—'} ${t.uom||''}</td>
+        <td>${t.winner||'—'}</td>
+        <td class="mono">${t.unit_eur_incl_gst ? '€'+fmtNum(t.unit_eur_incl_gst) : '—'}</td>
+        <td>${linkCell(t.source_url)}</td>
+      </tr>`).join('') || '';
+    toggleEmpty('#view-tenders', rows.length);
+    const sel = document.getElementById('tendersStatus');
+    if(sel.options.length <= 1){
+      const statuses = [...new Set(state.data.tenders.map(t => t.status).filter(Boolean))];
+      statuses.forEach(s => sel.insertAdjacentHTML('beforeend', `<option value="${s}">${s}</option>`));
+    }
+  }
+
+  // ---------- PRICE INTELLIGENCE ----------
+  function renderPrice(){
+    const q = document.getElementById('priceSearch').value.toLowerCase();
+    let rows = state.data.price_intelligence.filter(p => {
+      const hay = `${p.company||''} ${p.product_segment||''} ${p.winner||''}`.toLowerCase();
+      return !q || hay.includes(q);
+    });
+    rows = getSorted('priceTable', rows);
+    document.getElementById('priceCount').textContent = `${rows.length} / ${state.data.price_intelligence.length} kayıt`;
+    document.querySelector('#view-price tbody').innerHTML = rows.map(p => `
+      <tr>
+        <td class="mono">${p.tender_id||''}</td>
+        <td>${p.company||''}</td>
+        <td class="mono">${p.year||'—'}</td>
+        <td>${p.product_segment||'—'}</td>
+        <td class="mono">${p.qty ?? '—'}</td>
+        <td>${p.winner||'—'}</td>
+        <td class="mono">${p.total_eur_basic ? '€'+fmtNum(p.total_eur_basic) : '—'}</td>
+        <td class="mono">${p.unit_eur_basic ? '€'+fmtNum(p.unit_eur_basic) : '—'}</td>
+        <td>${p.confidence||'—'}</td>
+        <td>${linkCell(p.source_url)}</td>
+      </tr>`).join('') || '';
+    toggleEmpty('#view-price', rows.length);
+  }
+
+  // ---------- PORTALS ----------
+  function renderPortals(){
+    const q = document.getElementById('portalsSearch').value.toLowerCase();
+    const tier = document.getElementById('portalsTier').value;
+    let rows = state.data.portals.filter(p => {
+      const hay = `${p.name||''} ${p.type||''}`.toLowerCase();
+      const matchQ = !q || hay.includes(q);
+      const matchT = !tier || p.tier === tier;
+      return matchQ && matchT;
+    });
+    rows = getSorted('portalsTable', rows);
+    document.getElementById('portalsCount').textContent = `${rows.length} / ${state.data.portals.length} portal`;
+    document.querySelector('#view-portals tbody').innerHTML = rows.map(p => `
+      <tr>
+        <td>${tierPill(p.tier)}</td>
+        <td>${p.name||''}</td>
+        <td class="muted">${p.type||'—'}</td>
+        <td>${p.relevance||'—'}</td>
+        <td class="muted">${p.login_requirement||'—'}</td>
+        <td>${p.website ? `<a class="link" href="${p.website}" target="_blank" rel="noopener">${p.website.replace(/^https?:\/\//,'')}</a>` : '—'}</td>
+      </tr>`).join('') || '';
+    toggleEmpty('#view-portals', rows.length);
+  }
+
+  // ---------- COMPETITORS ----------
+  function renderCompetitors(){
+    const q = document.getElementById('compSearch').value.toLowerCase();
+    let rows = state.data.competitors.filter(c => {
+      const hay = `${c.name||''} ${c.country||''} ${c.segment||''}`.toLowerCase();
+      return !q || hay.includes(q);
+    });
+    rows = getSorted('compTable', rows);
+    document.getElementById('compCount').textContent = `${rows.length} / ${state.data.competitors.length} rakip`;
+    document.querySelector('#view-competitors tbody').innerHTML = rows.map(c => `
+      <tr>
+        <td>${c.name||''}</td>
+        <td class="muted">${c.country||'—'}</td>
+        <td>${c.role||'—'}</td>
+        <td class="muted">${c.segment||'—'}</td>
+        <td>${c.relevance||'—'}</td>
+        <td>${c.website ? `<a class="link" href="${c.website}" target="_blank" rel="noopener">${c.website.replace(/^https?:\/\//,'')}</a>` : '—'}</td>
+      </tr>`).join('') || '';
+    toggleEmpty('#view-competitors', rows.length);
+  }
+
+  // ---------- LOG ----------
+  function renderLog(){
+    const rows = [...state.data.source_log].reverse();
+    document.querySelector('#view-log tbody').innerHTML = rows.map(l => `
+      <tr>
+        <td class="mono muted">${l.timestamp||''}</td>
+        <td>${l.message||''}</td>
+        <td class="mono">${l.actor||''}</td>
+      </tr>`).join('') || '';
+    toggleEmpty('#view-log', rows.length);
+  }
+
+  function toggleEmpty(sectionSel, count){
+    const empty = document.querySelector(`${sectionSel} .empty-state`);
+    if(empty) empty.style.display = count ? 'none' : 'block';
+  }
+
+  function renderAll(){
+    renderTenders(); renderPrice(); renderPortals(); renderCompetitors(); renderLog();
+  }
+
+  function initTabs(){
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.panel-view').forEach(v => v.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`view-${btn.dataset.tab}`).classList.add('active');
+      });
+    });
+  }
+
+  function initFilters(){
+    ['tendersSearch','tendersStatus'].forEach(id => document.getElementById(id).addEventListener('input', renderTenders));
+    document.getElementById('tendersStatus').addEventListener('change', renderTenders);
+    document.getElementById('priceSearch').addEventListener('input', renderPrice);
+    ['portalsSearch'].forEach(id => document.getElementById(id).addEventListener('input', renderPortals));
+    document.getElementById('portalsTier').addEventListener('change', renderPortals);
+    document.getElementById('compSearch').addEventListener('input', renderCompetitors);
+
+    wireSort('tendersTable', () => state.data.tenders, renderTenders);
+    wireSort('priceTable', () => state.data.price_intelligence, renderPrice);
+    wireSort('portalsTable', () => state.data.portals, renderPortals);
+    wireSort('compTable', () => state.data.competitors, renderCompetitors);
+  }
+
+  fetch('data.json?_=' + Date.now())
+    .then(r => {
+      if(!r.ok) throw new Error('data.json okunamadı (HTTP ' + r.status + ')');
+      return r.json();
+    })
+    .then(d => {
+      state.data = d;
+      document.getElementById('generatedAt').textContent = d.dashboard.generated_at || '—';
+      document.getElementById('statusLine').textContent = 'veri yüklendi';
+      renderGauges(d);
+      initTabs();
+      initFilters();
+      renderAll();
+    })
+    .catch(err => {
+      document.getElementById('statusLine').textContent = 'HATA: ' + err.message;
+      document.querySelector('main').innerHTML = `<div class="empty-state">data.json yüklenemedi. Bu dosyanın docs/ klasöründe olduğundan ve GitHub Pages'in bu klasörden servis ettiğinden emin olun.<br><br>${err.message}</div>`;
+    });
+})();
+</script>
+
+</body>
+</html>
