@@ -344,17 +344,23 @@
     "url": "https://www.tenderwizard.com",
     "action_type": "vendor_registration_required",
     "required_items": [
-      "vendor registration"
+      "vendor registration",
+      "vendor registration / empanelment"
     ],
-    "automation_possible": "partial",
-    "next_action": "Vendor registration/empanelment status must be checked",
+    "automation_possible": "partial_with_registration",
+    "next_action": "Vendor registration/empanelment may be needed for private documents. Public intelligence extraction continues.",
     "confidence": "Medium",
     "status": "open",
     "signals": [
       "registration"
     ],
-    "count": 1,
-    "last_seen": "2026-07-01 11:12 UTC"
+    "count": 2,
+    "last_seen": "2026-07-01 11:49 UTC",
+    "data_access": "registration",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Check vendor registration/empanelment status for document visibility only",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
   },
   {
     "timestamp": "2026-07-01 11:12 UTC",
@@ -374,5 +380,395 @@
     ],
     "count": 2,
     "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:45 UTC",
+    "portal": "GAIL India",
+    "portal_id": "gail_india",
+    "url": "https://gailtenders.in/Gailtenders",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password",
+      "vendor registration / empanelment"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:45 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:45 UTC",
+    "portal": "Indraprastha Gas (IGL)",
+    "portal_id": "indraprastha_gas_igl",
+    "url": "https://tenders.iglonline.net/tenderList",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password",
+      "vendor registration / empanelment",
+      "commercial access terms found"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential",
+      "registration",
+      "commercial_access"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:45 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:45 UTC",
+    "portal": "Gujarat Gas (GGL)",
+    "portal_id": "gujarat_gas_ggl",
+    "url": "https://www.gujaratgas.com/tenders/",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:45 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "Adani Total Gas (ATGL)",
+    "portal_id": "adani_total_gas_atgl",
+    "url": "https://www.adanigas.com/commercials",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "CAPTCHA / human verification",
+      "username/password",
+      "vendor registration / empanelment",
+      "commercial access terms found"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "credential",
+      "registration",
+      "commercial_access"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "Torrent Gas",
+    "portal_id": "torrent_gas",
+    "url": "https://www.torrentgas.com/User/Info/Vendor",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password",
+      "vendor registration / empanelment"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "IndianOil-Adani Gas (IOAGPL)",
+    "portal_id": "indianoil_adani_gas_ioagpl",
+    "url": "https://ioagpl.com/vendor-registration-form/",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "CAPTCHA / human verification",
+      "username/password",
+      "vendor registration / empanelment"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "credential",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "Bharat Petroleum (BPCL CGD)",
+    "portal_id": "bharat_petroleum_bpcl_cgd",
+    "url": "https://bharatpetroleum.in/tenders",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password",
+      "vendor registration / empanelment"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "Maharashtra Natural Gas (MNGL)",
+    "portal_id": "maharashtra_natural_gas_mngl",
+    "url": "https://mngl.in/active-tenders",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password",
+      "commercial access terms found"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential",
+      "commercial_access"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:46 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/tenders.html",
+    "action_type": "credentials_required",
+    "required_items": [
+      "commercial access terms found",
+      "username/password"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "commercial_access",
+      "credential"
+    ],
+    "count": 2,
+    "last_seen": "2026-07-01 11:46 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:48 UTC",
+    "portal": "Aegis Gas / Aegis Logistics",
+    "portal_id": "aegis_gas_aegis_logistics",
+    "url": "https://www.aegisindia.com",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "CAPTCHA / human verification",
+      "username/password"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "credential"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:48 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:48 UTC",
+    "portal": "Reliance BP Mobility / Jio-bp gas related",
+    "portal_id": "reliance_bp_mobility_jio_bp_gas_related",
+    "url": "https://www.jiobp.com",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "CAPTCHA / human verification"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:48 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:48 UTC",
+    "portal": "Engineers India Limited (EIL)",
+    "portal_id": "engineers_india_limited_eil",
+    "url": "https://engineersindia.com/tenders/",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:48 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:48 UTC",
+    "portal": "Tolani Projects",
+    "portal_id": "tolani_projects",
+    "url": "https://tolaniprojects.com",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "CAPTCHA / human verification",
+      "username/password"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "credential"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:48 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:49 UTC",
+    "portal": "CPPP / eProcure",
+    "portal_id": "cppp_eprocure",
+    "url": "https://www.etenders.gov.in/eprocure/app",
+    "action_type": "protected_manual_review",
+    "required_items": [
+      "digital signature / certificate",
+      "username/password"
+    ],
+    "data_access": "manual_review",
+    "automation_possible": "manual_review_only",
+    "next_action": "Protected portal element found. Use only public intelligence extraction; protected access requires human review.",
+    "next_technical_action": "Do not automate protected steps; use public pages and result archives only",
+    "next_business_action": "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "dsc",
+      "credential"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:49 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
+  },
+  {
+    "timestamp": "2026-07-01 11:49 UTC",
+    "portal": "SAP Ariba Discovery",
+    "portal_id": "sap_ariba_discovery",
+    "url": "https://service.ariba.com",
+    "action_type": "credentials_required",
+    "required_items": [
+      "username/password"
+    ],
+    "data_access": "credentials",
+    "automation_possible": "partial_with_credentials",
+    "next_action": "Credentials may be needed for private documents. Continue public data extraction; review credential availability outside GitHub.",
+    "next_technical_action": "Keep public scraping active; only use credentials for document discovery after approved setup",
+    "next_business_action": "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "credential"
+    ],
+    "count": 2,
+    "last_seen": "2026-07-01 11:49 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_bid_or_offer_submission_automation"
   }
 ]
