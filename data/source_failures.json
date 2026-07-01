@@ -1,1 +1,641 @@
-[]
+[
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "Indian Oil Corporation (IOCL CGD)",
+    "portal_id": "indian_oil_corporation_iocl_cgd",
+    "url": "https://iocl.com/tenders",
+    "failure_type": "http_307",
+    "http_status": 307,
+    "content_type": "text/html",
+    "final_url": "https://iocl.com/tenders",
+    "action_required": "redirect_review",
+    "retry_strategy": "follow_final_url",
+    "signals": [],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Bharat Petroleum (BPCL CGD)",
+    "portal_id": "bharat_petroleum_bpcl_cgd",
+    "url": "https://bharatpetroleum.in/tenders",
+    "failure_type": "http_403",
+    "http_status": 403,
+    "content_type": "text/html",
+    "final_url": "https://bharatpetroleum.in/tenders",
+    "action_required": "access_or_login_required",
+    "retry_strategy": "login_or_browser_fetch",
+    "signals": [
+      "http_403"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Hindustan Petroleum (HPCL CGD)",
+    "portal_id": "hindustan_petroleum_hpcl_cgd",
+    "url": "https://www.hindustanpetroleum.com/pages/tenders-and-contracts",
+    "failure_type": "http_403",
+    "http_status": 403,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.hindustanpetroleum.com/pages/tenders-and-contracts",
+    "action_required": "access_or_login_required",
+    "retry_strategy": "login_or_browser_fetch",
+    "signals": [
+      "http_403"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Green Gas Limited",
+    "portal_id": "green_gas_limited",
+    "url": "https://www.gglonline.net/tender",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.gglonline.net/tender",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='www.gglonline.net', port=443): Max retries exceeded with url: /tender (Caused by NameResolutionError(\"HTTPSConnection(host='www.gglonline.net', port=443): Failed to resolve 'www.gglonline.net' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Central U.P. Gas (CUGL)",
+    "portal_id": "central_u_p_gas_cugl",
+    "url": "https://www.cugl.co.in/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.cugl.co.in/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Sabarmati Gas",
+    "portal_id": "sabarmati_gas",
+    "url": "https://www.sabarmatigas.in/tenders",
+    "failure_type": "http_403",
+    "http_status": 403,
+    "content_type": "text/html",
+    "final_url": "https://www.sabarmatigas.in/tenders",
+    "action_required": "access_or_login_required",
+    "retry_strategy": "login_or_browser_fetch",
+    "signals": [
+      "http_403",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Charotar Gas",
+    "portal_id": "charotar_gas",
+    "url": "https://charotargas.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=iso-8859-1",
+    "final_url": "https://charotargas.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Goa Natural Gas",
+    "portal_id": "goa_natural_gas",
+    "url": "https://www.goanaturalgas.com/tenders/",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.goanaturalgas.com/tenders/",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "login_signal",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Haryana City Gas",
+    "portal_id": "haryana_city_gas",
+    "url": "https://haryanacitygas.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://haryanacitygas.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Bhagyanagar Gas",
+    "portal_id": "bhagyanagar_gas",
+    "url": "https://www.bglgas.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.bglgas.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Tripura Natural Gas",
+    "portal_id": "tripura_natural_gas",
+    "url": "https://tngclonline.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=utf-8",
+    "final_url": "https://tngclonline.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "IRM Energy",
+    "portal_id": "irm_energy",
+    "url": "https://www.irmenergy.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.irmenergy.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Think Gas",
+    "portal_id": "think_gas",
+    "url": "https://www.think-gas.com/tenders",
+    "failure_type": "ssl_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.think-gas.com/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "browser_fetch_or_ssl_fallback",
+    "signals": [
+      "ssl"
+    ],
+    "note": "HTTPSConnectionPool(host='www.think-gas.com', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)')))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "AG&P Pratham",
+    "portal_id": "ag_p_pratham",
+    "url": "https://agppratham.com/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=iso-8859-1",
+    "final_url": "https://agppratham.com/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Godavari Gas",
+    "portal_id": "godavari_gas",
+    "url": "https://www.godavarigas.in/tenders",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.godavarigas.in/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='www.godavarigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='www.godavarigas.in', port=443): Failed to resolve 'www.godavarigas.in' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Bengal Gas Company",
+    "portal_id": "bengal_gas_company",
+    "url": "https://bengalgas.com/tenders",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://bengalgas.com/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='bengalgas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='bengalgas.com', port=443): Failed to resolve 'bengalgas.com' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Purba Bharati Gas",
+    "portal_id": "purba_bharati_gas",
+    "url": "https://www.purbabharatigas.in/tenders",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.purbabharatigas.in/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='www.purbabharatigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='www.purbabharatigas.in', port=443): Failed to resolve 'www.purbabharatigas.in' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Assam Gas Company",
+    "portal_id": "assam_gas_company",
+    "url": "https://assamgas.org/tenders",
+    "failure_type": "timeout",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://assamgas.org/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_or_reduce_timeout",
+    "signals": [
+      "timeout"
+    ],
+    "note": "HTTPSConnectionPool(host='assamgas.org', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='assamgas.org', port=443) at 0x7fd46a746710>, 'Connection to assamgas.org timed out. (connect timeout=20)'))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Rajasthan State Gas",
+    "portal_id": "rajasthan_state_gas",
+    "url": "https://rsgl.rajasthan.gov.in/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "",
+    "final_url": "https://rsgl.rajasthan.gov.in/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Naveriya Gas",
+    "portal_id": "naveriya_gas",
+    "url": "https://naveriyagas.com/tenders",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://naveriyagas.com/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='naveriyagas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='naveriyagas.com', port=443): Failed to resolve 'naveriyagas.com' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Rajasthan Rajya Gas / Local CGD",
+    "portal_id": "rajasthan_rajya_gas_local_cgd",
+    "url": "https://rsgl.rajasthan.gov.in/tenders",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "",
+    "final_url": "https://rsgl.rajasthan.gov.in/tenders",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Oil India Limited CGD JV",
+    "portal_id": "oil_india_limited_cgd_jv",
+    "url": "https://www.oil-india.com/tender",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.oil-india.com/tender",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "MECON Limited",
+    "portal_id": "mecon_limited",
+    "url": "https://www.meconlimited.co.in/tenders",
+    "failure_type": "ssl_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.meconlimited.co.in/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "browser_fetch_or_ssl_fallback",
+    "signals": [
+      "ssl"
+    ],
+    "note": "HTTPSConnectionPool(host='www.meconlimited.co.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLError(1, '[SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1016)')))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "L&T Hydrocarbon / L&T Energy",
+    "portal_id": "l_t_hydrocarbon_l_t_energy",
+    "url": "https://www.larsentoubro.com/corporate/suppliers/",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=utf-8",
+    "final_url": "https://www.larsentoubro.com/corporate/suppliers",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Kalpataru Projects International",
+    "portal_id": "kalpataru_projects_international",
+    "url": "https://www.kalpataruprojects.com/suppliers",
+    "failure_type": "http_404",
+    "http_status": 404,
+    "content_type": "text/html; charset=utf-8",
+    "final_url": "https://www.kalpataruprojects.com/suppliers",
+    "action_required": "portal_url_fix_required",
+    "retry_strategy": "update_portal_url",
+    "signals": [
+      "http_404",
+      "error_page_signal"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Dinesh Engineers / DEL",
+    "portal_id": "dinesh_engineers_del",
+    "url": "https://www.dineshengineers.com",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.dineshengineers.com",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='www.dineshengineers.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.dineshengineers.com', port=443): Failed to resolve 'www.dineshengineers.com' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Resonance Energy",
+    "portal_id": "resonance_energy",
+    "url": "https://resonanceenergy.in",
+    "failure_type": "dns_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://resonanceenergy.in",
+    "action_required": "source_access_review",
+    "retry_strategy": "update_portal_domain",
+    "signals": [
+      "dns"
+    ],
+    "note": "HTTPSConnectionPool(host='resonanceenergy.in', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='resonanceenergy.in', port=443): Failed to resolve 'resonanceenergy.in' ([Errno -2] Name or service not known)\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "GeM Portal",
+    "portal_id": "gem_portal",
+    "url": "https://gem.gov.in",
+    "failure_type": "connection_refused",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://gem.gov.in",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_later_or_alternative_source",
+    "signals": [
+      "connection_refused"
+    ],
+    "note": "HTTPSConnectionPool(host='gem.gov.in', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host='gem.gov.in', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "nProcure",
+    "portal_id": "nprocure",
+    "url": "https://www.nprocure.com",
+    "failure_type": "ssl_error",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.nprocure.com",
+    "action_required": "source_access_review",
+    "retry_strategy": "browser_fetch_or_ssl_fallback",
+    "signals": [
+      "ssl"
+    ],
+    "note": "HTTPSConnectionPool(host='www.nprocure.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:14 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/files/CPBG_GSHPL.docx",
+    "failure_type": "not_a_pdf",
+    "http_status": null,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.gasonet.in/files/CPBG_GSHPL.docx",
+    "action_required": "document_parse_review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "doc"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:14 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:14 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/files/CPBG_GSRJL -19.docx",
+    "failure_type": "not_a_pdf",
+    "http_status": null,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.gasonet.in/files/CPBG_GSRJL -19.docx",
+    "action_required": "document_parse_review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "doc"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:14 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:14 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/files/CPBG_GSUKL.docx",
+    "failure_type": "not_a_pdf",
+    "http_status": null,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.gasonet.in/files/CPBG_GSUKL.docx",
+    "action_required": "document_parse_review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "doc"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:14 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:18 UTC",
+    "portal": "Vadodara Gas Limited",
+    "portal_id": "vadodara_gas_limited",
+    "url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/NIT-Domestic-Meter-49.pdf",
+    "failure_type": "download_failed",
+    "http_status": null,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/NIT-Domestic-Meter-49.pdf",
+    "action_required": "review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "pdf"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:18 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:19 UTC",
+    "portal": "Vadodara Gas Limited",
+    "portal_id": "vadodara_gas_limited",
+    "url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/Replies-to-Bidders-16-NOS-DUAL-ARM-CARAUTO-DISPENSER.pdf",
+    "failure_type": "download_failed",
+    "http_status": null,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/Replies-to-Bidders-16-NOS-DUAL-ARM-CARAUTO-DISPENSER.pdf",
+    "action_required": "review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "pdf"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:19 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:19 UTC",
+    "portal": "Vadodara Gas Limited",
+    "portal_id": "vadodara_gas_limited",
+    "url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/    2-Replies-to-Bidders-Gas-Tap-P065-23-24.pdf",
+    "failure_type": "download_failed",
+    "http_status": null,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/    2-Replies-to-Bidders-Gas-Tap-P065-23-24.pdf",
+    "action_required": "review",
+    "retry_strategy": "parser_rule_update",
+    "signals": [
+      "pdf"
+    ],
+    "note": "",
+    "count": 1,
+    "last_seen": "2026-07-01 11:19 UTC"
+  }
+]

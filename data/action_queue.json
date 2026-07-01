@@ -1,1 +1,378 @@
-[]
+[
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "GAIL India",
+    "portal_id": "gail_india",
+    "url": "https://gailtenders.in/Gailtenders",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password",
+      "vendor registration"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "Indraprastha Gas (IGL)",
+    "portal_id": "indraprastha_gas_igl",
+    "url": "https://tenders.iglonline.net/tenderList",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password",
+      "vendor registration",
+      "tender fee/EMD"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "registration",
+      "tender_fee"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "Gujarat Gas (GGL)",
+    "portal_id": "gujarat_gas_ggl",
+    "url": "https://www.gujaratgas.com/tenders/",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "Adani Total Gas (ATGL)",
+    "portal_id": "adani_total_gas_atgl",
+    "url": "https://www.adanigas.com/commercials",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password",
+      "vendor registration",
+      "tender fee/EMD"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login",
+      "registration",
+      "tender_fee"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "Torrent Gas",
+    "portal_id": "torrent_gas",
+    "url": "https://www.torrentgas.com/User/Info/Vendor",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password",
+      "vendor registration"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:10 UTC",
+    "portal": "IndianOil-Adani Gas (IOAGPL)",
+    "portal_id": "indianoil_adani_gas_ioagpl",
+    "url": "https://ioagpl.com/vendor-registration-form/",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password",
+      "vendor registration"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:10 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Maharashtra Natural Gas (MNGL)",
+    "portal_id": "maharashtra_natural_gas_mngl",
+    "url": "https://mngl.in/active-tenders",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password",
+      "tender fee/EMD"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "tender_fee"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/tenders.html",
+    "action_type": "login_required",
+    "required_items": [
+      "tender fee/EMD",
+      "username/password"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "tender_fee"
+    ],
+    "count": 2,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:11 UTC",
+    "portal": "Avantika Gas",
+    "portal_id": "avantika_gas",
+    "url": "https://www.aglonline.net/tender",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:11 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Aavantika Gas / similar spelling check",
+    "portal_id": "aavantika_gas_similar_spelling_check",
+    "url": "https://www.aglonline.net/tender",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Vadodara Gas Limited",
+    "portal_id": "vadodara_gas_limited",
+    "url": "https://www.vgl.co.in/tenders/",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password",
+      "vendor registration"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login",
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Aegis Gas / Aegis Logistics",
+    "portal_id": "aegis_gas_aegis_logistics",
+    "url": "https://www.aegisindia.com",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Reliance BP Mobility / Jio-bp gas related",
+    "portal_id": "reliance_bp_mobility_jio_bp_gas_related",
+    "url": "https://www.jiobp.com",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Engineers India Limited (EIL)",
+    "portal_id": "engineers_india_limited_eil",
+    "url": "https://engineersindia.com/tenders/",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "Tolani Projects",
+    "portal_id": "tolani_projects",
+    "url": "https://tolaniprojects.com",
+    "action_type": "manual_required",
+    "required_items": [
+      "CAPTCHA",
+      "username/password"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "captcha",
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "CPPP / eProcure",
+    "portal_id": "cppp_eprocure",
+    "url": "https://www.etenders.gov.in/eprocure/app",
+    "action_type": "manual_required",
+    "required_items": [
+      "DSC",
+      "username/password"
+    ],
+    "automation_possible": "manual_only",
+    "next_action": "Manual login/DSC/CAPTCHA step required before full data extraction",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "dsc",
+      "login"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "TenderWizard / eProcurement Technologies",
+    "portal_id": "tenderwizard_eprocurement_technologies",
+    "url": "https://www.tenderwizard.com",
+    "action_type": "vendor_registration_required",
+    "required_items": [
+      "vendor registration"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor registration/empanelment status must be checked",
+    "confidence": "Medium",
+    "status": "open",
+    "signals": [
+      "registration"
+    ],
+    "count": 1,
+    "last_seen": "2026-07-01 11:12 UTC"
+  },
+  {
+    "timestamp": "2026-07-01 11:12 UTC",
+    "portal": "SAP Ariba Discovery",
+    "portal_id": "sap_ariba_discovery",
+    "url": "https://service.ariba.com",
+    "action_type": "login_required",
+    "required_items": [
+      "username/password"
+    ],
+    "automation_possible": "partial",
+    "next_action": "Vendor credentials required; automate only after approved credential setup",
+    "confidence": "High",
+    "status": "open",
+    "signals": [
+      "login"
+    ],
+    "count": 2,
+    "last_seen": "2026-07-01 11:12 UTC"
+  }
+]
