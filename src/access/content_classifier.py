@@ -1,7 +1,7 @@
 """Content and access classification helpers for tender sources.
 
 The bot must not assume that a URL ending in .pdf is a real PDF. Many tender
-portals return HTML login/error pages behind PDF-looking links. This module
+portals return HTML access/error pages behind PDF-looking links. This module
 classifies the received content before a parser decides what to do next.
 """
 from __future__ import annotations
@@ -107,8 +107,8 @@ def classify_bytes(
     low = preview.lower()
     if any(x in low for x in ["login", "sign in", "user name", "username", "password", "captcha", "vendor login", "supplier login"]):
         c.looks_like_login = True
-        c.failure_type = c.failure_type or "login_required"
-        c.signals.append("login_signal")
+        c.failure_type = c.failure_type or "credentials_required"
+        c.signals.append("access_signal")
     if any(x in low for x in ["404", "not found", "access denied", "forbidden", "unauthorized", "error occurred"]):
         c.looks_like_error = True
         c.signals.append("error_page_signal")

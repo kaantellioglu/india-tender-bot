@@ -1,7 +1,12 @@
-"""Persistent diagnostic queues for source failures and manual actions.
+"""Persistent diagnostic queues for source failures and access review.
 
-These files are committed by GitHub Actions and then exported into docs/data.json
-so the dashboard shows *why* a source failed and what action is needed.
+The queue is for market-intelligence extraction only:
+- public tender/award/result data collection
+- document availability checks
+- portal URL/access health
+
+It explicitly excludes bid/offer submission, DSC signing, CAPTCHA bypass, payments,
+EMD handling, and any transaction on procurement portals.
 """
 from __future__ import annotations
 
@@ -15,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data"
 DEFAULT_FAILURES = DATA_DIR / "source_failures.json"
 DEFAULT_ACTIONS = DATA_DIR / "action_queue.json"
+MARKET_INTELLIGENCE_SCOPE = "market_intelligence_only"
+EXCLUDED_SCOPE = "no_bid_or_offer_submission_automation"
 
 
 def now_utc() -> str:
@@ -37,6 +44,8 @@ class SourceFailure:
     note: str = ""
     count: int = 1
     last_seen: str = ""
+    scope: str = MARKET_INTELLIGENCE_SCOPE
+    excluded_scope: str = EXCLUDED_SCOPE
 
 
 @dataclass
@@ -47,13 +56,18 @@ class PortalAction:
     url: str
     action_type: str
     required_items: list[str] = field(default_factory=list)
-    automation_possible: str = "partial"
-    next_action: str = "Manual review required"
+    data_access: str = "public"
+    automation_possible: str = "data_extraction_only"
+    next_action: str = "Review source access for intelligence extraction"
+    next_technical_action: str = "Continue public scraping or create parser rule"
+    next_business_action: str = "Check whether public documents/award data are available"
     confidence: str = "Medium"
     status: str = "open"
     signals: list[str] = field(default_factory=list)
     count: int = 1
     last_seen: str = ""
+    scope: str = MARKET_INTELLIGENCE_SCOPE
+    excluded_scope: str = EXCLUDED_SCOPE
 
 
 def _load_json_list(path: Path) -> list[dict[str, Any]]:
@@ -69,6 +83,30 @@ def _load_json_list(path: Path) -> list[dict[str, Any]]:
 def _save_json_list(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _default_technical_action(action_type: str, data_access: str) -> str:
+    if action_type in {"credentials_required", "vendor_registration_required"}:
+        return "Keep public scraping active; only use credentials for document discovery after approved setup"
+    if action_type == "protected_manual_review":
+        return "Do not automate protected steps; use public pages and result archives only"
+    if action_type == "document_access_review":
+        return "Check whether documents are publicly downloadable or mirrored in award/archive pages"
+    if data_access == "browser":
+        return "Build browser-rendered data scraper for public tender/result tables"
+    return "Continue public tender/award/result extraction"
+
+
+def _default_business_action(action_type: str) -> str:
+    if action_type == "credentials_required":
+        return "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository"
+    if action_type == "vendor_registration_required":
+        return "Check vendor registration/empanelment status for document visibility only"
+    if action_type == "protected_manual_review":
+        return "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation"
+    if action_type == "document_access_review":
+        return "Review commercial terms only as intelligence; no transaction workflow"
+    return "No business transaction required"
 
 
 class DiagnosticRecorder:
@@ -103,6 +141,8 @@ class DiagnosticRecorder:
                 row["retry_strategy"] = retry_strategy
                 row["signals"] = sorted(set((row.get("signals") or []) + (signals or [])))
                 row["note"] = note or row.get("note", "")
+                row["scope"] = MARKET_INTELLIGENCE_SCOPE
+                row["excluded_scope"] = EXCLUDED_SCOPE
                 _save_json_list(self.failures_path, rows[-1000:])
                 return
         failure = SourceFailure(
@@ -129,23 +169,33 @@ class DiagnosticRecorder:
         url: str,
         action_type: str,
         required_items: Optional[list[str]] = None,
-        automation_possible: str = "partial",
-        next_action: str = "Manual review required",
+        automation_possible: str = "data_extraction_only",
+        next_action: str = "Review source access for intelligence extraction",
         confidence: str = "Medium",
         signals: Optional[list[str]] = None,
+        data_access: str = "public",
+        next_technical_action: Optional[str] = None,
+        next_business_action: Optional[str] = None,
     ) -> None:
         ts = now_utc()
         rows = _load_json_list(self.actions_path)
         key = (portal.get("id", ""), url, action_type)
+        tech = next_technical_action or _default_technical_action(action_type, data_access)
+        biz = next_business_action or _default_business_action(action_type)
         for row in rows:
             if (row.get("portal_id"), row.get("url"), row.get("action_type")) == key:
                 row["count"] = int(row.get("count", 1)) + 1
                 row["last_seen"] = ts
                 row["required_items"] = sorted(set((row.get("required_items") or []) + (required_items or [])))
+                row["data_access"] = data_access
                 row["automation_possible"] = automation_possible
                 row["next_action"] = next_action
+                row["next_technical_action"] = tech
+                row["next_business_action"] = biz
                 row["confidence"] = confidence
                 row["signals"] = sorted(set((row.get("signals") or []) + (signals or [])))
+                row["scope"] = MARKET_INTELLIGENCE_SCOPE
+                row["excluded_scope"] = EXCLUDED_SCOPE
                 _save_json_list(self.actions_path, rows[-1000:])
                 return
         action = PortalAction(
@@ -156,8 +206,11 @@ class DiagnosticRecorder:
             url=url,
             action_type=action_type,
             required_items=required_items or [],
+            data_access=data_access,
             automation_possible=automation_possible,
             next_action=next_action,
+            next_technical_action=tech,
+            next_business_action=biz,
             confidence=confidence,
             signals=signals or [],
         )

@@ -72,6 +72,7 @@ class BaseScraper:
                 url=url,
                 action_type=signal.access_type,
                 required_items=signal.required_items,
+                data_access=signal.data_access,
                 automation_possible=signal.automation_possible,
                 next_action=signal.action,
                 confidence=signal.confidence,
@@ -109,8 +110,8 @@ class BaseScraper:
                 action_required = "manual_review"
                 retry_strategy = "review_portal_url"
                 if resp.status_code in (401, 403):
-                    action_required = "access_or_login_required"
-                    retry_strategy = "login_or_browser_fetch"
+                    action_required = "access_review_required"
+                    retry_strategy = "browser_fetch_or_credential_review"
                     self._record_action_from_html(url, preview)
                 elif resp.status_code == 404:
                     action_required = "portal_url_fix_required"

@@ -76,8 +76,9 @@ def run(workbook_path: Path, tiers: list[str] | None, max_pdf_parses: int = 120)
                     url=lead.url,
                     action_type=action.get("action_type", "manual_review"),
                     required_items=action.get("required_items", []),
-                    automation_possible=action.get("automation_possible", "partial"),
-                    next_action=action.get("next_action", "Manual review required"),
+                    data_access=action.get("data_access", "manual_review"),
+                    automation_possible=action.get("automation_possible", "data_extraction_only"),
+                    next_action=action.get("next_action", "Review source access for intelligence extraction"),
                     confidence=action.get("confidence", "Medium"),
                     signals=action.get("signals", []),
                 )
@@ -88,7 +89,7 @@ def run(workbook_path: Path, tiers: list[str] | None, max_pdf_parses: int = 120)
                 url=lead.url,
                 failure_type="document_parse_exception",
                 action_required="parser_rule_review",
-                retry_strategy="improve_parser_or_manual_review",
+                retry_strategy="improve_parser_or_source_review",
                 note=str(exc)[:500],
             )
 

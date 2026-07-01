@@ -4,7 +4,7 @@ V3 goals:
 - Never assume a .pdf URL is a real PDF; verify %PDF magic.
 - If a PDF-looking URL returns HTML, classify it and parse the HTML fallback.
 - Extract text + tables from PDFs with transparent confidence.
-- Detect login/manual action signals and return them for diagnostics.
+- Detect access/registration/protected-page signals and return them for diagnostics.
 """
 from __future__ import annotations
 
@@ -157,7 +157,7 @@ def parse_textual_content(info: ExtractedTenderInfo, text: str) -> ExtractedTend
     info.text_excerpt = compact[:1000]
     info.tender_ref = first_match(TENDER_REF_PATTERNS, compact)
     info.tender_date = date_near(["tender date", "date of tender", "start date", "published", "issue date"], compact) or first_match(DATE_PATTERNS, compact)
-    info.closing_date = date_near(["closing date", "due date", "last date", "bid submission", "end date", "submission deadline"], compact)
+    info.closing_date = date_near(["closing date", "due date", "last date", "end date", "submission deadline", "document download end date"], compact)
     info.qty, info.unit = extract_qty(compact)
     info.total_price_inr = extract_price(compact)
     info.winner = first_match(WINNER_PATTERNS, compact)
@@ -206,6 +206,7 @@ def parse_tender_pdf(url: str) -> ExtractedTenderInfo:
             info.detected_actions.append({
                 "action_type": login_signal.access_type,
                 "required_items": login_signal.required_items,
+                "data_access": login_signal.data_access,
                 "automation_possible": login_signal.automation_possible,
                 "next_action": login_signal.action,
                 "confidence": login_signal.confidence,

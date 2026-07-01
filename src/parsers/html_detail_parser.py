@@ -71,7 +71,7 @@ def parse_html_text(text: str, fallback_title: str = "") -> HtmlTenderInfo:
         extract_date_near("closing date", t)
         or extract_date_near("due date", t)
         or extract_date_near("last date", t)
-        or extract_date_near("bid submission", t)
+        or extract_date_near("submission deadline", t)
         or extract_date_near("end date", t)
     )
     q = QTY_RE.search(t)

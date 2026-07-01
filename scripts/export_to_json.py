@@ -1,4 +1,7 @@
-"""Export Excel + diagnostic queues to docs/data.json for GitHub Pages."""
+"""Export Excel + diagnostic queues to docs/data.json for GitHub Pages.
+
+Scope: market intelligence only. No bid/offer submission workflow is exported.
+"""
 from __future__ import annotations
 
 import argparse
@@ -95,8 +98,8 @@ def build_portal_health(portals: list[dict], tenders: list[dict], failures: list
         fl = by_portal_failures.get(name, []) + by_portal_failures.get(p.get("id"), [])
         ac = by_portal_actions.get(name, []) + by_portal_actions.get(p.get("id"), [])
         status = "OK"
-        if any((f.get("failure_type") or "").startswith("http_403") or f.get("failure_type") == "login_required" for f in fl) or ac:
-            status = "Action Required"
+        if any((f.get("failure_type") or "").startswith("http_403") or f.get("failure_type") in {"credentials_required", "protected_manual_review"} for f in fl) or ac:
+            status = "Access Review"
         elif any(f.get("failure_type") in {"dns_error", "ssl_error", "timeout", "connection_refused", "redirect_loop"} for f in fl):
             status = "Access Problem"
         elif any((f.get("failure_type") or "").startswith("http_404") for f in fl):
@@ -111,7 +114,7 @@ def build_portal_health(portals: list[dict], tenders: list[dict], failures: list
             "status": status,
             "lead_count": by_portal_tenders.get(name, 0),
             "failure_count": len(fl),
-            "open_action_count": len([x for x in ac if x.get("status", "open") == "open"]),
+            "open_access_review_count": len([x for x in ac if x.get("status", "open") == "open"]),
             "top_failure": Counter(f.get("failure_type") for f in fl).most_common(1)[0][0] if fl else "",
             "next_action": (ac[-1].get("next_action") if ac else p.get("next_action", "")),
             "website": p.get("website", ""),
@@ -156,8 +159,8 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "high_priority_count": sum(1 for t in tenders if t.get("priority") == "High"),
         "medium_priority_count": sum(1 for t in tenders if t.get("priority") == "Medium"),
         "failure_count": len(failures),
-        "open_action_count": len([a for a in actions if a.get("status", "open") == "open"]),
-        "portal_action_required_count": sum(1 for p in portal_health if p.get("status") in {"Action Required", "Access Problem", "Broken URL"}),
+        "open_access_review_count": len([a for a in actions if a.get("status", "open") == "open"]),
+        "portal_access_review_count": sum(1 for p in portal_health if p.get("status") in {"Access Review", "Access Problem", "Broken URL"}),
         "missing_ref_count": sum(1 for t in tenders if t.get("missing_ref")),
         "missing_date_count": sum(1 for t in tenders if t.get("missing_date")),
         "missing_qty_count": sum(1 for t in tenders if t.get("missing_qty")),
@@ -173,12 +176,13 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "source_log": source_log,
         "source_failures": failures[-1000:],
         "action_queue": actions[-1000:],
+        "access_queue": actions[-1000:],
         "portal_health": portal_health,
     }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Yazildi: {out_path} ({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat, {len(failures)} failure, {len(actions)} action)")
+    print(f"Yazildi: {out_path} ({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat, {len(failures)} failure, {len(actions)} access-review)")
 
 
 def parse_args():

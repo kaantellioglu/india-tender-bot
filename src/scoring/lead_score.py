@@ -32,8 +32,8 @@ POSITIVE_RULES = [
     (20, r"\b(pdf|doc|docx|xls|xlsx)\b", "document source"),
     (20, r"\b(qty|quantity|nos|no\.|sets|units|pcs|each)\b", "quantity signal"),
     (20, r"\b(inr|rs\.?|amount|price|boq|bill of quantities|quoted)\b", "commercial/price signal"),
-    (15, r"tender\s*(no|ref)|bid\s*(no|id)|rfq|rfp|nit|eoi", "tender reference signal"),
-    (10, r"closing\s+date|due\s+date|bid\s+submission|last\s+date", "closing date signal"),
+    (15, r"tender\s*(no|ref)|tender\s*(no|id)|bid\s*(no|id)|rfq|rfp|nit|eoi", "tender reference signal"),
+    (10, r"closing\s+date|due\s+date|last\s+date", "closing date signal"),
 ]
 NEGATIVE_RULES = [
     (-45, r"career|job|recruitment|investor|annual report|csr|privacy|terms|contact us", "website noise"),

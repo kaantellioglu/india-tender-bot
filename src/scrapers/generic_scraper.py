@@ -3,7 +3,7 @@
 V3 upgrades:
 - Reads parent table/list/card text instead of only <a> text.
 - Extracts tender ref/date/closing date from row text.
-- Detects login/vendor/DSC actions from portal pages.
+- Detects access/registration/protected-page signals for intelligence extraction only.
 - Calculates transparent priority score for each candidate.
 - Supports portal-specific max_leads via config/portal_rules.yaml when available.
 """
@@ -97,6 +97,7 @@ class GenericScraper(BaseScraper):
                 url=url,
                 action_type=login_signal.access_type,
                 required_items=login_signal.required_items,
+                data_access=login_signal.data_access,
                 automation_possible=login_signal.automation_possible,
                 next_action=login_signal.action,
                 confidence=login_signal.confidence,
