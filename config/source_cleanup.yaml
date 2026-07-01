@@ -1,0 +1,106 @@
+# V3.2 source cleanup board.
+# Purpose: clean public tender/result/archive sources before award/price extraction.
+# Scope: market intelligence only. No procurement transaction or protected portal interaction is included.
+
+sources:
+  gail_india:
+    portal: GAIL India
+    status: priority_source
+    data_access_status: public_archive_and_tender_pages
+    public_tender_url: https://gailtenders.in/Gailtenders
+    archive_award_url: https://gailtenders.in/Gailtenders/writereaddata/AOC/
+    technical_fix_needed: aoc_archive_listing_or_pdf_index_parser
+    market_intelligence_priority: High
+    target_data: [AOC, LOA, FOA, award_amount, winner, quantity, regulator]
+    notes: Use GAIL AOC/LOA/FOA archive before generic active tenders.
+
+  indraprastha_gas_igl:
+    portal: Indraprastha Gas (IGL)
+    status: priority_source
+    data_access_status: public_or_browser_table
+    public_tender_url: https://tenders.iglonline.net/tenderList
+    archive_award_url: https://tenders.iglonline.net/tenderList
+    technical_fix_needed: browser_table_and_detail_parser
+    market_intelligence_priority: High
+    target_data: [active_tender, tender_ref, closing_date, BOQ, award_result]
+    notes: Data list is visible but noisy; build source-specific table/detail extraction.
+
+  gasonet_services:
+    portal: Gasonet Services
+    status: priority_source
+    data_access_status: public_pdf_page
+    public_tender_url: https://www.gasonet.in/tenders.html
+    archive_award_url: https://www.gasonet.in/tenders.html
+    technical_fix_needed: pdf_table_and_boq_parser
+    market_intelligence_priority: High
+    target_data: [domestic_regulator, service_regulator, quantity, technical_spec, price_schedule]
+    notes: Good gas regulator benchmark source.
+
+  maharashtra_natural_gas_mngl:
+    portal: Maharashtra Natural Gas (MNGL)
+    status: priority_source
+    data_access_status: public_active_tender_page
+    public_tender_url: https://mngl.in/active-tenders
+    archive_award_url: https://mngl.in/active-tenders
+    technical_fix_needed: active_archive_split_and_pdf_parser
+    market_intelligence_priority: High
+    target_data: [active_tender, regulator, closing_date, quantity]
+
+  vadodara_gas_limited:
+    portal: Vadodara Gas Limited
+    status: source_repair_required
+    data_access_status: timeout_or_unstable
+    public_tender_url: https://www.vgl.co.in/tenders/
+    archive_award_url: https://www.vgl.co.in/tenders/
+    technical_fix_needed: retry_browser_fetch_and_pdf_url_repair
+    market_intelligence_priority: High
+    target_data: [domestic_meter, gas_tap, regulator_related, historical_pdf]
+    notes: Several PDF links return 404 or timeout; keep URL repair queue.
+
+  bharat_petroleum_bpcl_cgd:
+    portal: Bharat Petroleum (BPCL CGD)
+    status: improved_source
+    data_access_status: public_candidates_found
+    public_tender_url: https://bharatpetroleum.in/tenders
+    archive_award_url: https://bharatpetroleum.in/tenders
+    technical_fix_needed: stable_public_results_parser
+    market_intelligence_priority: High
+    target_data: [CGD, gas_regulator, purchase_order, award_result]
+
+  hindustan_petroleum_hpcl_cgd:
+    portal: Hindustan Petroleum (HPCL CGD)
+    status: access_problem
+    data_access_status: http_403
+    public_tender_url: https://www.hindustanpetroleum.com/pages/tenders-and-contracts
+    archive_award_url: https://www.hindustanpetroleum.com/pages/tenders-and-contracts
+    technical_fix_needed: browser_fetch_or_alternative_public_source
+    market_intelligence_priority: Medium
+    target_data: [CGD, award_result]
+
+  green_gas_limited:
+    portal: Green Gas Limited
+    status: broken_domain
+    data_access_status: dns_error
+    public_tender_url: https://www.gglonline.net/tender
+    archive_award_url: https://www.gglonline.net/tender
+    technical_fix_needed: find_current_domain_or_public_procurement_mirror
+    market_intelligence_priority: High
+
+  cppp_eprocure:
+    portal: CPPP / eProcure
+    status: priority_aggregator
+    data_access_status: public_search_requires_browser_or_endpoint
+    public_tender_url: https://www.etenders.gov.in/eprocure/app
+    archive_award_url: https://www.etenders.gov.in/eprocure/app
+    technical_fix_needed: search_endpoint_or_playwright_result_parser
+    market_intelligence_priority: High
+    target_data: [GAIL, BPCL, IOCL, MNGL, EIL, regulator, RMS, MRS, PRS]
+
+  gem:
+    portal: GeM
+    status: protected_or_rate_limited
+    data_access_status: connection_refused_or_bot_block
+    public_tender_url: https://gem.gov.in
+    archive_award_url: https://gem.gov.in
+    technical_fix_needed: alternative_public_award_sources_or_manual_source_review
+    market_intelligence_priority: Medium

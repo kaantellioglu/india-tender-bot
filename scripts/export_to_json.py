@@ -1,6 +1,6 @@
 """Export Excel + diagnostic queues to docs/data.json for GitHub Pages.
 
-Scope: market intelligence only. No bid/offer submission workflow is exported.
+Scope: market intelligence only. No procurement transaction workflow is exported.
 """
 from __future__ import annotations
 
@@ -12,12 +12,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import openpyxl
+import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_WORKBOOK = ROOT / "data" / "India_Procurement_Intelligence_Database.xlsx"
 DEFAULT_OUT = ROOT / "docs" / "data.json"
 FAILURES_PATH = ROOT / "data" / "source_failures.json"
 ACTIONS_PATH = ROOT / "data" / "action_queue.json"
+SOURCE_CLEANUP_PATH = ROOT / "config" / "source_cleanup.yaml"
 
 
 def rows_as_dicts(ws, header_row: int, headers: list[str]) -> list[dict]:
@@ -45,6 +47,23 @@ def load_json_list(path: Path) -> list[dict]:
     except Exception:
         return []
 
+
+
+def load_source_cleanup(path: Path = SOURCE_CLEANUP_PATH) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        rows = []
+        for portal_id, item in (data.get("sources") or {}).items():
+            if isinstance(item, dict):
+                row = {"portal_id": portal_id, **item}
+                row.setdefault("scope", "market_intelligence_only")
+                row.setdefault("excluded_scope", "no_procurement_transaction_automation")
+                rows.append(row)
+        return rows
+    except Exception:
+        return []
 
 def parse_meta(notes: str | None) -> dict:
     notes = str(notes or "")
@@ -83,10 +102,12 @@ def derive_tender_fields(t: dict) -> dict:
     return t
 
 
-def build_portal_health(portals: list[dict], tenders: list[dict], failures: list[dict], actions: list[dict]) -> list[dict]:
+def build_portal_health(portals: list[dict], tenders: list[dict], failures: list[dict], actions: list[dict], cleanup: list[dict] | None = None) -> list[dict]:
     by_portal_tenders = Counter(t.get("company") or t.get("portal") or "" for t in tenders)
     by_portal_failures = defaultdict(list)
     by_portal_actions = defaultdict(list)
+    cleanup_by_name = {c.get("portal"): c for c in (cleanup or [])}
+    cleanup_by_id = {c.get("portal_id"): c for c in (cleanup or [])}
     for f in failures:
         by_portal_failures[f.get("portal") or f.get("portal_id")].append(f)
     for a in actions:
@@ -97,6 +118,7 @@ def build_portal_health(portals: list[dict], tenders: list[dict], failures: list
         name = p.get("name") or ""
         fl = by_portal_failures.get(name, []) + by_portal_failures.get(p.get("id"), [])
         ac = by_portal_actions.get(name, []) + by_portal_actions.get(p.get("id"), [])
+        cu = cleanup_by_name.get(name) or cleanup_by_id.get(p.get("id")) or {}
         status = "OK"
         if any((f.get("failure_type") or "").startswith("http_403") or f.get("failure_type") in {"credentials_required", "protected_manual_review"} for f in fl) or ac:
             status = "Access Review"
@@ -106,6 +128,10 @@ def build_portal_health(portals: list[dict], tenders: list[dict], failures: list
             status = "Broken URL"
         elif fl:
             status = "Review"
+        if cu.get("status") in {"source_repair_required", "broken_domain", "access_problem", "protected_or_rate_limited"}:
+            status = "Source Cleanup"
+        elif cu.get("status") in {"priority_source", "priority_aggregator", "improved_source"} and status == "OK":
+            status = "Priority Source"
         health.append({
             "portal": name,
             "portal_id": p.get("id", ""),
@@ -116,7 +142,11 @@ def build_portal_health(portals: list[dict], tenders: list[dict], failures: list
             "failure_count": len(fl),
             "open_access_review_count": len([x for x in ac if x.get("status", "open") == "open"]),
             "top_failure": Counter(f.get("failure_type") for f in fl).most_common(1)[0][0] if fl else "",
-            "next_action": (ac[-1].get("next_action") if ac else p.get("next_action", "")),
+            "next_action": (cu.get("technical_fix_needed") or (ac[-1].get("next_action") if ac else p.get("next_action", ""))),
+            "data_access_status": cu.get("data_access_status", ""),
+            "market_intelligence_priority": cu.get("market_intelligence_priority", ""),
+            "public_tender_url": cu.get("public_tender_url", ""),
+            "archive_award_url": cu.get("archive_award_url", ""),
             "website": p.get("website", ""),
         })
     return health
@@ -147,7 +177,8 @@ def export(workbook_path: Path, out_path: Path) -> None:
 
     failures = load_json_list(FAILURES_PATH)
     actions = load_json_list(ACTIONS_PATH)
-    portal_health = build_portal_health(portals, tenders, failures, actions)
+    source_cleanup = load_source_cleanup()
+    portal_health = build_portal_health(portals, tenders, failures, actions, source_cleanup)
 
     dashboard = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
@@ -160,7 +191,8 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "medium_priority_count": sum(1 for t in tenders if t.get("priority") == "Medium"),
         "failure_count": len(failures),
         "open_access_review_count": len([a for a in actions if a.get("status", "open") == "open"]),
-        "portal_access_review_count": sum(1 for p in portal_health if p.get("status") in {"Access Review", "Access Problem", "Broken URL"}),
+        "portal_access_review_count": sum(1 for p in portal_health if p.get("status") in {"Access Review", "Access Problem", "Broken URL", "Source Cleanup"}),
+        "source_cleanup_count": len(source_cleanup),
         "missing_ref_count": sum(1 for t in tenders if t.get("missing_ref")),
         "missing_date_count": sum(1 for t in tenders if t.get("missing_date")),
         "missing_qty_count": sum(1 for t in tenders if t.get("missing_qty")),
@@ -178,11 +210,12 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "action_queue": actions[-1000:],
         "access_queue": actions[-1000:],
         "portal_health": portal_health,
+        "source_cleanup": source_cleanup,
     }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Yazildi: {out_path} ({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat, {len(failures)} failure, {len(actions)} access-review)")
+    print(f"Yazildi: {out_path} ({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat, {len(failures)} failure, {len(actions)} access-review, {len(source_cleanup)} source-cleanup)")
 
 
 def parse_args():

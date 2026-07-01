@@ -5,8 +5,7 @@ The queue is for market-intelligence extraction only:
 - document availability checks
 - portal URL/access health
 
-It explicitly excludes bid/offer submission, DSC signing, CAPTCHA bypass, payments,
-EMD handling, and any transaction on procurement portals.
+It explicitly excludes procurement transaction automation and protected portal interaction.
 """
 from __future__ import annotations
 
@@ -21,7 +20,7 @@ DATA_DIR = ROOT / "data"
 DEFAULT_FAILURES = DATA_DIR / "source_failures.json"
 DEFAULT_ACTIONS = DATA_DIR / "action_queue.json"
 MARKET_INTELLIGENCE_SCOPE = "market_intelligence_only"
-EXCLUDED_SCOPE = "no_bid_or_offer_submission_automation"
+EXCLUDED_SCOPE = "no_procurement_transaction_automation"
 
 
 def now_utc() -> str:
@@ -86,27 +85,29 @@ def _save_json_list(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def _default_technical_action(action_type: str, data_access: str) -> str:
-    if action_type in {"credentials_required", "vendor_registration_required"}:
-        return "Keep public scraping active; only use credentials for document discovery after approved setup"
-    if action_type == "protected_manual_review":
-        return "Do not automate protected steps; use public pages and result archives only"
-    if action_type == "document_access_review":
-        return "Check whether documents are publicly downloadable or mirrored in award/archive pages"
-    if data_access == "browser":
-        return "Build browser-rendered data scraper for public tender/result tables"
+    if action_type in {"credentials_required", "credential_document_area"}:
+        return "Keep public scraping active; verify whether read-only document access exists"
+    if action_type in {"vendor_registration_required", "registration_document_area"}:
+        return "Keep public scraping active; check whether registration affects document visibility"
+    if action_type in {"protected_manual_review", "protected_source_review"}:
+        return "Do not automate protected source interactions; use public pages and result archives only"
+    if action_type in {"document_access_review", "access_review"}:
+        return "Check whether documents are publicly downloadable or mirrored in result/archive pages"
+    if data_access == "browser" or action_type == "browser_scrape_needed":
+        return "Build browser-rendered public data scraper for tender/result tables"
     return "Continue public tender/award/result extraction"
 
 
 def _default_business_action(action_type: str) -> str:
-    if action_type == "credentials_required":
-        return "Confirm if ESKA has read-only vendor credentials for document access; never store secrets in repository"
-    if action_type == "vendor_registration_required":
-        return "Check vendor registration/empanelment status for document visibility only"
-    if action_type == "protected_manual_review":
-        return "Human review only for protected pages; no CAPTCHA/DSC/payment/offer automation"
-    if action_type == "document_access_review":
-        return "Review commercial terms only as intelligence; no transaction workflow"
-    return "No business transaction required"
+    if action_type in {"credentials_required", "credential_document_area"}:
+        return "Confirm whether read-only document access exists; never store secrets in repository"
+    if action_type in {"vendor_registration_required", "registration_document_area"}:
+        return "Check registration/empanelment status only for document visibility"
+    if action_type in {"protected_manual_review", "protected_source_review"}:
+        return "Human source review only for protected pages"
+    if action_type in {"document_access_review", "access_review"}:
+        return "Review source availability only as intelligence"
+    return "No source-side business action required"
 
 
 class DiagnosticRecorder:

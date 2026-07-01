@@ -60,7 +60,8 @@ jobs:
           print("high_priority_count:", dashboard.get("high_priority_count"))
           print("failure_count:", dashboard.get("failure_count"))
           print("open_access_review_count:", dashboard.get("open_access_review_count"))
-          required = ["dashboard", "portals", "tenders", "price_intelligence", "portal_health", "source_failures", "access_queue"]
+          print("source_cleanup_count:", dashboard.get("source_cleanup_count"))
+          required = ["dashboard", "portals", "tenders", "price_intelligence", "portal_health", "source_failures", "access_queue", "source_cleanup"]
           missing = [k for k in required if k not in data]
           if missing:
               raise SystemExit(f"data.json eksik alanlar: {missing}")

@@ -20,6 +20,7 @@ from .base_scraper import BaseScraper, TenderLead
 from ..access.login_detector import detect_login_requirements
 from ..parsers.html_detail_parser import parse_html_text, clean_text
 from ..scoring.lead_score import score_text
+from ..discovery.archive_discovery import discover_sources
 
 logger = logging.getLogger(__name__)
 
@@ -77,105 +78,117 @@ def infer_file_type(url: str) -> str:
 class GenericScraper(BaseScraper):
     def fetch_leads(self) -> list[TenderLead]:
         candidates: list[TenderLead] = []
-        url = self.portal.get("tender_search_url") or self.portal.get("website")
-        if not url:
-            return candidates
-
         rules = load_portal_rules().get(self.portal.get("id", ""), {})
         max_leads = int(rules.get("max_leads", DEFAULT_MAX_LEADS_PER_PORTAL))
         noise_filters = [*NOISE_HINTS, *rules.get("noise_filters", [])]
         priority_keywords = [k.lower() for k in rules.get("priority_keywords", [])]
-
-        resp = self._get(url)
-        if resp is None:
+        sources = discover_sources(self.portal, rules)
+        if not sources:
             return candidates
 
-        login_signal = detect_login_requirements(resp.text, url)
-        if login_signal.access_type != "public" and self.diagnostics:
-            self.diagnostics.record_action(
-                portal=self.portal,
-                url=url,
-                action_type=login_signal.access_type,
-                required_items=login_signal.required_items,
-                data_access=login_signal.data_access,
-                automation_possible=login_signal.automation_possible,
-                next_action=login_signal.action,
-                confidence=login_signal.confidence,
-                signals=login_signal.signals,
-            )
-
-        soup = BeautifulSoup(resp.text, "html.parser")
         seen_urls: set[str] = set()
+        usable_source_count = 0
 
-        for a in soup.find_all("a", href=True):
-            href = (a.get("href") or "").strip()
-            text = clean_text(a.get_text(" ", strip=True) or "")
-            if not href or href.startswith("javascript:") or href.startswith("#") or href.lower().startswith("mailto:"):
+        for source in sources:
+            url = source.url
+            resp = self._get(url)
+            if resp is None:
                 continue
+            usable_source_count += 1
 
-            full_url = urljoin(resp.url or url, href)
-            if full_url in seen_urls:
-                continue
-
-            row_text = parent_context_text(a)
-            haystack = clean_text(f"{text} {href} {row_text}")
-            hay_low = haystack.lower()
-            if any(n in hay_low for n in noise_filters):
-                continue
-
-            file_type = infer_file_type(full_url)
-            is_document = file_type in {"pdf", "doc", "xls"}
-            matched_kw = self._matches_keyword(haystack)
-            strong_doc_hint = is_document and any(h in hay_low for h in STRONG_DOCUMENT_HINTS)
-            priority_kw_hit = any(pk in hay_low for pk in priority_keywords)
-
-            # Accept if targeted keyword, true document hint, or row has tender reference/closing date signals.
-            html_info = parse_html_text(row_text or haystack, fallback_title=text)
-            tender_signal = bool(html_info.tender_ref or html_info.closing_date)
-            if not (matched_kw or strong_doc_hint or priority_kw_hit or tender_signal):
-                continue
-
-            score = score_text(haystack, file_type=file_type, matched_keyword=matched_kw or "")
-            if score.priority == "Low" and not strong_doc_hint and not tender_signal:
-                continue
-
-            seen_urls.add(full_url)
-            title = text or html_info.title or row_text[:140] or full_url
-            extra = {
-                "source_type": "html_table" if row_text and row_text != text else "html_link",
-                "row_text": row_text,
-                "tender_ref": html_info.tender_ref,
-                "tender_date": html_info.tender_date,
-                "closing_date": html_info.closing_date,
-                "html_confidence": html_info.confidence,
-                "lead_score": score.score,
-                "priority": score.priority,
-                "score_reasons": score.reasons,
-                "equipment_segment": score.equipment_segment,
-                "equipment_type": score.equipment_type,
-                "equipment_relevance": score.equipment_relevance,
-            }
-
-            candidates.append(
-                TenderLead(
-                    portal_id=self.portal["id"],
-                    portal_name=self.portal["name"],
-                    title=title[:300],
-                    url=full_url,
-                    matched_keyword=matched_kw,
-                    published_date=html_info.tender_date,
-                    file_type=file_type,
-                    raw_snippet=row_text or text,
-                    extra=extra,
+            access_signal = detect_login_requirements(resp.text, url)
+            if access_signal.access_type != "public" and self.diagnostics:
+                self.diagnostics.record_action(
+                    portal=self.portal,
+                    url=url,
+                    action_type=access_signal.access_type,
+                    required_items=access_signal.required_items,
+                    data_access=access_signal.data_access,
+                    automation_possible=access_signal.automation_possible,
+                    next_action=access_signal.action,
+                    confidence=access_signal.confidence,
+                    signals=access_signal.signals,
                 )
-            )
 
-        # High priority first, then higher score, then documents.
-        candidates.sort(key=lambda l: (0 if l.extra.get("priority") == "High" else 1 if l.extra.get("priority") == "Medium" else 2, -(l.extra.get("lead_score") or 0), 0 if l.file_type in {"pdf", "doc", "xls"} else 1))
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for a in soup.find_all("a", href=True):
+                href = (a.get("href") or "").strip()
+                text = clean_text(a.get_text(" ", strip=True) or "")
+                if not href or href.startswith("javascript:") or href.startswith("#") or href.lower().startswith("mailto:"):
+                    continue
+
+                full_url = urljoin(resp.url or url, href)
+                if full_url in seen_urls:
+                    continue
+
+                row_text = parent_context_text(a)
+                haystack = clean_text(f"{text} {href} {row_text} {source.source_kind}")
+                hay_low = haystack.lower()
+                if any(n in hay_low for n in noise_filters):
+                    continue
+
+                file_type = infer_file_type(full_url)
+                is_document = file_type in {"pdf", "doc", "xls"}
+                matched_kw = self._matches_keyword(haystack)
+                strong_doc_hint = is_document and any(h in hay_low for h in STRONG_DOCUMENT_HINTS)
+                priority_kw_hit = any(pk in hay_low for pk in priority_keywords)
+
+                html_info = parse_html_text(row_text or haystack, fallback_title=text)
+                tender_signal = bool(html_info.tender_ref or html_info.closing_date)
+                archive_signal = source.source_kind in {"award_archive", "award_or_archive", "archive_guess"} and any(h in hay_low for h in ["aoc", "loa", "foa", "award", "work order", "purchase order"])
+
+                if not (matched_kw or strong_doc_hint or priority_kw_hit or tender_signal or archive_signal):
+                    continue
+
+                score = score_text(haystack, file_type=file_type, matched_keyword=matched_kw or "")
+                if score.priority == "Low" and not strong_doc_hint and not tender_signal and not archive_signal:
+                    continue
+
+                seen_urls.add(full_url)
+                title = text or html_info.title or row_text[:140] or full_url
+                extra = {
+                    "source_type": "html_table" if row_text and row_text != text else "html_link",
+                    "source_page_url": url,
+                    "source_page_kind": source.source_kind,
+                    "source_page_reason": source.reason,
+                    "row_text": row_text,
+                    "tender_ref": html_info.tender_ref,
+                    "tender_date": html_info.tender_date,
+                    "closing_date": html_info.closing_date,
+                    "html_confidence": html_info.confidence,
+                    "lead_score": score.score,
+                    "priority": score.priority,
+                    "score_reasons": score.reasons,
+                    "equipment_segment": score.equipment_segment,
+                    "equipment_type": score.equipment_type,
+                    "equipment_relevance": score.equipment_relevance,
+                }
+
+                candidates.append(
+                    TenderLead(
+                        portal_id=self.portal["id"],
+                        portal_name=self.portal["name"],
+                        title=title[:300],
+                        url=full_url,
+                        matched_keyword=matched_kw,
+                        published_date=html_info.tender_date,
+                        file_type=file_type,
+                        raw_snippet=row_text or text,
+                        extra=extra,
+                    )
+                )
+
+        candidates.sort(key=lambda l: (
+            0 if l.extra.get("priority") == "High" else 1 if l.extra.get("priority") == "Medium" else 2,
+            -(l.extra.get("lead_score") or 0),
+            0 if l.file_type in {"pdf", "doc", "xls"} else 1,
+            0 if l.extra.get("source_page_kind") in {"award_archive", "award_or_archive"} else 1,
+        ))
         leads = candidates[:max_leads]
 
+        source_note = f"{usable_source_count}/{len(sources)} kaynak sayfasi"
         if len(candidates) > max_leads:
-            logger.info("%s: %d aday bulundu, ilk %d tanesi alindi (limit)", self.portal["name"], len(candidates), max_leads)
+            logger.info("%s: %d aday bulundu, ilk %d tanesi alindi (limit, %s)", self.portal["name"], len(candidates), max_leads, source_note)
         else:
-            logger.info("%s: %d aday link bulundu", self.portal["name"], len(leads))
+            logger.info("%s: %d aday link bulundu (%s)", self.portal["name"], len(leads), source_note)
         return leads

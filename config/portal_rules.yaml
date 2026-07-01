@@ -1,90 +1,111 @@
-# Portal-specific learning rules. Update this file as the bot learns selectors,
-# noisy links, max lead limits, or manual access requirements.
+# V3.2 portal-specific source rules for market-intelligence extraction.
+# No procurement transaction or protected portal interaction is in scope.
+
 portals:
+  gail_india:
+    strategy: public_tender_and_aoc_archive
+    max_leads: 250
+    source_urls:
+      - url: https://gailtenders.in/Gailtenders
+        kind: active_tender
+        reason: active_tender_search
+      - url: https://gailtenders.in/Gailtenders/writereaddata/AOC/
+        kind: award_archive
+        reason: aoc_loa_foa_archive
+    priority_keywords: [domestic regulator, service regulator, pressure regulator, RMS, MRS, DRS, PRS, gas filter, filter station, skid, AOC, LOA, FOA, award]
+    noise_filters: [career, investor, photo, contact, sitemap]
+
   indraprastha_gas_igl:
     strategy: aggressive_table_scan
     max_leads: 300
-    priority_keywords:
-      - domestic regulator
-      - service regulator
-      - pressure regulator
-      - frs
-      - mrs
-      - prs
-    noise_filters:
-      - user manual
-      - download app
-      - browser
-      - tender guide
-      - login guide
+    source_urls:
+      - url: https://tenders.iglonline.net/tenderList
+        kind: active_and_historical_table
+        reason: tender_list_table
+    priority_keywords: [domestic regulator, service regulator, pressure regulator, FRS, MRS, DRS, PRS, RMS, gas filter, filter station, skid]
+    noise_filters: [login help, forgot password, registration guide, terms, privacy, contact us]
 
   gasonet_services:
-    strategy: html_table_then_pdf
-    max_leads: 250
-    priority_keywords:
-      - domestic regulator
-      - service regulator
-      - pressure regulator
-      - regulator
-      - gas meter
-    noise_filters:
-      - image
-      - icon
-
-  vadodara_gas_limited:
-    strategy: html_table_then_pdf
-    max_leads: 250
-    priority_keywords:
-      - regulator
-      - drs
-      - prs
-      - mrs
-      - skid
-    noise_filters:
-      - photo gallery
-      - terms
+    strategy: public_pdf_table
+    max_leads: 200
+    source_urls:
+      - url: https://www.gasonet.in/tenders.html
+        kind: public_tender_pdf_list
+        reason: tender_pdf_page
+    priority_keywords: [domestic regulator, service regulator, pressure regulator, meter regulator, gas tap, PNG regulator, filter]
+    noise_filters: [career, contact, about]
 
   maharashtra_natural_gas_mngl:
-    strategy: html_table_then_cppp_reference
-    max_leads: 180
-    priority_keywords:
-      - domestic regulator
-      - service regulator
-      - regulator
-      - png
-      - cgd
+    strategy: public_active_archive_scan
+    max_leads: 160
+    source_urls:
+      - url: https://mngl.in/active-tenders
+        kind: active_tender_table
+        reason: active_tenders
+    priority_keywords: [domestic regulator, service regulator, pressure regulator, DRS, PRS, MRS, RMS, gas filter, skid]
 
-  gail_india:
-    strategy: award_archive_pdf
+  vadodara_gas_limited:
+    strategy: unstable_source_url_repair
     max_leads: 180
-    priority_keywords:
-      - loa
-      - foa
-      - aoc
-      - regulator
-      - metering
-      - gas
+    source_urls:
+      - url: https://www.vgl.co.in/tenders/
+        kind: tender_pdf_archive
+        reason: configured_vgl_tenders
+    priority_keywords: [domestic meter, regulator, gas tap, pressure regulator, service regulator, PNG]
+    retry_policy: browser_fetch_then_url_repair
 
   bharat_petroleum_bpcl_cgd:
-    strategy: blocked_site_alternative_sources
-    max_leads: 80
-    access_level: login_or_blocked
-    fallback_sources:
-      - CPPP
-      - GeM
-      - BPCL eProcurement
+    strategy: public_tender_scan
+    max_leads: 150
+    source_urls:
+      - url: https://bharatpetroleum.in/tenders
+        kind: public_tender_page
+        reason: bpcl_tender_page
+    priority_keywords: [CGD, gas regulator, pressure regulator, RMS, MRS, DRS, PRS, skid, filter]
 
   hindustan_petroleum_hpcl_cgd:
-    strategy: blocked_site_alternative_sources
+    strategy: alternative_source_needed
     max_leads: 80
-    access_level: login_or_blocked
-    fallback_sources:
-      - CPPP
-      - GeM
-      - HPCL eProcurement
+    source_urls:
+      - url: https://www.hindustanpetroleum.com/pages/tenders-and-contracts
+        kind: public_tender_page
+        reason: hpcl_tender_page
+    priority_keywords: [CGD, regulator, RMS, MRS, DRS, PRS]
+
+  gujarat_gas_ggl:
+    strategy: public_page_plus_nprocure_reference
+    max_leads: 150
+    source_urls:
+      - url: https://www.gujaratgas.com/tenders/
+        kind: tender_page
+        reason: ggl_public_tenders
+    priority_keywords: [domestic regulator, service regulator, pressure regulator, nprocure, RMS, DRS, MRS]
+
+  adani_total_gas_atgl:
+    strategy: public_commercial_page
+    max_leads: 120
+    source_urls:
+      - url: https://www.adanigas.com/commercials
+        kind: commercial_tender_page
+        reason: atgl_commercials
+    priority_keywords: [tender, EOI, regulator, RMS, DRS, MRS, PRS, skid]
+    noise_filters: [vendor registration form only, career]
 
   cppp_eprocure:
-    strategy: playwright_form_search_required
-    max_leads: 200
-    access_level: js_form
-    manual_note: Playwright scraper required for organisation + keyword form search.
+    strategy: aggregator_browser_or_endpoint
+    max_leads: 120
+    source_urls:
+      - url: https://www.etenders.gov.in/eprocure/app
+        kind: procurement_aggregator
+        reason: cppp_public_search
+    priority_keywords: [GAIL, BPCL, IOCL, HPCL, MNGL, EIL, gas regulator, pressure regulator, RMS, MRS, DRS, PRS, gas filter station]
+
+  tenderwizard_eprocurement_technologies:
+    strategy: aggregator_watch
+    max_leads: 80
+    priority_keywords: [gas regulator, pressure regulator, RMS, MRS, DRS, PRS, gas filter station]
+
+  sap_ariba_discovery:
+    strategy: aggregator_watch
+    max_leads: 80
+    priority_keywords: [gas regulator, pressure regulator, RMS, MRS, DRS, PRS, gas filter station]
