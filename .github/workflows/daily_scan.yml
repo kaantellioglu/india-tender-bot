@@ -34,6 +34,9 @@ jobs:
 
       - name: Taramayi calistir
         env:
+          # Portal basina daha fazla aday alinsin; dashboard'da eksik veri azaltmak icin.
+          MAX_LEADS_PER_PORTAL: "120"
+
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
@@ -41,7 +44,7 @@ jobs:
           NOTIFY_EMAIL_TO: ${{ secrets.NOTIFY_EMAIL_TO }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m src.main
+        run: python -m src.main --max-pdf-parses 120
 
       - name: Dashboard JSON uret
         run: python -m scripts.export_to_json
@@ -63,8 +66,13 @@ jobs:
           print("portal_count:", dashboard.get("portal_count"))
           print("tender_count:", dashboard.get("tender_count"))
           print("price_row_count:", dashboard.get("price_row_count"))
+          print("missing_core_fields:", dashboard.get("missing_core_fields"))
+          print("high_value_count:", dashboard.get("high_value_count"))
 
-          required = ["dashboard", "portals", "tenders", "price_intelligence", "competitors", "source_log"]
+          required = [
+              "dashboard", "portals", "tenders", "price_intelligence",
+              "competitors", "source_log", "portal_health", "status_counts"
+          ]
           missing = [k for k in required if k not in data]
           if missing:
               raise SystemExit(f"data.json eksik alanlar: {missing}")
@@ -82,5 +90,5 @@ jobs:
           else
             git commit -m "Otomatik tarama ve dashboard: $(date -u +'%Y-%m-%d %H:%M UTC')"
             git pull --rebase origin main
-            git push
+            git push origin main
           fi
