@@ -1,0 +1,78 @@
+competitors:
+- name: Vanaz Engineers
+  country: India
+  role: OEM
+  segment: Domestic/service/industrial regulators
+  website: https://vanaz.com
+  relevance: High
+  notes: Frequently seen in Indian gas market
+- name: Pietro Fiorentini
+  country: Italy/India
+  role: OEM
+  segment: Industrial/service regulators, stations
+  website: https://www.fiorentini.com
+  relevance: High
+  notes: Strong C&I/PRS/MRS competitor
+- name: Honeywell / Elster
+  country: USA/India
+  role: OEM
+  segment: Meters/regulators
+  website: https://process.honeywell.com
+  relevance: Medium
+  notes: Often in meter/regulator ecosystem
+- name: Itron
+  country: USA/India
+  role: OEM
+  segment: Meters/regulators
+  website: https://www.itron.com
+  relevance: Medium
+  notes: Domestic/commercial gas ecosystem
+- name: Mesura Nirmal Gas Controls
+  country: India
+  role: OEM
+  segment: Domestic/service regulators
+  website: https://mesura.in
+  relevance: High
+  notes: Indian regulator competitor
+- name: Kabsons Gas Equipment
+  country: India
+  role: OEM
+  segment: Domestic regulators
+  website: https://kabsons.com
+  relevance: High
+  notes: Awarded domestic regulator source found
+- name: Prabha Electronics
+  country: India
+  role: Supplier/OEM
+  segment: Domestic regulators/meters
+  website: To verify
+  relevance: Medium
+  notes: Award source found in tender portals
+- name: Madas
+  country: Italy
+  role: OEM
+  segment: Gas regulators/filters/SSV
+  website: https://www.madas.it
+  relevance: Medium
+  notes: Possible imported competitor
+- name: Emerson / Fisher
+  country: USA/India
+  role: OEM
+  segment: Industrial regulators
+  website: https://www.emerson.com
+  relevance: Medium
+  notes: Industrial/PRS segment
+- name: Kromschroeder / Honeywell
+  country: Germany/USA
+  role: OEM
+  segment: Gas controls
+  website: https://process.honeywell.com
+  relevance: Medium
+  notes: Gas train components
+- name: ESKA Valve
+  country: Türkiye
+  role: OEM
+  segment: Domestic/service/industrial regulators
+  website: https://eskavalve.com
+  relevance: Target
+  notes: Our benchmark row

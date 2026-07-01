@@ -1,0 +1,664 @@
+portals:
+- id: gail_india
+  name: GAIL India
+  tier: Tier 1
+  type: PSU / Gas transmission + CGD parent
+  website: https://gailtenders.in
+  tender_search_url: https://gailtenders.in/Gailtenders
+  award_url: https://gailtenders.in/Gailtenders/writereaddata/AOC/
+  login_required: May need vendor login/DSC for bids
+  relevance: High
+  note: FOA/LOA/AOC PDFs openly available
+  next_action: Use GAIL AOC and archive searches
+  scraper: generic
+  enabled: true
+- id: gail_gas
+  name: GAIL Gas
+  tier: Tier 1
+  type: CGD operator
+  website: https://gailgas.com
+  tender_search_url: https://gailgas.com/stakeholder-zone/vendor-zone
+  award_url: https://gailgas.com/stakeholder-zone/vendor-zone
+  login_required: Likely GeM/portal depending tender
+  relevance: High
+  note: Vendor zone points to tender information system
+  next_action: Search domestic/service regulators and GeM refs
+  scraper: generic
+  enabled: true
+- id: indraprastha_gas_igl
+  name: Indraprastha Gas (IGL)
+  tier: Tier 1
+  type: CGD operator
+  website: https://www.iglonline.net
+  tender_search_url: https://tenders.iglonline.net/tenderList
+  award_url: https://tenders.iglonline.net/tenderList
+  login_required: Vendor registration listed on tender portal
+  relevance: High
+  note: Portal has active tenders, vendor portal, e-tender guide
+  next_action: Search FRS/MRS/C&I regulators
+  scraper: generic
+  enabled: true
+- id: mahanagar_gas_mgl
+  name: Mahanagar Gas (MGL)
+  tier: Tier 1
+  type: CGD operator
+  website: https://www.mahanagargas.com
+  tender_search_url: https://www.mahanagargas.com/Tender
+  award_url: https://www.mahanagargas.com/Tender
+  login_required: SAP/RFx, DSC usually needed
+  relevance: High
+  note: Supplier bid guide shows digital signature requirement
+  next_action: Need find archive/results
+  scraper: generic
+  enabled: true
+- id: gujarat_gas_ggl
+  name: Gujarat Gas (GGL)
+  tier: Tier 1
+  type: CGD operator
+  website: https://www.gujaratgas.com
+  tender_search_url: https://www.gujaratgas.com/tenders/
+  award_url: https://www.gujaratgas.com/tenders/
+  login_required: nProcure registration; DSC likely
+  relevance: High
+  note: GGL tenders are published through nProcure
+  next_action: Use nProcure support links
+  scraper: generic
+  enabled: true
+- id: adani_total_gas_atgl
+  name: Adani Total Gas (ATGL)
+  tier: Tier 1
+  type: CGD operator
+  website: https://www.adanigas.com
+  tender_search_url: https://www.adanigas.com/commercials
+  award_url: https://www.adanigas.com/commercials
+  login_required: Vendor registration available
+  relevance: High
+  note: Commercials page has Vendor Registration, Tender and EOI
+  next_action: Search tender category list
+  scraper: generic
+  enabled: true
+- id: torrent_gas
+  name: Torrent Gas
+  tier: Tier 1
+  type: CGD operator
+  website: https://www.torrentgas.com
+  tender_search_url: https://www.torrentgas.com/User/Info/Vendor
+  award_url: https://www.torrentgas.com/User/Info/Vendor
+  login_required: Vendor evaluation/registration
+  relevance: High
+  note: Vendor page lists procurement email
+  next_action: procurement@torrentgas.com
+  scraper: generic
+  enabled: true
+- id: indianoil_adani_gas_ioagpl
+  name: IndianOil-Adani Gas (IOAGPL)
+  tier: Tier 1
+  type: CGD JV
+  website: https://ioagpl.com
+  tender_search_url: https://ioagpl.com/vendor-registration-form/
+  award_url: https://ioagpl.com/tenders/
+  login_required: Vendor form via courier/docs
+  relevance: High
+  note: Vendor registration form page lists required docs
+  next_action: Search IOAGPL regulator on CPPP too
+  scraper: generic
+  enabled: true
+- id: indian_oil_corporation_iocl_cgd
+  name: Indian Oil Corporation (IOCL CGD)
+  tier: Tier 1
+  type: PSU CGD operator
+  website: https://iocl.com
+  tender_search_url: https://iocl.com/tenders
+  award_url: https://iocl.com/pages/cgd
+  login_required: CPPP/IOCL portal/GeM
+  relevance: High
+  note: IOCL says it is present in 49 GAs with JVs
+  next_action: Search organisation Indian Oil Corporation
+  scraper: generic
+  enabled: true
+- id: bharat_petroleum_bpcl_cgd
+  name: Bharat Petroleum (BPCL CGD)
+  tier: Tier 1
+  type: PSU CGD operator
+  website: https://bharatpetroleum.in
+  tender_search_url: https://bharatpetroleum.in/tenders
+  award_url: https://bharatpetroleum.in/bharat-petroleum-for/our-businesses/gas/city-gas-distribution
+  login_required: CPPP/BPCL portal/GeM
+  relevance: High
+  note: BPCL CGD page confirms CGD business
+  next_action: Search BPCL CGD regulator
+  scraper: generic
+  enabled: true
+- id: hindustan_petroleum_hpcl_cgd
+  name: Hindustan Petroleum (HPCL CGD)
+  tier: Tier 1
+  type: PSU CGD operator
+  website: https://www.hindustanpetroleum.com
+  tender_search_url: https://www.hindustanpetroleum.com/pages/tenders-and-contracts
+  award_url: https://www.hindustanpetroleum.com
+  login_required: CPPP/HPCL portal/GeM
+  relevance: Medium
+  note: Often central PSU procurement
+  next_action: Search HPCL city gas distribution regulator
+  scraper: generic
+  enabled: true
+- id: maharashtra_natural_gas_mngl
+  name: Maharashtra Natural Gas (MNGL)
+  tier: Tier 2
+  type: CGD operator
+  website: https://mngl.in
+  tender_search_url: https://mngl.in/active-tenders
+  award_url: https://mngl.in/vendor/instructions-to-bridders
+  login_required: CPPP; DSC required
+  relevance: High
+  note: Instructions say submit on CPP portal with DSC
+  next_action: Important domestic regulator ARC source
+  scraper: generic
+  enabled: true
+- id: gasonet_services
+  name: Gasonet Services
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.gasonet.in
+  tender_search_url: https://www.gasonet.in/tenders.html
+  award_url: https://www.gasonet.in/tenders.html
+  login_required: Open tender PDF; email in docs
+  relevance: High
+  note: Tenders page has domestic/service regulator PDF
+  next_action: Good for technical/quantity extraction
+  scraper: generic
+  enabled: true
+- id: green_gas_limited
+  name: Green Gas Limited
+  tier: Tier 2
+  type: CGD JV
+  website: https://www.gglonline.net
+  tender_search_url: https://www.gglonline.net/tender
+  award_url: https://www.gglonline.net/tender
+  login_required: To verify
+  relevance: High
+  note: CGD operator; tender page to monitor
+  next_action: Search regulator/PRS
+  scraper: generic
+  enabled: true
+- id: central_u_p_gas_cugl
+  name: Central U.P. Gas (CUGL)
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.cugl.co.in
+  tender_search_url: https://www.cugl.co.in/tenders
+  award_url: https://www.cugl.co.in/tenders
+  login_required: To verify
+  relevance: High
+  note: CGD operator in UP
+  next_action: Search CUGL procurement regulator
+  scraper: generic
+  enabled: true
+- id: sabarmati_gas
+  name: Sabarmati Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.sabarmatigas.in
+  tender_search_url: https://www.sabarmatigas.in/tenders
+  award_url: https://www.sabarmatigas.in/tenders
+  login_required: To verify
+  relevance: High
+  note: CGD operator in Gujarat
+  next_action: Search service/domestic regulators
+  scraper: generic
+  enabled: true
+- id: charotar_gas
+  name: Charotar Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://charotargas.com
+  tender_search_url: https://charotargas.com/tenders
+  award_url: https://charotargas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search tenders manually
+  scraper: generic
+  enabled: true
+- id: goa_natural_gas
+  name: Goa Natural Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.goanaturalgas.com
+  tender_search_url: https://www.goanaturalgas.com/tenders/
+  award_url: https://www.goanaturalgas.com/tenders/
+  login_required: Open docs possible
+  relevance: High
+  note: Previous docs include regulator quantities
+  next_action: Good benchmark source
+  scraper: generic
+  enabled: true
+- id: haryana_city_gas
+  name: Haryana City Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://haryanacitygas.com
+  tender_search_url: https://haryanacitygas.com/tenders
+  award_url: https://haryanacitygas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search domestic regulator
+  scraper: generic
+  enabled: true
+- id: bhagyanagar_gas
+  name: Bhagyanagar Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.bglgas.com
+  tender_search_url: https://www.bglgas.com/tenders
+  award_url: https://www.bglgas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator; PNGRB listed entity
+  next_action: Search BGL tenders
+  scraper: generic
+  enabled: true
+- id: tripura_natural_gas
+  name: Tripura Natural Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://tngclonline.com
+  tender_search_url: https://tngclonline.com/tenders
+  award_url: https://tngclonline.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search TNGCL regulator
+  scraper: generic
+  enabled: true
+- id: avantika_gas
+  name: Avantika Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.aglonline.net
+  tender_search_url: https://www.aglonline.net/tender
+  award_url: https://www.aglonline.net/tender
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator in MP
+  next_action: Search service regulator
+  scraper: generic
+  enabled: true
+- id: irm_energy
+  name: IRM Energy
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.irmenergy.com
+  tender_search_url: https://www.irmenergy.com/tenders
+  award_url: https://www.irmenergy.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search procurements
+  scraper: generic
+  enabled: true
+- id: think_gas
+  name: Think Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.think-gas.com
+  tender_search_url: https://www.think-gas.com/tenders
+  award_url: https://www.think-gas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search procurement
+  scraper: generic
+  enabled: true
+- id: ag_p_pratham
+  name: AG&P Pratham
+  tier: Tier 2
+  type: CGD operator
+  website: https://agppratham.com
+  tender_search_url: https://agppratham.com/tenders
+  award_url: https://agppratham.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator
+  next_action: Search procurement/contact
+  scraper: generic
+  enabled: true
+- id: megha_city_gas_distribution
+  name: Megha City Gas Distribution
+  tier: Tier 2
+  type: CGD operator
+  website: https://meghagas.com
+  tender_search_url: https://meghagas.com/tenders
+  award_url: https://meghagas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: PNGRB listed CGD entity
+  next_action: Search MGCDPL tender
+  scraper: generic
+  enabled: true
+- id: godavari_gas
+  name: Godavari Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.godavarigas.in
+  tender_search_url: https://www.godavarigas.in/tenders
+  award_url: https://www.godavarigas.in/tenders
+  login_required: To verify
+  relevance: Medium
+  note: PNGRB listed CGD entity
+  next_action: Search gas regulator
+  scraper: generic
+  enabled: true
+- id: bengal_gas_company
+  name: Bengal Gas Company
+  tier: Tier 2
+  type: CGD operator
+  website: https://bengalgas.com
+  tender_search_url: https://bengalgas.com/tenders
+  award_url: https://bengalgas.com/tenders
+  login_required: To verify
+  relevance: Medium
+  note: GAIL/GCGS JV; CGD operator
+  next_action: Search tender
+  scraper: generic
+  enabled: true
+- id: purba_bharati_gas
+  name: Purba Bharati Gas
+  tier: Tier 2
+  type: CGD operator
+  website: https://www.purbabharatigas.in
+  tender_search_url: https://www.purbabharatigas.in/tenders
+  award_url: https://www.purbabharatigas.in/tenders
+  login_required: To verify
+  relevance: Medium
+  note: CGD operator in NE India
+  next_action: Search tenders
+  scraper: generic
+  enabled: true
+- id: assam_gas_company
+  name: Assam Gas Company
+  tier: Tier 3
+  type: Gas utility / CGD related
+  website: https://assamgas.org
+  tender_search_url: https://assamgas.org/tenders
+  award_url: https://assamgas.org/tenders
+  login_required: To verify
+  relevance: Medium
+  note: Regional gas utility
+  next_action: Search regulator/PRS
+  scraper: generic
+  enabled: true
+- id: rajasthan_state_gas
+  name: Rajasthan State Gas
+  tier: Tier 3
+  type: CGD JV
+  website: https://rsgl.rajasthan.gov.in
+  tender_search_url: https://rsgl.rajasthan.gov.in/tenders
+  award_url: https://rsgl.rajasthan.gov.in/tenders
+  login_required: To verify
+  relevance: Medium
+  note: Regional CGD player
+  next_action: Search tenders
+  scraper: generic
+  enabled: true
+- id: naveriya_gas
+  name: Naveriya Gas
+  tier: Tier 3
+  type: CGD operator
+  website: https://naveriyagas.com
+  tender_search_url: https://naveriyagas.com/tenders
+  award_url: https://naveriyagas.com/tenders
+  login_required: To verify
+  relevance: Low
+  note: PNGRB listed entity
+  next_action: Verify website/contacts
+  scraper: generic
+  enabled: true
+- id: bgrl_bgr_energy_cgd
+  name: BGRL / BGR Energy CGD
+  tier: Tier 3
+  type: CGD entity/contractor
+  website: https://www.bgrcorp.com
+  tender_search_url: https://www.bgrcorp.com
+  award_url: https://www.bgrcorp.com
+  login_required: To verify
+  relevance: Low
+  note: May be project/GA entity
+  next_action: Verify relevance
+  scraper: generic
+  enabled: true
+- id: aavantika_gas_similar_spelling_check
+  name: Aavantika Gas / similar spelling check
+  tier: Tier 3
+  type: CGD operator
+  website: https://www.aglonline.net
+  tender_search_url: https://www.aglonline.net/tender
+  award_url: https://www.aglonline.net/tender
+  login_required: To verify
+  relevance: Medium
+  note: Duplicate spelling check of Avantika Gas
+  next_action: Normalize later
+  scraper: generic
+  enabled: true
+- id: vadodara_gas_limited
+  name: Vadodara Gas Limited
+  tier: Tier 3
+  type: CGD operator
+  website: https://www.vgl.co.in
+  tender_search_url: https://www.vgl.co.in/tenders/
+  award_url: https://www.vgl.co.in/tenders/
+  login_required: Tender PDFs open
+  relevance: High
+  note: Known 50,000 domestic regulator tender source
+  next_action: Search P066/23-24 etc.
+  scraper: generic
+  enabled: true
+- id: rajasthan_rajya_gas_local_cgd
+  name: Rajasthan Rajya Gas / Local CGD
+  tier: Tier 3
+  type: CGD related
+  website: https://rsgl.rajasthan.gov.in
+  tender_search_url: https://rsgl.rajasthan.gov.in/tenders
+  award_url: https://rsgl.rajasthan.gov.in/tenders
+  login_required: To verify
+  relevance: Low
+  note: Consolidate with RSGL
+  next_action: Verify entity name
+  scraper: generic
+  enabled: true
+- id: aegis_gas_aegis_logistics
+  name: Aegis Gas / Aegis Logistics
+  tier: Tier 3
+  type: LPG/gas; possible procurement
+  website: https://www.aegisindia.com
+  tender_search_url: https://www.aegisindia.com
+  award_url: https://www.aegisindia.com
+  login_required: To verify
+  relevance: Low
+  note: Not core CGD; optional distributor/procurement
+  next_action: Use only for equipment leads
+  scraper: generic
+  enabled: true
+- id: oil_india_limited_cgd_jv
+  name: Oil India Limited CGD JV
+  tier: Tier 3
+  type: PSU/JV partner
+  website: https://www.oil-india.com
+  tender_search_url: https://www.oil-india.com/tender
+  award_url: https://www.oil-india.com/tender
+  login_required: CPPP/OIL portal
+  relevance: Medium
+  note: JV with BPCL in Arunachal reported
+  next_action: Search CGD procurement
+  scraper: generic
+  enabled: true
+- id: reliance_bp_mobility_jio_bp_gas_related
+  name: Reliance BP Mobility / Jio-bp gas related
+  tier: Tier 3
+  type: Energy retailer; not core CGD
+  website: https://www.jiobp.com
+  tender_search_url: https://www.jiobp.com
+  award_url: https://www.jiobp.com
+  login_required: To verify
+  relevance: Low
+  note: Potential gas retail/CNG assets; not DSO benchmark
+  next_action: Optional
+  scraper: generic
+  enabled: true
+- id: mecon_limited
+  name: MECON Limited
+  tier: Tier 3
+  type: Engineering consultant
+  website: https://www.meconlimited.co.in
+  tender_search_url: https://www.meconlimited.co.in/tenders
+  award_url: https://www.meconlimited.co.in/tenders
+  login_required: CPPP/MECON portal
+  relevance: High
+  note: EPCM/PMC technical specs for gas projects
+  next_action: Use for spec intelligence
+  scraper: generic
+  enabled: true
+- id: engineers_india_limited_eil
+  name: Engineers India Limited (EIL)
+  tier: Tier 3
+  type: EPCM/PMC consultant
+  website: https://engineersindia.com
+  tender_search_url: https://engineersindia.com/tenders/
+  award_url: https://engineersindia.com/tenders/
+  login_required: EIL portal/CPPP
+  relevance: High
+  note: PMC/spec maker for gas infrastructure
+  next_action: Search PRS/MRS/CGS
+  scraper: generic
+  enabled: true
+- id: l_t_hydrocarbon_l_t_energy
+  name: L&T Hydrocarbon / L&T Energy
+  tier: Tier 3
+  type: EPC contractor
+  website: https://www.larsentoubro.com
+  tender_search_url: https://www.larsentoubro.com/corporate/suppliers/
+  award_url: https://www.larsentoubro.com/corporate/suppliers/
+  login_required: Supplier registration
+  relevance: Medium
+  note: EPC vendor route
+  next_action: Not buyer; strategic channel
+  scraper: generic
+  enabled: true
+- id: kalpataru_projects_international
+  name: Kalpataru Projects International
+  tier: Tier 3
+  type: Pipeline EPC
+  website: https://www.kalpataruprojects.com
+  tender_search_url: https://www.kalpataruprojects.com/suppliers
+  award_url: https://www.kalpataruprojects.com/suppliers
+  login_required: Supplier route
+  relevance: Medium
+  note: Pipeline EPC channel
+  next_action: Optional for PRS/RMS equipment
+  scraper: generic
+  enabled: true
+- id: dinesh_engineers_del
+  name: Dinesh Engineers / DEL
+  tier: Tier 3
+  type: Pipeline contractor
+  website: https://www.dineshengineers.com
+  tender_search_url: https://www.dineshengineers.com
+  award_url: https://www.dineshengineers.com
+  login_required: To verify
+  relevance: Medium
+  note: Gasonet consortium source mentions Dinesh Engineers
+  next_action: EPC/subcontractor route
+  scraper: generic
+  enabled: true
+- id: resonance_energy
+  name: Resonance Energy
+  tier: Tier 3
+  type: Gas infra EPC/consortium
+  website: https://resonanceenergy.in
+  tender_search_url: https://resonanceenergy.in
+  award_url: https://resonanceenergy.in
+  login_required: To verify
+  relevance: Medium
+  note: Gasonet consortium source mentions Resonance Energy
+  next_action: EPC/subcontractor route
+  scraper: generic
+  enabled: true
+- id: tolani_projects
+  name: Tolani Projects
+  tier: Tier 3
+  type: Project contractor
+  website: https://tolaniprojects.com
+  tender_search_url: https://tolaniprojects.com
+  award_url: https://tolaniprojects.com
+  login_required: To verify
+  relevance: Low
+  note: Gasonet consortium source mentions Tolani Projects
+  next_action: Verify
+  scraper: generic
+  enabled: true
+- id: gem_portal
+  name: GeM Portal
+  tier: Tier 3
+  type: Government procurement marketplace
+  website: https://gem.gov.in
+  tender_search_url: https://gem.gov.in
+  award_url: https://gem.gov.in
+  login_required: Registration required
+  relevance: High
+  note: GAIL Gas regulator GeM specs appeared in search results
+  next_action: Search GeM specs / bid docs
+  scraper: generic
+  enabled: true
+- id: cppp_eprocure
+  name: CPPP / eProcure
+  tier: Tier 3
+  type: Central portal
+  website: https://www.etenders.gov.in/eprocure/app
+  tender_search_url: https://www.etenders.gov.in/eprocure/app
+  award_url: https://www.etenders.gov.in/eprocure/app
+  login_required: DSC required for bids; search open
+  relevance: High
+  note: Central Govt eProcurement system
+  next_action: Archive search for PSU/MNGL
+  scraper: generic
+  enabled: true
+- id: nprocure
+  name: nProcure
+  tier: Tier 3
+  type: Gujarat e-procurement
+  website: https://www.nprocure.com
+  tender_search_url: https://www.nprocure.com
+  award_url: https://www.nprocure.com
+  login_required: Registration/DSC likely
+  relevance: High
+  note: Gujarat Gas uses nProcure
+  next_action: Monitor GGL
+  scraper: generic
+  enabled: true
+- id: tenderwizard_eprocurement_technologies
+  name: TenderWizard / eProcurement Technologies
+  tier: Tier 3
+  type: Tender platform
+  website: https://www.tenderwizard.com
+  tender_search_url: https://www.tenderwizard.com
+  award_url: https://www.tenderwizard.com
+  login_required: Registration/DSC
+  relevance: Medium
+  note: Some utilities use eProcurement vendors
+  next_action: Use as portal family
+  scraper: generic
+  enabled: true
+- id: sap_ariba_discovery
+  name: SAP Ariba Discovery
+  tier: Tier 3
+  type: Enterprise procurement
+  website: https://www.ariba.com
+  tender_search_url: https://service.ariba.com
+  award_url: https://discovery.ariba.com
+  login_required: Registration
+  relevance: Medium
+  note: Many private/large utilities use Ariba-like RFx
+  next_action: Track when cited in documents
+  scraper: generic
+  enabled: true

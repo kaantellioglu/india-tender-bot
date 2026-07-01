@@ -1,0 +1,97 @@
+keywords:
+- segment: Domestic regulator
+  keyword: domestic regulator
+  meaning: Domestic PNG, 100 mbar to 21 mbar
+  notes: Use on all portals
+- segment: Service regulator
+  keyword: service regulator
+  meaning: 10/25/50/100 SCMH customer regulator
+  notes: High value vs domestic
+- segment: Commercial regulator
+  keyword: commercial regulator
+  meaning: C&I customer regulators
+  notes: Search C&I too
+- segment: Industrial regulator
+  keyword: industrial regulator
+  meaning: Industrial customer skid/regulator
+  notes: High margin
+- segment: Meter regulator
+  keyword: meter regulator
+  meaning: Regulator with meter / meter regulator
+  notes: Often bundled
+- segment: Pressure regulator
+  keyword: pressure regulator
+  meaning: Generic keyword
+  notes: Broad search
+- segment: Gas pressure regulator
+  keyword: gas pressure regulator
+  meaning: Specific keyword
+  notes: Good for CPPP
+- segment: Regulator skid
+  keyword: regulator skid
+  meaning: Skid/package system
+  notes: High value
+- segment: Metering skid
+  keyword: metering skid
+  meaning: Metering skid / RPD / turbine
+  notes: Comparable equipment
+- segment: MRS
+  keyword: MRS
+  meaning: Metering & regulating station
+  notes: Search acronym and full form
+- segment: DRS
+  keyword: DRS
+  meaning: District regulating station
+  notes: Search acronym and full form
+- segment: FRS
+  keyword: FRS
+  meaning: Field regulating station
+  notes: IGL/MGL use this
+- segment: PRS
+  keyword: PRS
+  meaning: Pressure reducing station
+  notes: PRS/package
+- segment: CGS
+  keyword: CGS
+  meaning: City Gate Station
+  notes: City gate / CGS
+- segment: City Gate
+  keyword: city gate
+  meaning: Transmission to distribution entry point
+  notes: High pressure projects
+- segment: Slam shut
+  keyword: slam shut
+  meaning: SSV/OPSO safety valve
+  notes: Can be component tender
+- segment: SSV
+  keyword: SSV
+  meaning: Slam shut valve
+  notes: Search with regulator
+- segment: Monitor regulator
+  keyword: monitor regulator
+  meaning: Active/monitor configuration
+  notes: High spec
+- segment: Relief valve
+  keyword: relief valve
+  meaning: SRV/relief included in specs
+  notes: Component search
+- segment: Gas train
+  keyword: gas train
+  meaning: Industrial/commercial train
+  notes: Broader
+- segment: Governor
+  keyword: governor
+  meaning: Older term for regulator
+  notes: Some Indian docs use it
+- segment: RMS
+  keyword: RMS
+  meaning: Regulating and metering station
+  notes: High value
+- segment: PNG regulator
+  keyword: PNG regulator
+  meaning: Domestic/commercial PNG
+  notes: Use on CGD sites
+- segment: CNG regulator
+  keyword: CNG regulator
+  meaning: CNG station/vehicle side often irrelevant
+  notes: Filter carefully
