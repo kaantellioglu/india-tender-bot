@@ -1,0 +1,90 @@
+# Portal-specific learning rules. Update this file as the bot learns selectors,
+# noisy links, max lead limits, or manual access requirements.
+portals:
+  indraprastha_gas_igl:
+    strategy: aggressive_table_scan
+    max_leads: 300
+    priority_keywords:
+      - domestic regulator
+      - service regulator
+      - pressure regulator
+      - frs
+      - mrs
+      - prs
+    noise_filters:
+      - user manual
+      - download app
+      - browser
+      - tender guide
+      - login guide
+
+  gasonet_services:
+    strategy: html_table_then_pdf
+    max_leads: 250
+    priority_keywords:
+      - domestic regulator
+      - service regulator
+      - pressure regulator
+      - regulator
+      - gas meter
+    noise_filters:
+      - image
+      - icon
+
+  vadodara_gas_limited:
+    strategy: html_table_then_pdf
+    max_leads: 250
+    priority_keywords:
+      - regulator
+      - drs
+      - prs
+      - mrs
+      - skid
+    noise_filters:
+      - photo gallery
+      - terms
+
+  maharashtra_natural_gas_mngl:
+    strategy: html_table_then_cppp_reference
+    max_leads: 180
+    priority_keywords:
+      - domestic regulator
+      - service regulator
+      - regulator
+      - png
+      - cgd
+
+  gail_india:
+    strategy: award_archive_pdf
+    max_leads: 180
+    priority_keywords:
+      - loa
+      - foa
+      - aoc
+      - regulator
+      - metering
+      - gas
+
+  bharat_petroleum_bpcl_cgd:
+    strategy: blocked_site_alternative_sources
+    max_leads: 80
+    access_level: login_or_blocked
+    fallback_sources:
+      - CPPP
+      - GeM
+      - BPCL eProcurement
+
+  hindustan_petroleum_hpcl_cgd:
+    strategy: blocked_site_alternative_sources
+    max_leads: 80
+    access_level: login_or_blocked
+    fallback_sources:
+      - CPPP
+      - GeM
+      - HPCL eProcurement
+
+  cppp_eprocure:
+    strategy: playwright_form_search_required
+    max_leads: 200
+    access_level: js_form
+    manual_note: Playwright scraper required for organisation + keyword form search.

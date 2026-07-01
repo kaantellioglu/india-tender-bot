@@ -1,651 +1,96 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ESKA // India Tender Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ESKA Global Gas Tender Intelligence</title>
 <style>
-  :root{
-    --bg-deep:#0F1417;
-    --panel:#171E23;
-    --panel-2:#1D262C;
-    --panel-3:#11181D;
-    --line:#2A353D;
-    --amber:#FF8A3D;
-    --cyan:#4FB8D0;
-    --text:#EDEAE2;
-    --muted:#8B99A0;
-    --green:#6FCF97;
-    --red:#E8664F;
-    --yellow:#F2C94C;
-    --radius:2px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg-deep);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    font-size:14px;
-    line-height:1.5;
-    min-height:100vh;
-  }
-  ::selection{background:var(--amber);color:#0F1417;}
-  header.nameplate{
-    padding:28px 32px 20px;
-    border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg, rgba(255,138,61,0.04), transparent 60%), var(--panel);
-  }
-  .nameplate-inner{
-    max-width:1480px; margin:0 auto;
-    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px;
-  }
-  .brand-eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--amber); margin:0 0 6px;
-  }
-  h1{
-    font-family:'Oswald',sans-serif;
-    font-weight:600;
-    font-size:clamp(24px,3.4vw,38px);
-    letter-spacing:.01em;
-    margin:0;
-    text-transform:uppercase;
-  }
-  h1 span{color:var(--cyan);}
-  .meta-block{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    color:var(--muted);
-    text-align:right;
-  }
-  .meta-block .dot{
-    display:inline-block; width:7px; height:7px; border-radius:50%;
-    background:var(--green); margin-right:6px;
-    box-shadow:0 0 6px var(--green);
-  }
-  .flange-divider{
-    max-width:1480px; margin:0 auto; padding:0 32px;
-    display:flex; align-items:center; height:18px;
-  }
-  .flange-line{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px);}
-  .flange-bolt{width:5px;height:5px;border-radius:50%;background:var(--line);flex-shrink:0;margin:0 18px;}
-  main{max-width:1480px;margin:0 auto;padding:24px 32px 60px;}
-  .gauges{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:1px; background:var(--line); border:1px solid var(--line);
-    margin-bottom:18px;
-  }
-  .gauge{background:var(--panel);padding:16px 18px;position:relative;}
-  .gauge .num{font-family:'Oswald',sans-serif;font-size:30px;font-weight:600;color:var(--text);line-height:1;}
-  .gauge .num.accent{color:var(--amber);}
-  .gauge .num.warn{color:var(--yellow);}
-  .gauge .lbl{
-    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
-    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px;
-  }
-  .gauge .tick{position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--amber),var(--cyan));opacity:.6;}
-  .quality-strip{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px;
-    background:var(--line); border:1px solid var(--line); margin:0 0 24px;
-  }
-  .quality-card{background:var(--panel-3);padding:12px 14px;}
-  .quality-card b{font-family:'Oswald';font-size:24px;font-weight:600;}
-  .quality-card span{display:block;color:var(--muted);font-family:'IBM Plex Mono';font-size:10px;text-transform:uppercase;}
-  .tabs{display:flex;gap:2px;margin-bottom:16px;border-bottom:1px solid var(--line);overflow-x:auto;}
-  .tab-btn{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--muted);background:transparent;border:none;
-    padding:11px 18px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;
-  }
-  .tab-btn:hover{color:var(--text);}
-  .tab-btn.active{color:var(--amber);border-bottom-color:var(--amber);}
-  .panel-view{display:none;}
-  .panel-view.active{display:block;}
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center;}
-  input[type="text"], select{
-    background:var(--panel-2);border:1px solid var(--line);color:var(--text);
-    font-family:'Inter',sans-serif;font-size:13px;padding:8px 12px;border-radius:var(--radius);
-  }
-  input[type="text"]{min-width:240px;flex:1;}
-  input[type="text"]:focus,select:focus{outline:1px solid var(--cyan);border-color:var(--cyan);}
-  .result-count{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);margin-left:auto;white-space:nowrap;}
-  .table-wrap{border:1px solid var(--line);overflow:auto;background:var(--panel);max-height:72vh;}
-  table{width:100%;border-collapse:collapse;min-width:1100px;}
-  thead th{
-    text-align:left;font-family:'IBM Plex Mono',monospace;font-size:11px;
-    letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
-    padding:10px 12px;border-bottom:1px solid var(--line);
-    background:var(--panel-2);position:sticky;top:0;cursor:pointer;white-space:nowrap;user-select:none;z-index:1;
-  }
-  thead th:hover{color:var(--amber);}
-  tbody td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:top;}
-  tbody tr:hover{background:rgba(79,184,208,0.05);}
-  tbody tr:last-child td{border-bottom:none;}
-  .mono{font-family:'IBM Plex Mono',monospace;font-size:12px;}
-  .muted{color:var(--muted);}
-  .desc{min-width:360px;max-width:560px;}
-  a.link{color:var(--cyan);text-decoration:none;border-bottom:1px dotted var(--cyan);}
-  a.link:hover{color:var(--amber);border-color:var(--amber);}
-  .pill{
-    display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;
-    font-size:10.5px;letter-spacing:.03em;padding:3px 8px;border-radius:20px;border:1px solid var(--line);white-space:nowrap;
-  }
-  .pill .valve{width:6px;height:6px;border-radius:50%;}
-  .pill.awarded{color:var(--green);} .pill.awarded .valve{background:var(--green);box-shadow:0 0 5px var(--green);}
-  .pill.docs{color:var(--amber);} .pill.docs .valve{background:var(--amber);box-shadow:0 0 5px var(--amber);}
-  .pill.lead{color:var(--muted);} .pill.lead .valve{background:var(--muted);}
-  .pill.pdf{color:var(--red);border-color:rgba(232,102,79,.35);}
-  .pill.html{color:var(--cyan);border-color:rgba(79,184,208,.35);}
-  .pill.high{color:var(--yellow);border-color:rgba(242,201,76,.35);}
-  .pill.ok{color:var(--green);border-color:rgba(111,207,151,.35);}
-  .pill.warn{color:var(--yellow);border-color:rgba(242,201,76,.35);}
-  .pill.bad{color:var(--red);border-color:rgba(232,102,79,.35);}
-  .pill.tier1{color:var(--amber);border-color:rgba(255,138,61,.35);}
-  .pill.tier2{color:var(--cyan);border-color:rgba(79,184,208,.35);}
-  .pill.tier3{color:var(--muted);}
-  .flags{display:flex;gap:4px;flex-wrap:wrap;}
-  .flag{font-family:'IBM Plex Mono';font-size:10px;color:var(--muted);border:1px solid var(--line);padding:2px 5px;border-radius:10px;}
-  .empty-state{padding:48px 20px;text-align:center;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
-  footer{
-    max-width:1480px;margin:0 auto;padding:20px 32px 40px;
-    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
-    border-top:1px solid var(--line);margin-top:20px;
-  }
-  @media(max-width:640px){
-    header.nameplate,main,footer{padding-left:16px;padding-right:16px;}
-    .meta-block{text-align:left;}
-    .nameplate-inner{flex-direction:column;align-items:flex-start;}
-  }
+:root{--bg:#0f1417;--panel:#171e23;--panel2:#1f2a31;--line:#2d3a43;--text:#edeae2;--muted:#94a3ad;--amber:#ff8a3d;--cyan:#4fb8d0;--green:#6fcf97;--red:#e8664f;--yellow:#f2c94c}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Arial,Helvetica,sans-serif}header{background:var(--panel);border-bottom:1px solid var(--line);padding:24px 28px}h1{margin:0;text-transform:uppercase;letter-spacing:.04em;font-size:28px}.sub{color:var(--muted);margin-top:6px}.wrap{max-width:1500px;margin:0 auto;padding:22px 28px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:20px}.stat{background:var(--panel);padding:14px}.stat b{display:block;font-size:28px;color:var(--amber)}.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.tabs{display:flex;gap:2px;overflow:auto;border-bottom:1px solid var(--line);margin:18px 0}.tab{border:0;background:transparent;color:var(--muted);padding:12px 16px;cursor:pointer;text-transform:uppercase;font-size:12px;letter-spacing:.04em}.tab.active{color:var(--amber);border-bottom:2px solid var(--amber)}.view{display:none}.view.active{display:block}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}.toolbar input,.toolbar select{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:8px 10px;min-width:160px}.toolbar input{flex:1;min-width:260px}.count{margin-left:auto;color:var(--muted);font-family:monospace}.tablewrap{overflow:auto;border:1px solid var(--line);background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}th{position:sticky;top:0;background:var(--panel2);color:var(--muted);text-align:left;font-size:11px;text-transform:uppercase;cursor:pointer}tr:hover{background:#20303a}a{color:var(--cyan)}.pill{display:inline-block;border:1px solid var(--line);border-radius:14px;padding:2px 8px;font-size:11px;white-space:nowrap}.High{color:var(--green);border-color:rgba(111,207,151,.45)}.Medium{color:var(--yellow);border-color:rgba(242,201,76,.45)}.Low{color:var(--muted)}.bad{color:var(--red)}.ok{color:var(--green)}.mono{font-family:monospace}.muted{color:var(--muted)}footer{padding:20px 28px;border-top:1px solid var(--line);color:var(--muted)}
 </style>
 </head>
 <body>
-<header class="nameplate">
-  <div class="nameplate-inner">
-    <div>
-      <p class="brand-eyebrow">ESKA &middot; Sales &amp; After-Sales Intelligence</p>
-      <h1>India Tender <span>Intelligence</span></h1>
-    </div>
-    <div class="meta-block">
-      <div><span class="dot"></span>son güncelleme: <span id="generatedAt">—</span></div>
-      <div id="statusLine" class="muted">veri yükleniyor…</div>
-    </div>
-  </div>
-</header>
-
-<div class="flange-divider"><div class="flange-line"></div><div class="flange-bolt"></div><div class="flange-line"></div><div class="flange-bolt"></div><div class="flange-line"></div></div>
-
-<main>
-  <section class="gauges" id="gauges"></section>
-  <section class="quality-strip" id="qualityStrip"></section>
-
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="tenders">İhale Kayıtları</button>
-    <button class="tab-btn" data-tab="health">Portal Kalitesi</button>
-    <button class="tab-btn" data-tab="price">Fiyat İstihbaratı</button>
-    <button class="tab-btn" data-tab="portals">Portallar</button>
-    <button class="tab-btn" data-tab="competitors">Rakipler</button>
-    <button class="tab-btn" data-tab="log">Tarama Günlüğü</button>
+<header><h1>ESKA Global Gas Tender Intelligence</h1><div class="sub">India pilot · gas regulators, skids, stations, valves · son güncelleme: <span id="generatedAt">—</span> · <span id="status">veri yükleniyor…</span></div></header>
+<div class="wrap">
+  <section id="stats" class="stats"></section>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="high">High Priority</button>
+    <button class="tab" data-tab="tenders">Tender Register</button>
+    <button class="tab" data-tab="prices">Price Intelligence</button>
+    <button class="tab" data-tab="health">Portal Health</button>
+    <button class="tab" data-tab="actions">Login & Actions</button>
+    <button class="tab" data-tab="failures">Failure Queue</button>
+    <button class="tab" data-tab="competitors">Competitors</button>
+    <button class="tab" data-tab="log">Source Log</button>
   </nav>
-
-  <section class="panel-view active" id="view-tenders">
-    <div class="toolbar">
-      <input type="text" id="tendersSearch" placeholder="Ara: firma, ref, ürün açıklaması, kazanan, not…">
-      <select id="tendersPortal"><option value="">Tüm portallar</option></select>
-      <select id="tendersStatus"><option value="">Tüm durumlar</option></select>
-      <select id="tendersType">
-        <option value="">Tüm kaynaklar</option>
-        <option value="pdf">Sadece PDF</option>
-        <option value="html">Sadece HTML</option>
-        <option value="doc">DOC</option>
-        <option value="excel">Excel</option>
-      </select>
-      <select id="tendersQuality">
-        <option value="">Tüm kalite</option>
-        <option value="high_value">Yüksek değerli ekipman</option>
-        <option value="missing_ref">Tender Ref eksik</option>
-        <option value="missing_date">Tarih eksik</option>
-        <option value="missing_qty">Miktar eksik</option>
-        <option value="missing_winner">Kazanan eksik</option>
-        <option value="missing_price">Fiyat eksik</option>
-      </select>
-      <span class="result-count" id="tendersCount"></span>
-    </div>
-    <div class="table-wrap">
-      <table id="tendersTable">
-        <thead><tr>
-          <th data-key="tender_id">ID</th>
-          <th data-key="company">Firma</th>
-          <th data-key="tender_ref">Ref</th>
-          <th data-key="tender_date">Tarih</th>
-          <th data-key="status">Durum</th>
-          <th data-key="source_type">Kaynak</th>
-          <th data-key="product_segment">Segment</th>
-          <th data-key="product_description">Ürün / İhale Açıklaması</th>
-          <th data-key="qty">Miktar</th>
-          <th data-key="winner">Kazanan</th>
-          <th data-key="quality_score">Kalite</th>
-          <th data-key="source_url">Link</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
-    </div>
-  </section>
-
-  <section class="panel-view" id="view-health">
-    <div class="toolbar">
-      <input type="text" id="healthSearch" placeholder="Portal ara…">
-      <span class="result-count" id="healthCount"></span>
-    </div>
-    <div class="table-wrap">
-      <table id="healthTable">
-        <thead><tr>
-          <th data-key="portal">Portal</th>
-          <th data-key="total">Toplam</th>
-          <th data-key="pdf">PDF</th>
-          <th data-key="high_value">Yüksek Değer</th>
-          <th data-key="with_ref">Ref Var</th>
-          <th data-key="with_qty">Miktar Var</th>
-          <th data-key="with_price">Fiyat Var</th>
-          <th data-key="avg_quality">Ortalama Kalite</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Kayıt yok.</div>
-    </div>
-  </section>
-
-  <section class="panel-view" id="view-price">
-    <div class="toolbar">
-      <input type="text" id="priceSearch" placeholder="Ara: firma, segment, kazanan…">
-      <span class="result-count" id="priceCount"></span>
-    </div>
-    <div class="table-wrap">
-      <table id="priceTable">
-        <thead><tr>
-          <th data-key="tender_id">ID</th>
-          <th data-key="company">Firma</th>
-          <th data-key="year">Yıl</th>
-          <th data-key="product_segment">Segment</th>
-          <th data-key="qty">Miktar</th>
-          <th data-key="winner">Kazanan</th>
-          <th data-key="total_inr_basic">Toplam INR</th>
-          <th data-key="unit_eur_basic">Birim €</th>
-          <th data-key="confidence">Güven</th>
-          <th data-key="source_url">Kaynak</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
-    </div>
-  </section>
-
-  <section class="panel-view" id="view-portals">
-    <div class="toolbar">
-      <input type="text" id="portalsSearch" placeholder="Ara: portal adı, tip…">
-      <select id="portalsTier">
-        <option value="">Tüm tier'lar</option>
-        <option value="Tier 1">Tier 1</option>
-        <option value="Tier 2">Tier 2</option>
-        <option value="Tier 3">Tier 3</option>
-      </select>
-      <span class="result-count" id="portalsCount"></span>
-    </div>
-    <div class="table-wrap">
-      <table id="portalsTable">
-        <thead><tr>
-          <th data-key="tier">Tier</th>
-          <th data-key="name">Portal</th>
-          <th data-key="type">Tip</th>
-          <th data-key="relevance">Önem</th>
-          <th data-key="login_requirement">Giriş Gereksinimi</th>
-          <th data-key="website">Site</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
-    </div>
-  </section>
-
-  <section class="panel-view" id="view-competitors">
-    <div class="toolbar">
-      <input type="text" id="compSearch" placeholder="Ara: firma, ülke, segment…">
-      <span class="result-count" id="compCount"></span>
-    </div>
-    <div class="table-wrap">
-      <table id="compTable">
-        <thead><tr>
-          <th data-key="name">Firma</th>
-          <th data-key="country">Ülke</th>
-          <th data-key="role">Rol</th>
-          <th data-key="segment">Segment</th>
-          <th data-key="relevance">Önem</th>
-          <th data-key="website">Site</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Eşleşen kayıt yok.</div>
-    </div>
-  </section>
-
-  <section class="panel-view" id="view-log">
-    <div class="table-wrap">
-      <table id="logTable">
-        <thead><tr>
-          <th data-key="timestamp">Zaman</th>
-          <th data-key="message">Mesaj</th>
-          <th data-key="actor">Kaynak</th>
-        </tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-state" style="display:none;">Kayıt yok.</div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  ESKA India Tender Bot &middot; data.json her otomatik taramadan sonra GitHub Actions ile güncellenir &middot;
-  <a class="link" href="https://github.com/kaantellioglu/india-tender-bot" target="_blank" rel="noopener">repo</a>
-</footer>
-
+  <section id="view-high" class="view active"></section>
+  <section id="view-tenders" class="view"></section>
+  <section id="view-prices" class="view"></section>
+  <section id="view-health" class="view"></section>
+  <section id="view-actions" class="view"></section>
+  <section id="view-failures" class="view"></section>
+  <section id="view-competitors" class="view"></section>
+  <section id="view-log" class="view"></section>
+</div>
+<footer>Dashboard data comes from docs/data.json generated by GitHub Actions. Use Failure Queue + Login Actions as the automation backlog.</footer>
 <script>
-(function(){
-  const state = { data: null, sort: {} };
-
-  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-  const fmtNum = (v) => {
-    if(v === null || v === undefined || v === '') return '—';
-    const n = Number(v);
-    if(Number.isNaN(n)) return esc(v);
-    return n.toLocaleString('en-US', {maximumFractionDigits: 2});
-  };
-  const linkCell = (url) => url ? `<a class="link" href="${esc(url)}" target="_blank" rel="noopener">aç ↗</a>` : '<span class="muted">—</span>';
-
-  function statusPill(status){
-    const s = (status || '').toLowerCase();
-    let cls = 'lead', label = status || 'New Lead';
-    if(s === 'awarded') cls = 'awarded';
-    else if(s.includes('docs')) cls = 'docs';
-    return `<span class="pill ${cls}"><span class="valve"></span>${esc(label)}</span>`;
+const state={data:null,sort:{}};
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const num=v=>v==null||v===''?'—':(Number.isNaN(Number(v))?esc(v):Number(v).toLocaleString('en-US',{maximumFractionDigits:2}));
+const link=u=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">open ↗</a>`:'—';
+const pill=v=>`<span class="pill ${esc(v||'Low')}">${esc(v||'—')}</span>`;
+function table(container, id, rows, cols){
+  const qid=id+'q', cid=id+'count';
+  container.innerHTML=`<div class="toolbar"><input id="${qid}" placeholder="Ara / filter…"><span class="count" id="${cid}"></span></div><div class="tablewrap"><table id="${id}"><thead><tr>${cols.map(c=>`<th data-k="${c.k}">${c.h}</th>`).join('')}</tr></thead><tbody></tbody></table></div>`;
+  const input=document.getElementById(qid), tbody=container.querySelector('tbody'), count=document.getElementById(cid);
+  function render(){
+    const q=input.value.toLowerCase();
+    let data=rows.filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q));
+    const s=state.sort[id];
+    if(s){data=[...data].sort((a,b)=>String(a[s.k]??'').localeCompare(String(b[s.k]??''),undefined,{numeric:true})*(s.d==='desc'?-1:1));}
+    count.textContent=`${data.length} / ${rows.length}`;
+    tbody.innerHTML=data.map(r=>`<tr>${cols.map(c=>`<td>${c.f?c.f(r[c.k],r):esc(r[c.k]??'')}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${cols.length}" class="muted">Kayıt yok.</td></tr>`;
   }
-  function sourcePill(t){
-    const src = (t || 'unknown').toLowerCase();
-    const cls = src === 'pdf' ? 'pdf' : src === 'html' ? 'html' : 'lead';
-    return `<span class="pill ${cls}">${esc(src.toUpperCase())}</span>`;
-  }
-  function tierPill(tier){
-    const cls = tier === 'Tier 1' ? 'tier1' : tier === 'Tier 2' ? 'tier2' : 'tier3';
-    return `<span class="pill ${cls}">${esc(tier || '—')}</span>`;
-  }
-  function qualityPill(score){
-    const n = Number(score || 0);
-    const cls = n >= 75 ? 'ok' : n >= 45 ? 'warn' : 'bad';
-    return `<span class="pill ${cls}">${n}</span>`;
-  }
-  function flagsCell(flags){
-    if(!flags || !flags.length) return '<span class="pill ok">OK</span>';
-    return `<div class="flags">${flags.map(f => `<span class="flag">${esc(f.replace('missing_','eksik_'))}</span>`).join('')}</div>`;
-  }
-
-  function renderGauges(d){
-    const g = d.dashboard || {};
-    const items = [
-      {n:g.portal_count, l:'Taranan Portal'},
-      {n:g.tender_count, l:'İhale Kaydı'},
-      {n:g.high_value_count, l:'Yüksek Değerli Lead', accent:true},
-      {n:g.pdf_count, l:'PDF Kaynak', accent:true},
-      {n:g.price_row_count, l:'Fiyat İstihbaratı', accent:true},
-      {n:g.avg_quality, l:'Ortalama Veri Kalitesi', warn:true},
-    ];
-    document.getElementById('gauges').innerHTML = items.map(it => `
-      <div class="gauge"><div class="tick"></div>
-        <div class="num${it.accent ? ' accent' : it.warn ? ' warn' : ''}">${fmtNum(it.n ?? 0)}</div>
-        <div class="lbl">${esc(it.l)}</div>
-      </div>`).join('');
-  }
-
-  function renderQuality(d){
-    const m = (d.dashboard && d.dashboard.missing_core_fields) || {};
-    const items = [
-      ['Eksik Ref', m.tender_ref],
-      ['Eksik Tarih', m.tender_date],
-      ['Eksik Miktar', m.qty],
-      ['Eksik Kazanan', m.winner],
-      ['Eksik Fiyat', m.price],
-    ];
-    document.getElementById('qualityStrip').innerHTML = items.map(([l,n]) =>
-      `<div class="quality-card"><b>${fmtNum(n ?? 0)}</b><span>${esc(l)}</span></div>`
-    ).join('');
-  }
-
-  function applySort(rows, key, dir){
-    if(!key) return rows;
-    return [...rows].sort((a,b) => {
-      let av = a[key], bv = b[key];
-      const an = Number(av), bn = Number(bv);
-      const bothNum = av !== null && av !== '' && bv !== null && bv !== '' && !Number.isNaN(an) && !Number.isNaN(bn);
-      let cmp = bothNum ? (an - bn) : String(av ?? '').localeCompare(String(bv ?? ''), 'tr');
-      return dir === 'desc' ? -cmp : cmp;
-    });
-  }
-  function wireSort(tableId, renderFn){
-    const table = document.getElementById(tableId);
-    table.querySelectorAll('thead th').forEach(th => {
-      th.addEventListener('click', () => {
-        const key = th.dataset.key;
-        const cur = state.sort[tableId];
-        const dir = (cur && cur.key === key && cur.dir === 'asc') ? 'desc' : 'asc';
-        state.sort[tableId] = {key, dir};
-        renderFn();
-      });
-    });
-  }
-  function getSorted(tableId, rows){
-    const s = state.sort[tableId];
-    return s ? applySort(rows, s.key, s.dir) : rows;
-  }
-  function toggleEmpty(sectionSel, count){
-    const empty = document.querySelector(`${sectionSel} .empty-state`);
-    if(empty) empty.style.display = count ? 'none' : 'block';
-  }
-
-  function renderTenders(){
-    const q = document.getElementById('tendersSearch').value.toLowerCase();
-    const portal = document.getElementById('tendersPortal').value;
-    const status = document.getElementById('tendersStatus').value;
-    const type = document.getElementById('tendersType').value;
-    const quality = document.getElementById('tendersQuality').value;
-
-    let rows = state.data.tenders.filter(t => {
-      const hay = `${t.company||''} ${t.portal||''} ${t.product_segment||''} ${t.product_description||''} ${t.winner||''} ${t.tender_ref||''} ${t.notes||''}`.toLowerCase();
-      const matchQ = !q || hay.includes(q);
-      const matchP = !portal || (t.company || t.portal) === portal;
-      const matchS = !status || t.status === status;
-      const matchT = !type || t.source_type === type;
-      const matchQual = !quality || (quality === 'high_value' ? t.high_value : (t.quality_flags || []).includes(quality));
-      return matchQ && matchP && matchS && matchT && matchQual;
-    });
-    rows = getSorted('tendersTable', rows);
-    document.getElementById('tendersCount').textContent = `${rows.length} / ${state.data.tenders.length} kayıt`;
-    document.querySelector('#view-tenders tbody').innerHTML = rows.map(t => `
-      <tr>
-        <td class="mono">${esc(t.tender_id||'')}</td>
-        <td>${esc(t.company||'')}</td>
-        <td class="mono muted">${esc(t.tender_ref||'—')}</td>
-        <td class="mono">${esc(t.tender_date||'—')}</td>
-        <td>${statusPill(t.status)}</td>
-        <td>${sourcePill(t.source_type)}</td>
-        <td>${t.high_value ? '<span class="pill high">HIGH</span> ' : ''}${esc(t.product_segment||'—')}</td>
-        <td class="desc">${esc(t.product_description||'—')}<div class="muted">${flagsCell(t.quality_flags)}</div></td>
-        <td class="mono">${esc(t.qty ?? '—')} ${esc(t.uom||'')}</td>
-        <td>${esc(t.winner||'—')}</td>
-        <td>${qualityPill(t.quality_score)}</td>
-        <td>${linkCell(t.source_url)}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-tenders', rows.length);
-  }
-
-  function renderHealth(){
-    const q = document.getElementById('healthSearch').value.toLowerCase();
-    let rows = state.data.portal_health.filter(r => !q || String(r.portal || '').toLowerCase().includes(q));
-    rows = getSorted('healthTable', rows);
-    document.getElementById('healthCount').textContent = `${rows.length} portal`;
-    document.querySelector('#view-health tbody').innerHTML = rows.map(r => `
-      <tr>
-        <td>${esc(r.portal)}</td>
-        <td class="mono">${fmtNum(r.total)}</td>
-        <td class="mono">${fmtNum(r.pdf)}</td>
-        <td class="mono">${fmtNum(r.high_value)}</td>
-        <td class="mono">${fmtNum(r.with_ref)}</td>
-        <td class="mono">${fmtNum(r.with_qty)}</td>
-        <td class="mono">${fmtNum(r.with_price)}</td>
-        <td>${qualityPill(r.avg_quality)}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-health', rows.length);
-  }
-
-  function renderPrice(){
-    const q = document.getElementById('priceSearch').value.toLowerCase();
-    let rows = state.data.price_intelligence.filter(p => {
-      const hay = `${p.company||''} ${p.product_segment||''} ${p.winner||''}`.toLowerCase();
-      return !q || hay.includes(q);
-    });
-    rows = getSorted('priceTable', rows);
-    document.getElementById('priceCount').textContent = `${rows.length} / ${state.data.price_intelligence.length} kayıt`;
-    document.querySelector('#view-price tbody').innerHTML = rows.map(p => `
-      <tr>
-        <td class="mono">${esc(p.tender_id||'')}</td>
-        <td>${esc(p.company||'')}</td>
-        <td class="mono">${esc(p.year||'—')}</td>
-        <td>${esc(p.product_segment||'—')}</td>
-        <td class="mono">${esc(p.qty ?? '—')}</td>
-        <td>${esc(p.winner||'—')}</td>
-        <td class="mono">${p.total_inr_basic ? '₹'+fmtNum(p.total_inr_basic) : '—'}</td>
-        <td class="mono">${p.unit_eur_basic ? '€'+fmtNum(p.unit_eur_basic) : '—'}</td>
-        <td>${esc(p.confidence||'—')}</td>
-        <td>${linkCell(p.source_url)}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-price', rows.length);
-  }
-
-  function renderPortals(){
-    const q = document.getElementById('portalsSearch').value.toLowerCase();
-    const tier = document.getElementById('portalsTier').value;
-    let rows = state.data.portals.filter(p => {
-      const hay = `${p.name||''} ${p.type||''}`.toLowerCase();
-      return (!q || hay.includes(q)) && (!tier || p.tier === tier);
-    });
-    rows = getSorted('portalsTable', rows);
-    document.getElementById('portalsCount').textContent = `${rows.length} / ${state.data.portals.length} portal`;
-    document.querySelector('#view-portals tbody').innerHTML = rows.map(p => `
-      <tr>
-        <td>${tierPill(p.tier)}</td>
-        <td>${esc(p.name||'')}</td>
-        <td class="muted">${esc(p.type||'—')}</td>
-        <td>${esc(p.relevance||'—')}</td>
-        <td class="muted">${esc(p.login_requirement||'—')}</td>
-        <td>${p.website ? `<a class="link" href="${esc(p.website)}" target="_blank" rel="noopener">${esc(p.website.replace(/^https?:\/\//,''))}</a>` : '—'}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-portals', rows.length);
-  }
-
-  function renderCompetitors(){
-    const q = document.getElementById('compSearch').value.toLowerCase();
-    let rows = state.data.competitors.filter(c => {
-      const hay = `${c.name||''} ${c.country||''} ${c.segment||''}`.toLowerCase();
-      return !q || hay.includes(q);
-    });
-    rows = getSorted('compTable', rows);
-    document.getElementById('compCount').textContent = `${rows.length} / ${state.data.competitors.length} rakip`;
-    document.querySelector('#view-competitors tbody').innerHTML = rows.map(c => `
-      <tr>
-        <td>${esc(c.name||'')}</td>
-        <td class="muted">${esc(c.country||'—')}</td>
-        <td>${esc(c.role||'—')}</td>
-        <td class="muted">${esc(c.segment||'—')}</td>
-        <td>${esc(c.relevance||'—')}</td>
-        <td>${c.website ? `<a class="link" href="${esc(c.website)}" target="_blank" rel="noopener">${esc(c.website.replace(/^https?:\/\//,''))}</a>` : '—'}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-competitors', rows.length);
-  }
-
-  function renderLog(){
-    const rows = [...state.data.source_log].reverse();
-    document.querySelector('#view-log tbody').innerHTML = rows.map(l => `
-      <tr>
-        <td class="mono muted">${esc(l.timestamp||'')}</td>
-        <td>${esc(l.message||'')}</td>
-        <td class="mono">${esc(l.actor||'')}</td>
-      </tr>`).join('');
-    toggleEmpty('#view-log', rows.length);
-  }
-
-  function renderAll(){
-    renderTenders(); renderHealth(); renderPrice(); renderPortals(); renderCompetitors(); renderLog();
-  }
-
-  function initTabs(){
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.panel-view').forEach(v => v.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(`view-${btn.dataset.tab}`).classList.add('active');
-      });
-    });
-  }
-
-  function fillSelects(){
-    const portals = [...new Set(state.data.tenders.map(t => t.company || t.portal).filter(Boolean))].sort();
-    portals.forEach(p => document.getElementById('tendersPortal').insertAdjacentHTML('beforeend', `<option value="${esc(p)}">${esc(p)}</option>`));
-    const statuses = [...new Set(state.data.tenders.map(t => t.status).filter(Boolean))].sort();
-    statuses.forEach(s => document.getElementById('tendersStatus').insertAdjacentHTML('beforeend', `<option value="${esc(s)}">${esc(s)}</option>`));
-  }
-
-  function initFilters(){
-    ['tendersSearch','tendersPortal','tendersStatus','tendersType','tendersQuality'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderTenders);
-      document.getElementById(id).addEventListener('change', renderTenders);
-    });
-    document.getElementById('healthSearch').addEventListener('input', renderHealth);
-    document.getElementById('priceSearch').addEventListener('input', renderPrice);
-    document.getElementById('portalsSearch').addEventListener('input', renderPortals);
-    document.getElementById('portalsTier').addEventListener('change', renderPortals);
-    document.getElementById('compSearch').addEventListener('input', renderCompetitors);
-
-    wireSort('tendersTable', renderTenders);
-    wireSort('healthTable', renderHealth);
-    wireSort('priceTable', renderPrice);
-    wireSort('portalsTable', renderPortals);
-    wireSort('compTable', renderCompetitors);
-  }
-
-  fetch('data.json?_=' + Date.now())
-    .then(r => {
-      if(!r.ok) throw new Error('data.json okunamadı (HTTP ' + r.status + ')');
-      return r.json();
-    })
-    .then(d => {
-      state.data = d;
-      document.getElementById('generatedAt').textContent = d.dashboard.generated_at || '—';
-      document.getElementById('statusLine').textContent = 'veri yüklendi';
-      renderGauges(d);
-      renderQuality(d);
-      initTabs();
-      fillSelects();
-      initFilters();
-      renderAll();
-    })
-    .catch(err => {
-      document.getElementById('statusLine').textContent = 'HATA: ' + err.message;
-      document.querySelector('main').innerHTML = `<div class="empty-state">data.json yüklenemedi. Bu dosyanın docs/ klasöründe olduğundan ve GitHub Pages'in bu klasörden servis ettiğinden emin olun.<br><br>${esc(err.message)}</div>`;
-    });
-})();
+  input.addEventListener('input',render);
+  container.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;const cur=state.sort[id];state.sort[id]={k,d:cur&&cur.k===k&&cur.d==='asc'?'desc':'asc'};render();}));
+  render();
+}
+function renderStats(d){
+  const x=d.dashboard||{};
+  const items=[['Portal',x.portal_count],['Tender',x.tender_count],['High Priority',x.high_priority_count],['Price Rows',x.price_row_count],['Open Actions',x.open_action_count],['Failures',x.failure_count],['Missing Ref',x.missing_ref_count],['Missing Price',x.missing_price_count]];
+  document.getElementById('stats').innerHTML=items.map(([l,n])=>`<div class="stat"><b>${num(n||0)}</b><span>${esc(l)}</span></div>`).join('');
+}
+const tenderCols=[
+  {k:'priority',h:'Priority',f:v=>pill(v)},{k:'lead_score',h:'Score',f:num},{k:'company',h:'Buyer/Portal'},
+  {k:'tender_ref',h:'Tender Ref',f:v=>esc(v||'—')},{k:'tender_date',h:'Date',f:v=>esc(v||'—')},{k:'closing_date',h:'Closing',f:v=>esc(v||'—')},
+  {k:'equipment',h:'Equipment',f:v=>esc(v||'—')},{k:'product_description',h:'Title / Description',f:v=>`<div style="max-width:520px">${esc(v||'')}</div>`},
+  {k:'qty',h:'Qty',f:v=>esc(v||'—')},{k:'winner',h:'Winner',f:v=>esc(v||'—')},{k:'total_inr_basic',h:'INR',f:num},{k:'source_type',h:'Source'},
+  {k:'source_url',h:'URL',f:link}
+];
+function init(d){
+  state.data=d;document.getElementById('generatedAt').textContent=d.dashboard.generated_at||'—';document.getElementById('status').textContent='veri yüklendi';renderStats(d);
+  table(document.getElementById('view-high'),'tblHigh',(d.tenders||[]).filter(x=>x.priority==='High'),tenderCols);
+  table(document.getElementById('view-tenders'),'tblTender',d.tenders||[],tenderCols);
+  table(document.getElementById('view-prices'),'tblPrice',d.price_intelligence||[],[
+    {k:'tender_id',h:'ID'},{k:'company',h:'Company'},{k:'product_segment',h:'Segment'},{k:'qty',h:'Qty'},{k:'winner',h:'Winner'},{k:'total_inr_basic',h:'INR',f:num},{k:'confidence',h:'Confidence'},{k:'source_url',h:'URL',f:link}
+  ]);
+  table(document.getElementById('view-health'),'tblHealth',d.portal_health||[],[
+    {k:'status',h:'Status',f:v=>`<span class="${v==='OK'?'ok':'bad'}">${esc(v)}</span>`},{k:'portal',h:'Portal'},{k:'tier',h:'Tier'},{k:'lead_count',h:'Leads',f:num},{k:'failure_count',h:'Failures',f:num},{k:'open_action_count',h:'Actions',f:num},{k:'top_failure',h:'Top Failure'},{k:'next_action',h:'Next Action'},{k:'website',h:'Site',f:link}
+  ]);
+  table(document.getElementById('view-actions'),'tblActions',d.action_queue||[],[
+    {k:'last_seen',h:'Last Seen'},{k:'portal',h:'Portal'},{k:'action_type',h:'Action Type'},{k:'required_items',h:'Required',f:v=>esc((v||[]).join(', '))},{k:'automation_possible',h:'Automation'},{k:'next_action',h:'Next Action'},{k:'confidence',h:'Confidence'},{k:'url',h:'URL',f:link}
+  ]);
+  table(document.getElementById('view-failures'),'tblFailures',d.source_failures||[],[
+    {k:'last_seen',h:'Last Seen'},{k:'portal',h:'Portal'},{k:'failure_type',h:'Failure'},{k:'http_status',h:'HTTP',f:num},{k:'content_type',h:'Content Type'},{k:'action_required',h:'Action Required'},{k:'retry_strategy',h:'Retry Strategy'},{k:'count',h:'Count',f:num},{k:'url',h:'URL',f:link}
+  ]);
+  table(document.getElementById('view-competitors'),'tblComp',d.competitors||[],[
+    {k:'name',h:'Name'},{k:'country',h:'Country'},{k:'role',h:'Role'},{k:'segment',h:'Segment'},{k:'relevance',h:'Relevance'},{k:'website',h:'Site',f:link}
+  ]);
+  table(document.getElementById('view-log'),'tblLog',(d.source_log||[]).slice().reverse(),[
+    {k:'timestamp',h:'Time'},{k:'message',h:'Message'},{k:'actor',h:'Actor'}
+  ]);
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('view-'+b.dataset.tab).classList.add('active');}));
+fetch('data.json?_='+Date.now()).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(init).catch(e=>{document.getElementById('status').textContent='HATA: '+e.message;});
 </script>
 </body>
 </html>

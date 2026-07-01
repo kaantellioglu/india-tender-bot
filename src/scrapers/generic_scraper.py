@@ -1,249 +1,180 @@
-"""
-Generic scraper: login/DSC gerektirmeyen, acik HTML ihale listesi sayfalari icin.
+"""Generic scraper for public tender pages.
 
-v2 iyilestirmeleri:
-- Sadece <a> text/href degil, linkin bulundugu tablo satiri (<tr>) veya liste/kart
-  konteyneri de okunur. Bu sayede tender no, tarih, closing date ve aciklama
-  bilgileri daha iyi yakalanir.
-- Portal basina limit ortam degiskeniyle ayarlanabilir:
-      MAX_LEADS_PER_PORTAL=120
-- Her lead.extra icine ham satir metni, tahmini tender_ref, tender_date,
-  closing_date ve source_type bilgileri yazilir.
-- LOA/AOC/FOA gibi sonuc belgeleri "awarded_candidate" olarak isaretlenir.
+V3 upgrades:
+- Reads parent table/list/card text instead of only <a> text.
+- Extracts tender ref/date/closing date from row text.
+- Detects login/vendor/DSC actions from portal pages.
+- Calculates transparent priority score for each candidate.
+- Supports portal-specific max_leads via config/portal_rules.yaml when available.
 """
 from __future__ import annotations
 
 import logging
-import os
-import re
-from urllib.parse import urljoin, urldefrag
+from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
-from bs4 import BeautifulSoup
+import yaml
+from bs4 import BeautifulSoup, Tag
 
 from .base_scraper import BaseScraper, TenderLead
+from ..access.login_detector import detect_login_requirements
+from ..parsers.html_detail_parser import parse_html_text, clean_text
+from ..scoring.lead_score import score_text
 
 logger = logging.getLogger(__name__)
+
+ROOT = Path(__file__).resolve().parents[2]
+PORTAL_RULES_PATH = ROOT / "config" / "portal_rules.yaml"
 
 STRONG_DOCUMENT_HINTS = [
     "nit", "rfq", "rfp", "eoi", "corrigendum", "aoc", "loa", "foa", "boq",
     "tender no", "tender ref", "tender_no", "bid no", "e-tender", "award",
-    "letter of award", "contract award", "purchase order", "po no",
+    "letter of award", "purchase order", "work order",
 ]
-
-# Dar kapsamli ekipman kelimeleri. Bunlar generic "tender/procurement" yerine
-# gaz ekipmani odakli signal uretir.
-GAS_EQUIPMENT_HINTS = [
-    "regulator", "governor", "pressure reducing", "pressure reduction",
-    "metering", "rms", "mrs", "drs", "frs", "prs", "cgs", "skid",
-    "slam shut", "ssv", "relief valve", "gas train", "png", "cng",
-]
-
-DOC_EXTENSIONS = (".pdf", ".doc", ".docx", ".xls", ".xlsx", ".zip")
+DOC_EXTENSIONS = (".pdf", ".doc", ".docx", ".xls", ".xlsx", ".csv")
 DEFAULT_MAX_LEADS_PER_PORTAL = 120
-
-DATE_RE = re.compile(
-    r"\b("
-    r"\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|"
-    r"\d{4}[/-]\d{1,2}[/-]\d{1,2}|"
-    r"\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{2,4}"
-    r")\b",
-    re.IGNORECASE,
-)
-
-TENDER_REF_RE = re.compile(
-    r"\b("
-    r"(?:tender|bid|rfq|rfp|eoi|nit|loa|foa|aoc|po)\s*(?:no\.?|ref\.?|number)?\s*[:#-]?\s*[A-Z0-9][A-Z0-9/_\-.]{3,}|"
-    r"[A-Z]{2,12}/[A-Z0-9][A-Z0-9/_\-.]{4,}"
-    r")\b",
-    re.IGNORECASE,
-)
-
-CLOSING_HINT_RE = re.compile(r"(closing|last date|due date|bid end|submission|end date)", re.IGNORECASE)
+NOISE_HINTS = [
+    "contact us", "privacy", "terms", "career", "investor", "annual report", "sitemap",
+    "facebook", "twitter", "linkedin", "youtube", "copyright", "about us",
+]
 
 
-def _clean_text(text: str | None, limit: int = 600) -> str:
-    text = re.sub(r"\s+", " ", text or "").strip()
-    return text[:limit]
+def load_portal_rules() -> dict:
+    if not PORTAL_RULES_PATH.exists():
+        return {}
+    try:
+        data = yaml.safe_load(PORTAL_RULES_PATH.read_text(encoding="utf-8")) or {}
+        return data.get("portals", data) or {}
+    except Exception as exc:
+        logger.warning("portal_rules.yaml okunamadi: %s", exc)
+        return {}
 
 
-def _normalise_url(url: str) -> str:
-    return urldefrag(url.strip())[0]
+def parent_context_text(a: Tag) -> str:
+    # Prefer table row, then list item/card-like parents, then parent text.
+    for name in ["tr", "li", "article"]:
+        p = a.find_parent(name)
+        if p:
+            return clean_text(p.get_text(" ", strip=True))
+    for cls_hint in ["card", "tender", "row", "item", "notice"]:
+        p = a.find_parent(class_=lambda c: c and cls_hint in str(c).lower())
+        if p:
+            return clean_text(p.get_text(" ", strip=True))
+    return clean_text((a.parent.get_text(" ", strip=True) if a.parent else a.get_text(" ", strip=True)))
 
 
-def _is_document(url: str) -> bool:
-    return url.lower().split("?")[0].endswith(DOC_EXTENSIONS)
-
-
-def _file_type(url: str) -> str:
-    path = url.lower().split("?")[0]
+def infer_file_type(url: str) -> str:
+    path = urlparse(url).path.lower().split("?")[0]
     if path.endswith(".pdf"):
         return "pdf"
     if path.endswith((".doc", ".docx")):
         return "doc"
-    if path.endswith((".xls", ".xlsx")):
-        return "excel"
-    if path.endswith(".zip"):
-        return "zip"
+    if path.endswith((".xls", ".xlsx", ".csv")):
+        return "xls"
     return "html"
-
-
-def _best_container_text(a) -> str:
-    """Linkin icinde oldugu tablo satiri/liste/kart metnini dondurur."""
-    container = a.find_parent("tr")
-    if container is None:
-        container = a.find_parent(["li", "article", "div"])
-    link_text = a.get_text(" ", strip=True) or ""
-    if container is None:
-        return _clean_text(link_text)
-    row_text = container.get_text(" ", strip=True)
-    # Bazı nav div'leri cok uzun olabilir; link text'i de koru.
-    if len(row_text) > 900:
-        row_text = link_text
-    return _clean_text(row_text or link_text)
-
-
-def _extract_first_date(text: str) -> str | None:
-    m = DATE_RE.search(text or "")
-    return m.group(1).strip() if m else None
-
-
-def _extract_closing_date(text: str) -> str | None:
-    if not text:
-        return None
-    # Closing/due kelimesinden sonraki 160 karakterde tarih ara.
-    for m in CLOSING_HINT_RE.finditer(text):
-        chunk = text[m.start(): m.start() + 160]
-        dm = DATE_RE.search(chunk)
-        if dm:
-            return dm.group(1).strip()
-    return None
-
-
-def _extract_tender_ref(text: str) -> str | None:
-    m = TENDER_REF_RE.search(text or "")
-    if not m:
-        return None
-    value = _clean_text(m.group(1), limit=120)
-    # Aşırı genel yakalamaları azalt.
-    if len(value) < 5:
-        return None
-    return value
-
-
-def _score_candidate(*, matched_kw: str | None, strong_doc_hint: bool, equipment_hint: bool,
-                     is_doc: bool, row_text: str, url: str) -> int:
-    score = 0
-    if matched_kw:
-        score += 100
-    if strong_doc_hint:
-        score += 80
-    if equipment_hint:
-        score += 60
-    if is_doc:
-        score += 25
-    low = f"{row_text} {url}".lower()
-    if any(x in low for x in ("aoc", "loa", "foa", "award", "successful bidder")):
-        score += 35
-    if any(x in low for x in ("corrigendum", "amendment")):
-        score += 10
-    if _extract_tender_ref(row_text):
-        score += 20
-    if _extract_first_date(row_text):
-        score += 10
-    return score
 
 
 class GenericScraper(BaseScraper):
     def fetch_leads(self) -> list[TenderLead]:
-        candidates: list[tuple[int, TenderLead]] = []
+        candidates: list[TenderLead] = []
         url = self.portal.get("tender_search_url") or self.portal.get("website")
         if not url:
-            return []
+            return candidates
+
+        rules = load_portal_rules().get(self.portal.get("id", ""), {})
+        max_leads = int(rules.get("max_leads", DEFAULT_MAX_LEADS_PER_PORTAL))
+        noise_filters = [*NOISE_HINTS, *rules.get("noise_filters", [])]
+        priority_keywords = [k.lower() for k in rules.get("priority_keywords", [])]
 
         resp = self._get(url)
         if resp is None:
-            return []
+            return candidates
+
+        login_signal = detect_login_requirements(resp.text, url)
+        if login_signal.access_type != "public" and self.diagnostics:
+            self.diagnostics.record_action(
+                portal=self.portal,
+                url=url,
+                action_type=login_signal.access_type,
+                required_items=login_signal.required_items,
+                automation_possible=login_signal.automation_possible,
+                next_action=login_signal.action,
+                confidence=login_signal.confidence,
+                signals=login_signal.signals,
+            )
 
         soup = BeautifulSoup(resp.text, "html.parser")
         seen_urls: set[str] = set()
 
         for a in soup.find_all("a", href=True):
             href = (a.get("href") or "").strip()
+            text = clean_text(a.get_text(" ", strip=True) or "")
             if not href or href.startswith("javascript:") or href.startswith("#") or href.lower().startswith("mailto:"):
                 continue
 
-            full_url = _normalise_url(urljoin(url, href))
+            full_url = urljoin(resp.url or url, href)
             if full_url in seen_urls:
                 continue
 
-            link_text = a.get_text(" ", strip=True) or ""
-            row_text = _best_container_text(a)
-            haystack = f"{link_text} {href} {row_text}".lower()
+            row_text = parent_context_text(a)
+            haystack = clean_text(f"{text} {href} {row_text}")
+            hay_low = haystack.lower()
+            if any(n in hay_low for n in noise_filters):
+                continue
 
-            is_doc = _is_document(full_url)
+            file_type = infer_file_type(full_url)
+            is_document = file_type in {"pdf", "doc", "xls"}
             matched_kw = self._matches_keyword(haystack)
-            strong_doc_hint = is_doc and any(h in haystack for h in STRONG_DOCUMENT_HINTS)
-            equipment_hint = any(h in haystack for h in GAS_EQUIPMENT_HINTS)
+            strong_doc_hint = is_document and any(h in hay_low for h in STRONG_DOCUMENT_HINTS)
+            priority_kw_hit = any(pk in hay_low for pk in priority_keywords)
 
-            # Kabul mantigi:
-            # 1) Keyword eslesmesi, 2) guclu belge sinyali, 3) dokuman + gaz ekipmani
-            # 4) tablo satirinda tender/closing + gaz ekipmani birlikte geciyorsa.
-            tender_context = ("tender" in haystack or "bid" in haystack or "rfq" in haystack or "nit" in haystack)
-            if not (matched_kw or strong_doc_hint or (is_doc and equipment_hint) or (tender_context and equipment_hint)):
+            # Accept if targeted keyword, true document hint, or row has tender reference/closing date signals.
+            html_info = parse_html_text(row_text or haystack, fallback_title=text)
+            tender_signal = bool(html_info.tender_ref or html_info.closing_date)
+            if not (matched_kw or strong_doc_hint or priority_kw_hit or tender_signal):
+                continue
+
+            score = score_text(haystack, file_type=file_type, matched_keyword=matched_kw or "")
+            if score.priority == "Low" and not strong_doc_hint and not tender_signal:
                 continue
 
             seen_urls.add(full_url)
-            tender_ref = _extract_tender_ref(row_text) or _extract_tender_ref(link_text) or _extract_tender_ref(href)
-            tender_date = _extract_first_date(row_text)
-            closing_date = _extract_closing_date(row_text)
-            awarded_candidate = any(x in haystack for x in ("aoc", "loa", "foa", "award", "successful bidder"))
+            title = text or html_info.title or row_text[:140] or full_url
+            extra = {
+                "source_type": "html_table" if row_text and row_text != text else "html_link",
+                "row_text": row_text,
+                "tender_ref": html_info.tender_ref,
+                "tender_date": html_info.tender_date,
+                "closing_date": html_info.closing_date,
+                "html_confidence": html_info.confidence,
+                "lead_score": score.score,
+                "priority": score.priority,
+                "score_reasons": score.reasons,
+                "equipment_segment": score.equipment_segment,
+                "equipment_type": score.equipment_type,
+                "equipment_relevance": score.equipment_relevance,
+            }
 
-            title = _clean_text(row_text or link_text or full_url, limit=260)
-            score = _score_candidate(
-                matched_kw=matched_kw,
-                strong_doc_hint=strong_doc_hint,
-                equipment_hint=equipment_hint,
-                is_doc=is_doc,
-                row_text=row_text,
-                url=full_url,
+            candidates.append(
+                TenderLead(
+                    portal_id=self.portal["id"],
+                    portal_name=self.portal["name"],
+                    title=title[:300],
+                    url=full_url,
+                    matched_keyword=matched_kw,
+                    published_date=html_info.tender_date,
+                    file_type=file_type,
+                    raw_snippet=row_text or text,
+                    extra=extra,
+                )
             )
 
-            lead = TenderLead(
-                portal_id=self.portal["id"],
-                portal_name=self.portal["name"],
-                title=title,
-                url=full_url,
-                matched_keyword=matched_kw,
-                published_date=tender_date,
-                file_type=_file_type(full_url),
-                raw_snippet=row_text,
-                extra={
-                    "tender_ref": tender_ref,
-                    "tender_date": tender_date,
-                    "closing_date": closing_date,
-                    "source_type": _file_type(full_url),
-                    "awarded_candidate": awarded_candidate,
-                    "score": score,
-                    "row_text": row_text,
-                },
-            )
-            candidates.append((score, lead))
-
-        candidates.sort(key=lambda item: item[0], reverse=True)
-
-        try:
-            max_leads = int(os.getenv("MAX_LEADS_PER_PORTAL", str(DEFAULT_MAX_LEADS_PER_PORTAL)))
-        except ValueError:
-            max_leads = DEFAULT_MAX_LEADS_PER_PORTAL
-
-        leads = [lead for _, lead in candidates[:max_leads]]
+        # High priority first, then higher score, then documents.
+        candidates.sort(key=lambda l: (0 if l.extra.get("priority") == "High" else 1 if l.extra.get("priority") == "Medium" else 2, -(l.extra.get("lead_score") or 0), 0 if l.file_type in {"pdf", "doc", "xls"} else 1))
+        leads = candidates[:max_leads]
 
         if len(candidates) > max_leads:
-            logger.info(
-                "%s: %d aday bulundu, ilk %d tanesi alindi (limit)",
-                self.portal["name"], len(candidates), max_leads,
-            )
+            logger.info("%s: %d aday bulundu, ilk %d tanesi alindi (limit)", self.portal["name"], len(candidates), max_leads)
         else:
             logger.info("%s: %d aday link bulundu", self.portal["name"], len(leads))
-
         return leads

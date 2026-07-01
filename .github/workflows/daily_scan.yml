@@ -2,7 +2,6 @@ name: Daily Tender Scan
 
 on:
   schedule:
-    # Her gun 05:00 UTC
     - cron: "0 5 * * *"
   workflow_dispatch: {}
 
@@ -16,7 +15,6 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-
     steps:
       - name: Repoyu al
         uses: actions/checkout@v4
@@ -34,9 +32,6 @@ jobs:
 
       - name: Taramayi calistir
         env:
-          # Portal basina daha fazla aday alinsin; dashboard'da eksik veri azaltmak icin.
-          MAX_LEADS_PER_PORTAL: "120"
-
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
@@ -54,25 +49,18 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-
           p = Path("docs/data.json")
           if not p.exists():
               raise SystemExit("docs/data.json olusmadi")
-
           data = json.loads(p.read_text(encoding="utf-8"))
           dashboard = data.get("dashboard", {})
-
           print("generated_at:", dashboard.get("generated_at"))
           print("portal_count:", dashboard.get("portal_count"))
           print("tender_count:", dashboard.get("tender_count"))
-          print("price_row_count:", dashboard.get("price_row_count"))
-          print("missing_core_fields:", dashboard.get("missing_core_fields"))
-          print("high_value_count:", dashboard.get("high_value_count"))
-
-          required = [
-              "dashboard", "portals", "tenders", "price_intelligence",
-              "competitors", "source_log", "portal_health", "status_counts"
-          ]
+          print("high_priority_count:", dashboard.get("high_priority_count"))
+          print("failure_count:", dashboard.get("failure_count"))
+          print("open_action_count:", dashboard.get("open_action_count"))
+          required = ["dashboard", "portals", "tenders", "price_intelligence", "portal_health", "source_failures", "action_queue"]
           missing = [k for k in required if k not in data]
           if missing:
               raise SystemExit(f"data.json eksik alanlar: {missing}")
@@ -82,9 +70,7 @@ jobs:
         run: |
           git config user.name "eska-tender-bot"
           git config user.email "actions@users.noreply.github.com"
-
-          git add data/India_Procurement_Intelligence_Database.xlsx docs/data.json
-
+          git add data/India_Procurement_Intelligence_Database.xlsx docs/data.json data/source_failures.json data/action_queue.json
           if git diff --cached --quiet; then
             echo "Degisiklik yok"
           else

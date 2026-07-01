@@ -8,11 +8,10 @@ SCRAPER_REGISTRY = {
 }
 
 
-def get_scraper(portal: dict, keywords: list[dict]) -> BaseScraper:
-    """portal['scraper'] alanina gore uygun scraper sinifini dondurur."""
+def get_scraper(portal: dict, keywords: list[dict], diagnostics=None) -> BaseScraper:
+    """Return scraper class based on portal['scraper']."""
     scraper_cls = SCRAPER_REGISTRY.get(portal.get("scraper", "generic"), GenericScraper)
-    return scraper_cls(portal, keywords)
+    return scraper_cls(portal, keywords, diagnostics=diagnostics)
 
 
-__all__ = ["BaseScraper", "TenderLead", "GenericScraper", "CPPPScraper",
-           "SCRAPER_REGISTRY", "get_scraper"]
+__all__ = ["BaseScraper", "TenderLead", "GenericScraper", "CPPPScraper", "SCRAPER_REGISTRY", "get_scraper"]

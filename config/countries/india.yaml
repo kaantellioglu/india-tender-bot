@@ -1,0 +1,35 @@
+country: India
+currency: INR
+language: en
+market_focus: City Gas Distribution / PSU gas procurement
+priority_segments:
+  - domestic regulator
+  - service regulator
+  - pressure regulator
+  - industrial regulator
+  - regulator skid
+  - metering skid
+  - PRS
+  - DRS
+  - MRS
+  - RMS
+  - slam shut
+  - relief valve
+major_sources:
+  - GAIL India
+  - GAIL Gas
+  - IGL
+  - MNGL
+  - Gasonet
+  - Gujarat Gas
+  - Adani Total Gas
+  - CPPP
+  - GeM
+  - TenderWizard
+  - nProcure
+automation_policy:
+  public_pages: full
+  public_documents: full
+  javascript_pages: browser_automation_after_review
+  login_required: credentials_required
+  captcha_or_dsc: manual_only

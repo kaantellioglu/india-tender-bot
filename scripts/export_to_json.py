@@ -1,185 +1,150 @@
-"""
-data/India_Procurement_Intelligence_Database.xlsx dosyasini okuyup
-docs/data.json uretir.
-
-v2 iyilestirmeleri:
-- Dashboard icin veri kalitesi metrikleri eklenir.
-- Portal bazli durum/eksik veri ozetleri eklenir.
-- Tablodaki hyperlink hucreleri varsa URL degeri korunur.
-"""
+"""Export Excel + diagnostic queues to docs/data.json for GitHub Pages."""
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 
 import openpyxl
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_WORKBOOK = ROOT / "data" / "India_Procurement_Intelligence_Database.xlsx"
 DEFAULT_OUT = ROOT / "docs" / "data.json"
-
-
-def _serialise(v: Any) -> Any:
-    if isinstance(v, datetime):
-        return v.strftime("%Y-%m-%d")
-    return v
+FAILURES_PATH = ROOT / "data" / "source_failures.json"
+ACTIONS_PATH = ROOT / "data" / "action_queue.json"
 
 
 def rows_as_dicts(ws, header_row: int, headers: list[str]) -> list[dict]:
     out = []
-    for row in ws.iter_rows(min_row=header_row + 1, max_row=ws.max_row):
-        values = [cell.value for cell in row]
-        if not values or all(v is None for v in values):
+    for row in ws.iter_rows(min_row=header_row + 1, max_row=ws.max_row, values_only=True):
+        if row is None or all(v is None for v in row):
             continue
-        if values[0] is None:
+        if row[0] is None:
             continue
-
         record = {}
-        for idx, h in enumerate(headers):
-            cell = row[idx] if idx < len(row) else None
-            value = cell.value if cell is not None else None
-            if cell is not None and cell.hyperlink and not value:
-                value = cell.hyperlink.target
-            record[h] = _serialise(value)
+        for h, v in zip(headers, row):
+            if isinstance(v, datetime):
+                v = v.strftime("%Y-%m-%d")
+            record[h] = v
         out.append(record)
     return out
 
 
-def _blank(v: Any) -> bool:
-    return v is None or str(v).strip() == "" or str(v).strip().lower() in {"unknown", "not found", "—", "none"}
+def load_json_list(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
 
 
-def _source_type(url: str | None) -> str:
-    if not url:
-        return "unknown"
-    low = str(url).lower().split("?")[0]
-    if low.endswith(".pdf"):
-        return "pdf"
-    if low.endswith((".doc", ".docx")):
-        return "doc"
-    if low.endswith((".xls", ".xlsx")):
-        return "excel"
-    if low.endswith(".zip"):
-        return "zip"
-    return "html"
+def parse_meta(notes: str | None) -> dict:
+    notes = str(notes or "")
+    meta = {}
+    m = re.search(r"meta:(.*)", notes)
+    if not m:
+        return meta
+    for part in m.group(1).split(";"):
+        if "=" in part:
+            k, v = part.split("=", 1)
+            meta[k.strip()] = v.strip()
+    return meta
 
 
-def _is_high_value(row: dict) -> bool:
-    hay = " ".join(str(row.get(k) or "") for k in [
-        "product_segment", "product_description", "notes", "tender_ref"
-    ]).lower()
-    hints = [
-        "service regulator", "commercial regulator", "industrial regulator",
-        "rms", "mrs", "drs", "frs", "prs", "cgs", "metering skid",
-        "regulator skid", "gas train", "slam shut", "ssv", "relief valve",
-    ]
-    return any(h in hay for h in hints)
+def safe_int(v, default=0):
+    try:
+        if v in (None, ""):
+            return default
+        return int(float(str(v)))
+    except Exception:
+        return default
 
 
-def _quality_flags(row: dict) -> list[str]:
-    flags = []
-    if _blank(row.get("tender_ref")):
-        flags.append("missing_ref")
-    if _blank(row.get("tender_date")):
-        flags.append("missing_date")
-    if _blank(row.get("qty")):
-        flags.append("missing_qty")
-    if _blank(row.get("winner")) or str(row.get("winner")).lower() == "not found":
-        flags.append("missing_winner")
-    if _blank(row.get("total_inr_basic")) and _blank(row.get("unit_eur_basic")) and _blank(row.get("unit_eur_incl_gst")):
-        flags.append("missing_price")
-    return flags
+def derive_tender_fields(t: dict) -> dict:
+    meta = parse_meta(t.get("notes"))
+    t["lead_score"] = safe_int(meta.get("score"), 0)
+    t["priority"] = meta.get("priority") or ("High" if t["lead_score"] >= 70 else "Medium" if t["lead_score"] >= 40 else "Low")
+    t["source_type"] = meta.get("source_type") or ("pdf" if str(t.get("source_url") or "").lower().split("?")[0].endswith(".pdf") else "html")
+    t["closing_date"] = meta.get("closing_date") or ""
+    t["equipment"] = meta.get("equipment") or t.get("product_segment") or ""
+    t["missing_ref"] = not bool(t.get("tender_ref"))
+    t["missing_date"] = not bool(t.get("tender_date"))
+    t["missing_qty"] = not bool(t.get("qty"))
+    t["missing_winner"] = not bool(t.get("winner")) or str(t.get("winner")).lower() in {"not found", "unknown", "none"}
+    t["missing_price"] = not bool(t.get("total_inr_basic")) and not bool(t.get("unit_eur_basic")) and not bool(t.get("unit_eur_incl_gst"))
+    return t
 
 
-def _enrich_tenders(tenders: list[dict]) -> list[dict]:
-    for row in tenders:
-        row["source_type"] = _source_type(row.get("source_url"))
-        row["high_value"] = _is_high_value(row)
-        row["quality_flags"] = _quality_flags(row)
-        row["quality_score"] = max(0, 100 - len(row["quality_flags"]) * 18)
-    return tenders
-
-
-def _portal_health(tenders: list[dict]) -> list[dict]:
-    bucket = defaultdict(list)
-    for t in tenders:
-        bucket[t.get("company") or t.get("portal") or "Unknown"].append(t)
+def build_portal_health(portals: list[dict], tenders: list[dict], failures: list[dict], actions: list[dict]) -> list[dict]:
+    by_portal_tenders = Counter(t.get("company") or t.get("portal") or "" for t in tenders)
+    by_portal_failures = defaultdict(list)
+    by_portal_actions = defaultdict(list)
+    for f in failures:
+        by_portal_failures[f.get("portal") or f.get("portal_id")].append(f)
+    for a in actions:
+        by_portal_actions[a.get("portal") or a.get("portal_id")].append(a)
 
     health = []
-    for portal, rows in sorted(bucket.items()):
-        total = len(rows)
-        pdf = sum(1 for r in rows if r.get("source_type") == "pdf")
-        high = sum(1 for r in rows if r.get("high_value"))
-        with_ref = sum(1 for r in rows if not _blank(r.get("tender_ref")))
-        with_qty = sum(1 for r in rows if not _blank(r.get("qty")))
-        with_price = sum(1 for r in rows if not (
-            _blank(r.get("total_inr_basic")) and _blank(r.get("unit_eur_basic")) and _blank(r.get("unit_eur_incl_gst"))
-        ))
-        avg_quality = round(sum(r.get("quality_score", 0) for r in rows) / total, 1) if total else 0
+    for p in portals:
+        name = p.get("name") or ""
+        fl = by_portal_failures.get(name, []) + by_portal_failures.get(p.get("id"), [])
+        ac = by_portal_actions.get(name, []) + by_portal_actions.get(p.get("id"), [])
+        status = "OK"
+        if any((f.get("failure_type") or "").startswith("http_403") or f.get("failure_type") == "login_required" for f in fl) or ac:
+            status = "Action Required"
+        elif any(f.get("failure_type") in {"dns_error", "ssl_error", "timeout", "connection_refused", "redirect_loop"} for f in fl):
+            status = "Access Problem"
+        elif any((f.get("failure_type") or "").startswith("http_404") for f in fl):
+            status = "Broken URL"
+        elif fl:
+            status = "Review"
         health.append({
-            "portal": portal,
-            "total": total,
-            "pdf": pdf,
-            "high_value": high,
-            "with_ref": with_ref,
-            "with_qty": with_qty,
-            "with_price": with_price,
-            "avg_quality": avg_quality,
+            "portal": name,
+            "portal_id": p.get("id", ""),
+            "tier": p.get("tier", ""),
+            "relevance": p.get("relevance", ""),
+            "status": status,
+            "lead_count": by_portal_tenders.get(name, 0),
+            "failure_count": len(fl),
+            "open_action_count": len([x for x in ac if x.get("status", "open") == "open"]),
+            "top_failure": Counter(f.get("failure_type") for f in fl).most_common(1)[0][0] if fl else "",
+            "next_action": (ac[-1].get("next_action") if ac else p.get("next_action", "")),
+            "website": p.get("website", ""),
         })
-    return sorted(health, key=lambda r: (r["high_value"], r["total"]), reverse=True)
+    return health
 
 
 def export(workbook_path: Path, out_path: Path) -> None:
     wb = openpyxl.load_workbook(workbook_path, data_only=True)
 
     ws = wb["01 Portal Master"]
-    portal_headers = [
-        "tier", "name", "type", "website", "tender_search_url", "award_url",
-        "login_requirement", "relevance", "note", "next_action",
-    ]
-    portals = rows_as_dicts(ws, header_row=3, headers=portal_headers)
+    portal_headers = ["tier", "name", "type", "website", "tender_search_url", "award_url", "login_requirement", "relevance", "note", "next_action"]
+    portals = rows_as_dicts(ws, 3, portal_headers)
 
     ws = wb["04 Tender Register"]
-    tender_headers = [
-        "tender_id", "company", "portal", "tender_ref", "tender_date", "status",
-        "product_segment", "product_description", "qty", "uom", "winner",
-        "brand", "total_inr_basic", "gst_inr", "total_inr_incl_gst", "fx_inr_eur",
-        "total_eur", "unit_eur_basic", "unit_eur_incl_gst", "source_url",
-        "pdf_saved", "notes",
-    ]
-    tenders = _enrich_tenders(rows_as_dicts(ws, header_row=3, headers=tender_headers))
+    tender_headers = ["tender_id", "company", "portal", "tender_ref", "tender_date", "status", "product_segment", "product_description", "qty", "uom", "winner", "brand", "total_inr_basic", "gst_inr", "total_inr_incl_gst", "fx_inr_eur", "total_eur", "unit_eur_basic", "unit_eur_incl_gst", "source_url", "pdf_saved", "notes"]
+    tenders = [derive_tender_fields(t) for t in rows_as_dicts(ws, 3, tender_headers)]
 
     ws = wb["06 Price Intelligence"]
-    price_headers = [
-        "tender_id", "company", "year", "product_segment", "capacity", "qty",
-        "winner", "brand", "total_inr_basic", "total_eur_basic", "unit_eur_basic",
-        "unit_eur_incl_gst", "confidence", "source_url", "notes",
-    ]
-    price_intel = rows_as_dicts(ws, header_row=3, headers=price_headers)
+    price_headers = ["tender_id", "company", "year", "product_segment", "capacity", "qty", "winner", "brand", "total_inr_basic", "total_eur_basic", "unit_eur_basic", "unit_eur_incl_gst", "confidence", "source_url", "notes"]
+    price_intel = rows_as_dicts(ws, 3, price_headers)
 
     ws = wb["07 Competitor DB"]
     comp_headers = ["name", "country", "role", "segment", "website", "relevance", "notes"]
-    competitors = rows_as_dicts(ws, header_row=3, headers=comp_headers)
+    competitors = rows_as_dicts(ws, 3, comp_headers)
 
     ws = wb["08 Source Log"]
     log_headers = ["timestamp", "message", "actor"]
-    source_log = rows_as_dicts(ws, header_row=3, headers=log_headers)[-80:]
+    source_log = rows_as_dicts(ws, 3, log_headers)[-100:]
 
-    status_counts = dict(Counter((t.get("status") or "Unknown") for t in tenders))
-    source_type_counts = dict(Counter((t.get("source_type") or "unknown") for t in tenders))
-    missing_core_fields = {
-        "tender_ref": sum(1 for t in tenders if _blank(t.get("tender_ref"))),
-        "tender_date": sum(1 for t in tenders if _blank(t.get("tender_date"))),
-        "qty": sum(1 for t in tenders if _blank(t.get("qty"))),
-        "winner": sum(1 for t in tenders if _blank(t.get("winner")) or str(t.get("winner")).lower() == "not found"),
-        "price": sum(1 for t in tenders if (
-            _blank(t.get("total_inr_basic")) and _blank(t.get("unit_eur_basic")) and _blank(t.get("unit_eur_incl_gst"))
-        )),
-    }
+    failures = load_json_list(FAILURES_PATH)
+    actions = load_json_list(ACTIONS_PATH)
+    portal_health = build_portal_health(portals, tenders, failures, actions)
 
     dashboard = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
@@ -187,17 +152,16 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "tender_count": len(tenders),
         "price_row_count": len(price_intel),
         "competitor_count": len(competitors),
-        "awarded_count": sum(1 for t in tenders if (t.get("status") or "").lower() == "awarded"),
-        "high_relevance_portals": sum(1 for p in portals if (p.get("relevance") or "").lower() == "high"),
-        "tier1_count": sum(1 for p in portals if p.get("tier") == "Tier 1"),
-        "tier2_count": sum(1 for p in portals if p.get("tier") == "Tier 2"),
-        "tier3_count": sum(1 for p in portals if p.get("tier") == "Tier 3"),
-        "high_value_count": sum(1 for t in tenders if t.get("high_value")),
-        "pdf_count": sum(1 for t in tenders if t.get("source_type") == "pdf"),
-        "avg_quality": round(sum(t.get("quality_score", 0) for t in tenders) / len(tenders), 1) if tenders else 0,
-        "missing_core_fields": missing_core_fields,
-        "status_counts": status_counts,
-        "source_type_counts": source_type_counts,
+        "awarded_count": sum(1 for t in tenders if "award" in str(t.get("status") or "").lower()),
+        "high_priority_count": sum(1 for t in tenders if t.get("priority") == "High"),
+        "medium_priority_count": sum(1 for t in tenders if t.get("priority") == "Medium"),
+        "failure_count": len(failures),
+        "open_action_count": len([a for a in actions if a.get("status", "open") == "open"]),
+        "portal_action_required_count": sum(1 for p in portal_health if p.get("status") in {"Action Required", "Access Problem", "Broken URL"}),
+        "missing_ref_count": sum(1 for t in tenders if t.get("missing_ref")),
+        "missing_date_count": sum(1 for t in tenders if t.get("missing_date")),
+        "missing_qty_count": sum(1 for t in tenders if t.get("missing_qty")),
+        "missing_price_count": sum(1 for t in tenders if t.get("missing_price")),
     }
 
     payload = {
@@ -207,23 +171,18 @@ def export(workbook_path: Path, out_path: Path) -> None:
         "price_intelligence": price_intel,
         "competitors": competitors,
         "source_log": source_log,
-        "portal_health": _portal_health(tenders),
-        "status_counts": status_counts,
-        "source_type_counts": source_type_counts,
+        "source_failures": failures[-1000:],
+        "action_queue": actions[-1000:],
+        "portal_health": portal_health,
     }
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-
-    print(
-        f"Yazildi: {out_path} "
-        f"({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat kaydi)"
-    )
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Yazildi: {out_path} ({len(portals)} portal, {len(tenders)} ihale, {len(price_intel)} fiyat, {len(failures)} failure, {len(actions)} action)")
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="xlsx -> docs/data.json")
+    parser = argparse.ArgumentParser(description="xlsx + diagnostics -> docs/data.json")
     parser.add_argument("--workbook", type=str, default=str(DEFAULT_WORKBOOK))
     parser.add_argument("--out", type=str, default=str(DEFAULT_OUT))
     return parser.parse_args()

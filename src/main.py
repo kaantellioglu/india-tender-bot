@@ -1,18 +1,4 @@
-"""
-ESKA India Tender Bot - ana calistirma noktasi.
-
-Kullanim:
-    python -m src.main
-    python -m src.main --tiers "Tier 1" "Tier 2"
-    python -m src.main --workbook data/India_Procurement_Intelligence_Database.xlsx
-
-Akis:
-1. config/portals.yaml + config/keywords.yaml yuklenir
-2. Her portal icin uygun scraper calistirilir -> TenderLead listesi
-3. PDF uzantili lead'ler icin pdf_parser ile fiyat/miktar/kazanan cikarimi denenir
-4. Sonuclar mevcut xlsx semasina (Tender Register / Price Intelligence) eklenir
-5. Yeni kayit varsa e-posta/Telegram bildirimi gonderilir
-"""
+"""ESKA Global Gas Tender Bot - main runner."""
 from __future__ import annotations
 
 import argparse
@@ -25,78 +11,102 @@ from .scrapers import get_scraper, TenderLead
 from .parsers.pdf_parser import parse_tender_pdf, ExtractedTenderInfo
 from .storage.excel_store import update_workbook
 from .notifier.notify import notify_new_tenders
+from .diagnostics.source_failure import DiagnosticRecorder
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("tender_bot")
 
-DEFAULT_WORKBOOK = Path(__file__).resolve().parent.parent / "data" / "India_Procurement_Intelligence_Database.xlsx"
+ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_WORKBOOK = ROOT / "data" / "India_Procurement_Intelligence_Database.xlsx"
 
 
-def run(workbook_path: Path, tiers: list[str] | None, max_pdf_parses: int = 40) -> None:
+def _pdf_parse_priority(lead: TenderLead) -> tuple[int, int]:
+    priority_rank = {"High": 0, "Medium": 1, "Low": 2}.get(lead.extra.get("priority", "Low"), 2)
+    score = int(lead.extra.get("lead_score") or 0)
+    return (priority_rank, -score)
+
+
+def run(workbook_path: Path, tiers: list[str] | None, max_pdf_parses: int = 120) -> None:
     keywords = load_keywords()
     portals = load_portals(only_enabled=True, tiers=tiers)
+    diagnostics = DiagnosticRecorder()
     logger.info("%d portal taranacak (tiers=%s)", len(portals), tiers or "hepsi")
 
     all_leads: list[TenderLead] = []
     for portal in portals:
-        scraper = get_scraper(portal, keywords)
+        scraper = get_scraper(portal, keywords, diagnostics=diagnostics)
         try:
             leads = scraper.fetch_leads()
-        except Exception as exc:  # tek bir portalin hatasi tum taramayi durdurmasin
+        except Exception as exc:
             logger.error("%s taranirken hata: %s", portal["name"], exc)
+            diagnostics.record_failure(
+                portal=portal,
+                url=portal.get("tender_search_url") or portal.get("website") or "",
+                failure_type="scraper_exception",
+                action_required="scraper_rule_review",
+                retry_strategy="create_or_update_portal_rule",
+                note=str(exc)[:500],
+            )
             leads = []
         all_leads.extend(leads)
 
     logger.info("Toplam %d aday ihale/duyuru bulundu (tum portallar)", len(all_leads))
 
-    # PDF olanlardan fiyat/miktar/kazanan cikarmayi dene (maliyet/sure icin sinirli sayida)
     extracted_by_url: dict[str, ExtractedTenderInfo] = {}
-    pdf_leads = [l for l in all_leads if l.file_type == "pdf"][:max_pdf_parses]
-    logger.info("%d PDF icerik analizi icin isleniyor", len(pdf_leads))
-    for lead in pdf_leads:
+    doc_leads = [l for l in all_leads if l.file_type in {"pdf", "doc", "xls"}]
+    doc_leads = sorted(doc_leads, key=_pdf_parse_priority)[:max_pdf_parses]
+    logger.info("%d dokuman icerik analizi icin isleniyor", len(doc_leads))
+    for lead in doc_leads:
         try:
             info = parse_tender_pdf(lead.url)
             extracted_by_url[lead.url] = info
+            if info.failure_type and diagnostics:
+                diagnostics.record_failure(
+                    portal={"id": lead.portal_id, "name": lead.portal_name},
+                    url=lead.url,
+                    failure_type=info.failure_type,
+                    content_type=info.content_type,
+                    action_required="document_parse_review" if info.failure_type.startswith("not_") else "review",
+                    retry_strategy="html_fallback_or_manual_download" if info.source_type == "html_fallback" else "parser_rule_update",
+                    signals=[info.source_type],
+                )
+            for action in info.detected_actions:
+                diagnostics.record_action(
+                    portal={"id": lead.portal_id, "name": lead.portal_name},
+                    url=lead.url,
+                    action_type=action.get("action_type", "manual_review"),
+                    required_items=action.get("required_items", []),
+                    automation_possible=action.get("automation_possible", "partial"),
+                    next_action=action.get("next_action", "Manual review required"),
+                    confidence=action.get("confidence", "Medium"),
+                    signals=action.get("signals", []),
+                )
         except Exception as exc:
-            logger.warning("PDF parse hatasi (%s): %s", lead.url, exc)
+            logger.warning("Dokuman parse hatasi (%s): %s", lead.url, exc)
+            diagnostics.record_failure(
+                portal={"id": lead.portal_id, "name": lead.portal_name},
+                url=lead.url,
+                failure_type="document_parse_exception",
+                action_required="parser_rule_review",
+                retry_strategy="improve_parser_or_manual_review",
+                note=str(exc)[:500],
+            )
 
     if not workbook_path.exists():
-        logger.error(
-            "Workbook bulunamadi: %s\n"
-            "Ilk calistirmadan once 'India_Procurement_Intelligence_Database.xlsx' "
-            "dosyasini data/ klasorune kopyalayin (bkz. README).",
-            workbook_path,
-        )
+        logger.error("Workbook bulunamadi: %s", workbook_path)
         sys.exit(1)
 
     result = update_workbook(workbook_path, all_leads, extracted_by_url)
-
     sample_titles = [l.title for l in all_leads[:15]]
     notify_new_tenders(result["new_register_rows"], result["new_price_rows"], sample_titles)
-
-    logger.info(
-        "Tarama tamamlandi: %d yeni ihale, %d yeni fiyat kaydi eklendi",
-        result["new_register_rows"], result["new_price_rows"],
-    )
+    logger.info("Tarama tamamlandi: %d yeni ihale, %d yeni fiyat kaydi eklendi", result["new_register_rows"], result["new_price_rows"])
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="ESKA India Tender Bot")
-    parser.add_argument(
-        "--workbook", type=str, default=str(DEFAULT_WORKBOOK),
-        help="Guncellenecek xlsx dosyasinin yolu",
-    )
-    parser.add_argument(
-        "--tiers", nargs="*", default=None,
-        help='Sadece belirli tier(lar)i tara, orn: --tiers "Tier 1" "Tier 2"',
-    )
-    parser.add_argument(
-        "--max-pdf-parses", type=int, default=40,
-        help="Bir calistirmada en fazla kac PDF indirip parse edilecegi (varsayilan 40)",
-    )
+    parser = argparse.ArgumentParser(description="Global Gas Tender Intelligence Bot")
+    parser.add_argument("--workbook", type=str, default=str(DEFAULT_WORKBOOK), help="Guncellenecek xlsx dosyasinin yolu")
+    parser.add_argument("--tiers", nargs="*", default=None, help='Sadece belirli tier(lar)i tara')
+    parser.add_argument("--max-pdf-parses", type=int, default=120, help="Bir calistirmada en fazla kac dokuman parse edilecek")
     return parser.parse_args()
 
 
