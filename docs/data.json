@@ -1,6 +1,6 @@
 {
   "dashboard": {
-    "generated_at": "2026-08-02 07:42 UTC",
+    "generated_at": "2026-08-03 08:25 UTC",
     "portal_count": 51,
     "raw_tender_count": 2512,
     "tender_count": 173,
@@ -144021,6 +144021,11 @@
       "timestamp": "2026-08-02 07:42",
       "message": "Clean tarama: 0 yeni ihale, 0 yeni fiyat kaydi, 0 zenginlestirme, 108 non-target atlandi",
       "actor": "bot"
+    },
+    {
+      "timestamp": "2026-08-03 08:25",
+      "message": "Clean tarama: 0 yeni ihale, 0 yeni fiyat kaydi, 0 zenginlestirme, 91 non-target atlandi",
+      "actor": "bot"
     }
   ],
   "source_failures": [
@@ -144037,8 +144042,8 @@
       "retry_strategy": "follow_final_url",
       "signals": [],
       "note": "",
-      "count": 35,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 36,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144057,8 +144062,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 33,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144078,8 +144083,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144098,8 +144103,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.gglonline.net', port=443): Max retries exceeded with url: /tender (Caused by NameResolutionError(\"HTTPSConnection(host='www.gglonline.net', port=443): Failed to resolve 'www.gglonline.net' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144119,8 +144124,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 35,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 36,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144140,8 +144145,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144205,8 +144210,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 33,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144247,8 +144252,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144268,8 +144273,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144309,8 +144314,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144349,8 +144354,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='bengalgas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='bengalgas.com', port=443): Failed to resolve 'bengalgas.com' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144369,8 +144374,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.purbabharatigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='www.purbabharatigas.in', port=443): Failed to resolve 'www.purbabharatigas.in' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144409,8 +144414,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144429,8 +144434,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='naveriyagas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='naveriyagas.com', port=443): Failed to resolve 'naveriyagas.com' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144449,8 +144454,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144470,8 +144475,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144490,8 +144495,8 @@
         "ssl"
       ],
       "note": "HTTPSConnectionPool(host='www.meconlimited.co.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)')))",
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144510,8 +144515,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144531,8 +144536,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144551,8 +144556,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.dineshengineers.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.dineshengineers.com', port=443): Failed to resolve 'www.dineshengineers.com' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144571,8 +144576,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='resonanceenergy.in', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='resonanceenergy.in', port=443): Failed to resolve 'resonanceenergy.in' ([Errno -2] Name or service not known)\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144591,8 +144596,8 @@
         "connection_refused"
       ],
       "note": "HTTPSConnectionPool(host='gem.gov.in', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host='gem.gov.in', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144611,8 +144616,8 @@
         "ssl"
       ],
       "note": "HTTPSConnectionPool(host='www.nprocure.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
-      "count": 36,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 37,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144750,9 +144755,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='www.goanaturalgas.com', port=443): Max retries exceeded with url: /tenders/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.goanaturalgas.com', port=443) at 0x7fd8b6263c90>, 'Connection to www.goanaturalgas.com timed out. (connect timeout=20)'))",
-      "count": 3,
-      "last_seen": "2026-07-14 07:02 UTC",
+      "note": "HTTPSConnectionPool(host='www.goanaturalgas.com', port=443): Max retries exceeded with url: /tenders/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.goanaturalgas.com', port=443) at 0x7fa71d0d3ed0>, 'Connection to www.goanaturalgas.com timed out. (connect timeout=20)'))",
+      "count": 4,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144770,9 +144775,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='www.bglgas.com', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bglgas.com', port=443) at 0x7fd8b73b0990>, 'Connection to www.bglgas.com timed out. (connect timeout=20)'))",
-      "count": 3,
-      "last_seen": "2026-07-14 07:02 UTC",
+      "note": "HTTPSConnectionPool(host='www.bglgas.com', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bglgas.com', port=443) at 0x7fa71d0d3610>, 'Connection to www.bglgas.com timed out. (connect timeout=20)'))",
+      "count": 4,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144790,9 +144795,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='www.aglonline.net', port=443): Max retries exceeded with url: /tender (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.aglonline.net', port=443) at 0x7fd8b70d4a90>, 'Connection to www.aglonline.net timed out. (connect timeout=20)'))",
-      "count": 3,
-      "last_seen": "2026-07-14 07:03 UTC",
+      "note": "HTTPSConnectionPool(host='www.aglonline.net', port=443): Max retries exceeded with url: /tender (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.aglonline.net', port=443) at 0x7fa71d0a2210>, 'Connection to www.aglonline.net timed out. (connect timeout=20)'))",
+      "count": 4,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144831,9 +144836,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='www.aglonline.net', port=443): Max retries exceeded with url: /tender (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.aglonline.net', port=443) at 0x7fd8b72d0150>, 'Connection to www.aglonline.net timed out. (connect timeout=20)'))",
-      "count": 3,
-      "last_seen": "2026-07-14 07:03 UTC",
+      "note": "HTTPSConnectionPool(host='www.aglonline.net', port=443): Max retries exceeded with url: /tender (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.aglonline.net', port=443) at 0x7fa71d845c10>, 'Connection to www.aglonline.net timed out. (connect timeout=20)'))",
+      "count": 4,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144851,9 +144856,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='www.vgl.co.in', port=443): Max retries exceeded with url: /tenders/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.vgl.co.in', port=443) at 0x7fd8b70e8d10>, 'Connection to www.vgl.co.in timed out. (connect timeout=20)'))",
-      "count": 3,
-      "last_seen": "2026-07-14 07:04 UTC",
+      "note": "HTTPSConnectionPool(host='www.vgl.co.in', port=443): Max retries exceeded with url: /tenders/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.vgl.co.in', port=443) at 0x7fa71d83b550>, 'Connection to www.vgl.co.in timed out. (connect timeout=20)'))",
+      "count": 4,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144893,8 +144898,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144911,8 +144916,8 @@
       "retry_strategy": "follow_final_url",
       "signals": [],
       "note": "",
-      "count": 33,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -144932,8 +144937,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145032,8 +145037,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 32,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 33,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145052,8 +145057,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 28,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 29,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145092,8 +145097,8 @@
         "pdf"
       ],
       "note": "",
-      "count": 9,
-      "last_seen": "2026-08-01 07:39 UTC",
+      "count": 10,
+      "last_seen": "2026-08-03 08:24 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145132,8 +145137,8 @@
         "ssl"
       ],
       "note": "HTTPSConnectionPool(host='www.godavarigas.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-      "count": 23,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 24,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145394,8 +145399,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 5,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 6,
+      "last_seen": "2026-08-03 08:17 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145415,8 +145420,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 5,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 6,
+      "last_seen": "2026-08-03 08:17 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145434,9 +145439,9 @@
       "signals": [
         "timeout"
       ],
-      "note": "HTTPSConnectionPool(host='engineersindia.com', port=443): Read timed out. (read timeout=20)",
-      "count": 2,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "note": "HTTPSConnectionPool(host='engineersindia.com', port=443): Max retries exceeded with url: /tenders/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='engineersindia.com', port=443) at 0x7fa71dd0fad0>, 'Connection to engineersindia.com timed out. (connect timeout=20)'))",
+      "count": 3,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     }
@@ -146285,8 +146290,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:17 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146311,8 +146316,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146335,8 +146340,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146363,8 +146368,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 33,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146389,8 +146394,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146417,8 +146422,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146493,8 +146498,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146517,8 +146522,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146543,8 +146548,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146667,8 +146672,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146691,8 +146696,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146717,8 +146722,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146745,8 +146750,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 31,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 32,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146769,8 +146774,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 33,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146817,8 +146822,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 30,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 31,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147715,8 +147720,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:17 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147741,8 +147746,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147765,8 +147770,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147793,8 +147798,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 33,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147819,8 +147824,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147847,8 +147852,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:25 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147923,8 +147928,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147947,8 +147952,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147973,8 +147978,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:18 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148097,8 +148102,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148121,8 +148126,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:20 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148147,8 +148152,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 34,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 35,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148175,8 +148180,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 31,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 32,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148199,8 +148204,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 33,
-      "last_seen": "2026-08-02 07:27 UTC",
+      "count": 34,
+      "last_seen": "2026-08-03 08:21 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148247,8 +148252,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 30,
-      "last_seen": "2026-08-02 07:26 UTC",
+      "count": 31,
+      "last_seen": "2026-08-03 08:19 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
