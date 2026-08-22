@@ -32,8 +32,8 @@
       "http_403"
     ],
     "note": "",
-    "count": 52,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 53,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -53,8 +53,8 @@
       "http_403"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -73,8 +73,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='www.gglonline.net', port=443): Max retries exceeded with url: /tender (Caused by NameResolutionError(\"HTTPSConnection(host='www.gglonline.net', port=443): Failed to resolve 'www.gglonline.net' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -94,8 +94,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 54,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 55,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -115,8 +115,8 @@
       "http_403"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -159,8 +159,8 @@
       "login_signal"
     ],
     "note": "",
-    "count": 50,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 51,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -180,8 +180,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 51,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 52,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -201,8 +201,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 50,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 51,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -222,8 +222,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -243,8 +243,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 54,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 55,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -284,8 +284,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -324,8 +324,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='bengalgas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='bengalgas.com', port=443): Failed to resolve 'bengalgas.com' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -344,8 +344,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='www.purbabharatigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='www.purbabharatigas.in', port=443): Failed to resolve 'www.purbabharatigas.in' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -384,8 +384,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -404,8 +404,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='naveriyagas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='naveriyagas.com', port=443): Failed to resolve 'naveriyagas.com' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -424,8 +424,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -445,8 +445,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -465,8 +465,8 @@
       "ssl"
     ],
     "note": "HTTPSConnectionPool(host='www.meconlimited.co.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)')))",
-    "count": 51,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 52,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -485,8 +485,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -506,8 +506,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -526,8 +526,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='www.dineshengineers.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.dineshengineers.com', port=443): Failed to resolve 'www.dineshengineers.com' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -546,8 +546,8 @@
       "dns"
     ],
     "note": "HTTPSConnectionPool(host='resonanceenergy.in', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='resonanceenergy.in', port=443): Failed to resolve 'resonanceenergy.in' ([Errno -2] Name or service not known)\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:19 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -566,8 +566,8 @@
       "connection_refused"
     ],
     "note": "HTTPSConnectionPool(host='gem.gov.in', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host='gem.gov.in', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:19 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -586,8 +586,8 @@
       "ssl"
     ],
     "note": "HTTPSConnectionPool(host='www.nprocure.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
-    "count": 55,
-    "last_seen": "2026-08-21 05:23 UTC",
+    "count": 56,
+    "last_seen": "2026-08-22 05:19 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -666,8 +666,8 @@
       "pdf"
     ],
     "note": "",
-    "count": 46,
-    "last_seen": "2026-08-21 05:38 UTC",
+    "count": 47,
+    "last_seen": "2026-08-22 05:22 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -686,8 +686,8 @@
       "pdf"
     ],
     "note": "",
-    "count": 46,
-    "last_seen": "2026-08-21 05:38 UTC",
+    "count": 47,
+    "last_seen": "2026-08-22 05:22 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -706,8 +706,8 @@
       "pdf"
     ],
     "note": "",
-    "count": 14,
-    "last_seen": "2026-08-21 05:38 UTC",
+    "count": 15,
+    "last_seen": "2026-08-22 05:23 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -868,8 +868,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 53,
-    "last_seen": "2026-08-21 05:21 UTC",
+    "count": 54,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -907,8 +907,8 @@
       "http_403"
     ],
     "note": "",
-    "count": 53,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 54,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1007,8 +1007,8 @@
       "http_403"
     ],
     "note": "",
-    "count": 51,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 52,
+    "last_seen": "2026-08-22 05:16 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1027,8 +1027,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 47,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 48,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1067,8 +1067,8 @@
       "pdf"
     ],
     "note": "",
-    "count": 12,
-    "last_seen": "2026-08-17 05:30 UTC",
+    "count": 13,
+    "last_seen": "2026-08-22 05:23 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1107,8 +1107,8 @@
       "ssl"
     ],
     "note": "HTTPSConnectionPool(host='www.godavarigas.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-    "count": 42,
-    "last_seen": "2026-08-21 05:22 UTC",
+    "count": 43,
+    "last_seen": "2026-08-22 05:17 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1127,8 +1127,8 @@
       "timeout"
     ],
     "note": "HTTPSConnectionPool(host='www.etenders.gov.in', port=443): Read timed out. (read timeout=20)",
-    "count": 7,
-    "last_seen": "2026-08-19 05:20 UTC",
+    "count": 8,
+    "last_seen": "2026-08-22 05:19 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1369,8 +1369,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 24,
-    "last_seen": "2026-08-21 05:21 UTC",
+    "count": 25,
+    "last_seen": "2026-08-22 05:15 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1390,8 +1390,8 @@
       "http_404"
     ],
     "note": "",
-    "count": 24,
-    "last_seen": "2026-08-21 05:21 UTC",
+    "count": 25,
+    "last_seen": "2026-08-22 05:15 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1572,6 +1572,86 @@
     "note": "HTTPSConnectionPool(host='www.meconlimited.co.in', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.meconlimited.co.in', port=443) at 0x7fc7b478bed0>, 'Connection to www.meconlimited.co.in timed out. (connect timeout=20)'))",
     "count": 2,
     "last_seen": "2026-08-16 05:19 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_procurement_transaction_automation"
+  },
+  {
+    "timestamp": "2026-08-22 05:16 UTC",
+    "portal": "Gasonet Services",
+    "portal_id": "gasonet_services",
+    "url": "https://www.gasonet.in/tenders.html",
+    "failure_type": "timeout",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.gasonet.in/tenders.html",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_or_reduce_timeout",
+    "signals": [
+      "timeout"
+    ],
+    "note": "HTTPSConnectionPool(host='www.gasonet.in', port=443): Max retries exceeded with url: /tenders.html (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gasonet.in', port=443) at 0x7fcb4ad58490>, 'Connection to www.gasonet.in timed out. (connect timeout=20)'))",
+    "count": 1,
+    "last_seen": "2026-08-22 05:16 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_procurement_transaction_automation"
+  },
+  {
+    "timestamp": "2026-08-22 05:17 UTC",
+    "portal": "Charotar Gas",
+    "portal_id": "charotar_gas",
+    "url": "https://charotargas.com/tenders",
+    "failure_type": "timeout",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://charotargas.com/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_or_reduce_timeout",
+    "signals": [
+      "timeout"
+    ],
+    "note": "HTTPSConnectionPool(host='charotargas.com', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='charotargas.com', port=443) at 0x7fcb4a52e450>, 'Connection to charotargas.com timed out. (connect timeout=20)'))",
+    "count": 1,
+    "last_seen": "2026-08-22 05:17 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_procurement_transaction_automation"
+  },
+  {
+    "timestamp": "2026-08-22 05:17 UTC",
+    "portal": "Megha City Gas Distribution",
+    "portal_id": "megha_city_gas_distribution",
+    "url": "https://meghagas.com/tenders",
+    "failure_type": "timeout",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://meghagas.com/tenders",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_or_reduce_timeout",
+    "signals": [
+      "timeout"
+    ],
+    "note": "HTTPSConnectionPool(host='meghagas.com', port=443): Max retries exceeded with url: /tenders (Caused by ConnectTimeoutError(<HTTPSConnection(host='meghagas.com', port=443) at 0x7fcb4a5637d0>, 'Connection to meghagas.com timed out. (connect timeout=20)'))",
+    "count": 1,
+    "last_seen": "2026-08-22 05:17 UTC",
+    "scope": "market_intelligence_only",
+    "excluded_scope": "no_procurement_transaction_automation"
+  },
+  {
+    "timestamp": "2026-08-22 05:18 UTC",
+    "portal": "BGRL / BGR Energy CGD",
+    "portal_id": "bgrl_bgr_energy_cgd",
+    "url": "https://www.bgrcorp.com",
+    "failure_type": "timeout",
+    "http_status": null,
+    "content_type": "",
+    "final_url": "https://www.bgrcorp.com",
+    "action_required": "source_access_review",
+    "retry_strategy": "retry_or_reduce_timeout",
+    "signals": [
+      "timeout"
+    ],
+    "note": "HTTPSConnectionPool(host='www.bgrcorp.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bgrcorp.com', port=443) at 0x7fcb4ae447d0>, 'Connection to www.bgrcorp.com timed out. (connect timeout=20)'))",
+    "count": 1,
+    "last_seen": "2026-08-22 05:18 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   }
