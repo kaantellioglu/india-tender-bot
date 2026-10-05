@@ -1,24 +1,24 @@
 {
   "dashboard": {
-    "generated_at": "2026-10-04 10:54 UTC",
+    "generated_at": "2026-10-05 12:08 UTC",
     "portal_count": 51,
-    "raw_tender_count": 2535,
-    "tender_count": 196,
-    "review_tender_count": 152,
-    "rejected_tender_count": 2187,
-    "price_row_count": 6,
+    "raw_tender_count": 2536,
+    "tender_count": 197,
+    "review_tender_count": 153,
+    "rejected_tender_count": 2186,
+    "price_row_count": 7,
     "competitor_count": 11,
-    "awarded_count": 94,
-    "high_priority_count": 111,
+    "awarded_count": 95,
+    "high_priority_count": 112,
     "medium_priority_count": 29,
     "failure_count": 90,
     "open_access_review_count": 59,
     "portal_access_review_count": 51,
     "source_cleanup_count": 10,
     "missing_ref_count": 34,
-    "missing_date_count": 134,
-    "missing_qty_count": 183,
-    "missing_price_count": 152,
+    "missing_date_count": 135,
+    "missing_qty_count": 184,
+    "missing_price_count": 153,
     "scope": "market_intelligence_only",
     "excluded_scope": "no_bid_or_offer_submission_automation"
   },
@@ -9064,21 +9064,19 @@
       "missing_price": true,
       "is_clean_market_target": true,
       "needs_quality_review": false
-    }
-  ],
-  "raw_tenders": [
+    },
     {
-      "tender_id": "T-0536",
-      "company": "Indraprastha Gas (IGL)",
-      "portal": "Indraprastha Gas (IGL)",
-      "tender_ref": null,
+      "tender_id": "T-2536",
+      "company": "Maharashtra Natural Gas (MNGL)",
+      "portal": "Maharashtra Natural Gas (MNGL)",
+      "tender_ref": "MNGL/CP/2026-27/120",
       "tender_date": null,
-      "status": "New Lead",
-      "product_segment": null,
-      "product_description": "RTBQ_(3).pdf",
+      "status": "Awarded / Result",
+      "product_segment": "Regulating / metering station",
+      "product_description": "Tender For Hiring Land on Outright Purchase/Long-Term Lease Basis (Minimum 29 Years) for Setting up a Retail Outlet/CGS/Pig Receiver/Warehouse in the Hadapsar Area of Pune GA. MAHARASHTRA NATURAL GAS LIMITED Tender No.: MNGL/CP/2026-27/120 MAHARASHTRA NATURAL GAS LTD (A joint venture of GAIL & BPCL) Pride Purple Coronet, 301-302, Second Floor, Baner Rd, Above Bata Showroom, Baner, Pune – 411045 TENDER FOR HIRING OF LAND ON OUTRIGHT PURCHASE/LONG TERM LEASE BASIS (MINIMUM 29 YEARS) FOR SETTING UP RETAIL OUTLET/CGS/PIG RECEIVER/WAREHOUSE IN THE HADAPSAR AREA OF PUNE GA. TENDER NO. MNGL/CP/2026-27/120 DATED :04.10.2024 Page 1 of 9 Tender For Hiring Land on Outright Purchase/Long-Term Lease Basis (Minimum 29 Years) for Setting up a Retail Outlet/CGS/Pig Receiver/Warehouse in the Hadapsar Area of Pune GA. MAHARASHTRA NATURAL GAS LIMITED Tender No.: MNGL/CP/2026-27/120 INVITATION OF BID (IFB) Tender No. MNGL/CP/2026-27/120 To, ________________________ ________________________ _______________",
       "qty": null,
       "uom": null,
-      "winner": "Not found",
+      "winner": "shall be measured through an authorized competent person and the payment shall be made by MNGL",
       "brand": "Unknown",
       "total_inr_basic": null,
       "gst_inr": null,
@@ -9087,29 +9085,31 @@
       "total_eur": null,
       "unit_eur_basic": null,
       "unit_eur_incl_gst": null,
-      "source_url": "https://tenders.iglonline.net/uploads/tender/RTBQ_(3).pdf",
-      "pdf_saved": "No",
-      "notes": "Bot tarafindan tespit edildi (2026-07-01)",
-      "lead_score": 0,
-      "priority": "Low",
-      "source_type": "pdf",
-      "closing_date": "",
-      "equipment": "Unclassified",
-      "quality_status": "non_target",
-      "market_relevance": "Low",
-      "document_type": "unknown",
+      "source_url": "https://mngl.in/storage/193889/120_Tender-Document-for-CGS-in-Hadapsar-area-of-Pune-GA.pdf",
+      "pdf_saved": "Yes",
+      "notes": "Bot clean extraction (2026-10-05); meta:score=90;priority=High;source_type=html_table;closing_date=None;equipment=Regulating / metering station;quality_status=market_target;market_relevance=High;document_type=award;unit_price_inr=;amount_label=;matched_terms=Regulating / metering station;reject_reasons=employment/corporate;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
+      "lead_score": 90,
+      "priority": "High",
+      "source_type": "html_table",
+      "closing_date": "None",
+      "equipment": "Regulating / metering station",
+      "quality_status": "market_target",
+      "market_relevance": "High",
+      "document_type": "award",
       "unit_price_inr": null,
       "amount_label": "",
       "extraction_scope": "market_intelligence_only",
       "excluded_scope": "no_bid_or_offer_submission_automation",
-      "missing_ref": true,
+      "missing_ref": false,
       "missing_date": true,
       "missing_qty": true,
-      "missing_winner": true,
+      "missing_winner": false,
       "missing_price": true,
-      "is_clean_market_target": false,
+      "is_clean_market_target": true,
       "needs_quality_review": false
-    },
+    }
+  ],
+  "raw_tenders": [
     {
       "tender_id": "T-0537",
       "company": "Indraprastha Gas (IGL)",
@@ -67526,15 +67526,15 @@
       "unit_eur_incl_gst": null,
       "source_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/Replies-to-Bidders-16-NOS-DUAL-ARM-CARAUTO-DISPENSER.pdf",
       "pdf_saved": "No",
-      "notes": "Bot tarafindan tespit edildi (2026-07-01) | Bot enrich; date=2026-07-01; type=pdf; score=230; Bot tespit/zenginlestirme (2026-07-01); meta:score=70;priority=High;source_type=html_link;closing_date=None;equipment=Gas-related / review;reasons=equipment:Gas-related / review,document source,quantity signal,tender reference signal",
+      "notes": "Bot tarafindan tespit edildi (2026-07-01) | Bot enrich; date=2026-07-01; type=pdf; score=230; Bot tespit/zenginlestirme (2026-07-01); meta:score=70;priority=High;source_type=html_link;closing_date=None;equipment=Gas-related / review;reasons=equipment:Gas-related / review,document source,quantity signal,tender reference signal; Bot clean extraction (2026-10-05); meta:score=43;priority=Medium;source_type=html_link;closing_date=;equipment=Gas-related / review;quality_status=needs_review;market_relevance=Medium;document_type=unknown;unit_price_inr=;amount_label=;matched_terms=gas_context;reject_reasons=;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
       "lead_score": 70,
-      "priority": "High",
+      "priority": "Medium",
       "source_type": "html_link",
-      "closing_date": "None",
+      "closing_date": "",
       "equipment": "Gas-related / review",
-      "quality_status": "non_target",
-      "market_relevance": "Low",
-      "document_type": "award",
+      "quality_status": "needs_review",
+      "market_relevance": "Medium",
+      "document_type": "unknown",
       "unit_price_inr": null,
       "amount_label": "",
       "extraction_scope": "market_intelligence_only",
@@ -67545,7 +67545,7 @@
       "missing_winner": true,
       "missing_price": true,
       "is_clean_market_target": false,
-      "needs_quality_review": false
+      "needs_quality_review": true
     },
     {
       "tender_id": "T-1896",
@@ -95066,6 +95066,49 @@
       "missing_price": true,
       "is_clean_market_target": true,
       "needs_quality_review": false
+    },
+    {
+      "tender_id": "T-2536",
+      "company": "Maharashtra Natural Gas (MNGL)",
+      "portal": "Maharashtra Natural Gas (MNGL)",
+      "tender_ref": "MNGL/CP/2026-27/120",
+      "tender_date": null,
+      "status": "Awarded / Result",
+      "product_segment": "Regulating / metering station",
+      "product_description": "Tender For Hiring Land on Outright Purchase/Long-Term Lease Basis (Minimum 29 Years) for Setting up a Retail Outlet/CGS/Pig Receiver/Warehouse in the Hadapsar Area of Pune GA. MAHARASHTRA NATURAL GAS LIMITED Tender No.: MNGL/CP/2026-27/120 MAHARASHTRA NATURAL GAS LTD (A joint venture of GAIL & BPCL) Pride Purple Coronet, 301-302, Second Floor, Baner Rd, Above Bata Showroom, Baner, Pune – 411045 TENDER FOR HIRING OF LAND ON OUTRIGHT PURCHASE/LONG TERM LEASE BASIS (MINIMUM 29 YEARS) FOR SETTING UP RETAIL OUTLET/CGS/PIG RECEIVER/WAREHOUSE IN THE HADAPSAR AREA OF PUNE GA. TENDER NO. MNGL/CP/2026-27/120 DATED :04.10.2024 Page 1 of 9 Tender For Hiring Land on Outright Purchase/Long-Term Lease Basis (Minimum 29 Years) for Setting up a Retail Outlet/CGS/Pig Receiver/Warehouse in the Hadapsar Area of Pune GA. MAHARASHTRA NATURAL GAS LIMITED Tender No.: MNGL/CP/2026-27/120 INVITATION OF BID (IFB) Tender No. MNGL/CP/2026-27/120 To, ________________________ ________________________ _______________",
+      "qty": null,
+      "uom": null,
+      "winner": "shall be measured through an authorized competent person and the payment shall be made by MNGL",
+      "brand": "Unknown",
+      "total_inr_basic": null,
+      "gst_inr": null,
+      "total_inr_incl_gst": null,
+      "fx_inr_eur": null,
+      "total_eur": null,
+      "unit_eur_basic": null,
+      "unit_eur_incl_gst": null,
+      "source_url": "https://mngl.in/storage/193889/120_Tender-Document-for-CGS-in-Hadapsar-area-of-Pune-GA.pdf",
+      "pdf_saved": "Yes",
+      "notes": "Bot clean extraction (2026-10-05); meta:score=90;priority=High;source_type=html_table;closing_date=None;equipment=Regulating / metering station;quality_status=market_target;market_relevance=High;document_type=award;unit_price_inr=;amount_label=;matched_terms=Regulating / metering station;reject_reasons=employment/corporate;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
+      "lead_score": 90,
+      "priority": "High",
+      "source_type": "html_table",
+      "closing_date": "None",
+      "equipment": "Regulating / metering station",
+      "quality_status": "market_target",
+      "market_relevance": "High",
+      "document_type": "award",
+      "unit_price_inr": null,
+      "amount_label": "",
+      "extraction_scope": "market_intelligence_only",
+      "excluded_scope": "no_bid_or_offer_submission_automation",
+      "missing_ref": false,
+      "missing_date": true,
+      "missing_qty": true,
+      "missing_winner": false,
+      "missing_price": true,
+      "is_clean_market_target": true,
+      "needs_quality_review": false
     }
   ],
   "quality_review": [
@@ -97121,6 +97164,49 @@
       "quality_status": "needs_review",
       "market_relevance": "Medium",
       "document_type": "award",
+      "unit_price_inr": null,
+      "amount_label": "",
+      "extraction_scope": "market_intelligence_only",
+      "excluded_scope": "no_bid_or_offer_submission_automation",
+      "missing_ref": false,
+      "missing_date": false,
+      "missing_qty": true,
+      "missing_winner": true,
+      "missing_price": true,
+      "is_clean_market_target": false,
+      "needs_quality_review": true
+    },
+    {
+      "tender_id": "T-1895",
+      "company": "Vadodara Gas Limited",
+      "portal": "Vadodara Gas Limited",
+      "tender_ref": "Bidders",
+      "tender_date": "02/01/2024",
+      "status": "Awarded",
+      "product_segment": "Gas-related / review",
+      "product_description": "Replies to Bidders Queries for the Purchase of 16 Nos. Dual ARM Car/ Auto Dispenser with\n                05 year AMC For New CNG Station, Upgradation of Existing CNG Station ARC Basis vide Tender No.:\n                VGL/CO/C&P-CNG/BD202312P095 Dated 02/01/2024 and Tender ID: 616119",
+      "qty": null,
+      "uom": null,
+      "winner": "Not found",
+      "brand": "Unknown",
+      "total_inr_basic": null,
+      "gst_inr": null,
+      "total_inr_incl_gst": null,
+      "fx_inr_eur": null,
+      "total_eur": null,
+      "unit_eur_basic": null,
+      "unit_eur_incl_gst": null,
+      "source_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/Replies-to-Bidders-16-NOS-DUAL-ARM-CARAUTO-DISPENSER.pdf",
+      "pdf_saved": "No",
+      "notes": "Bot tarafindan tespit edildi (2026-07-01) | Bot enrich; date=2026-07-01; type=pdf; score=230; Bot tespit/zenginlestirme (2026-07-01); meta:score=70;priority=High;source_type=html_link;closing_date=None;equipment=Gas-related / review;reasons=equipment:Gas-related / review,document source,quantity signal,tender reference signal; Bot clean extraction (2026-10-05); meta:score=43;priority=Medium;source_type=html_link;closing_date=;equipment=Gas-related / review;quality_status=needs_review;market_relevance=Medium;document_type=unknown;unit_price_inr=;amount_label=;matched_terms=gas_context;reject_reasons=;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
+      "lead_score": 70,
+      "priority": "Medium",
+      "source_type": "html_link",
+      "closing_date": "",
+      "equipment": "Gas-related / review",
+      "quality_status": "needs_review",
+      "market_relevance": "Medium",
+      "document_type": "unknown",
       "unit_price_inr": null,
       "amount_label": "",
       "extraction_scope": "market_intelligence_only",
@@ -101607,6 +101693,49 @@
     }
   ],
   "rejected_tenders": [
+    {
+      "tender_id": "T-1275",
+      "company": "Indraprastha Gas (IGL)",
+      "portal": "Indraprastha Gas (IGL)",
+      "tender_ref": "IGL/ET2/CP/CP17502",
+      "tender_date": null,
+      "status": "New Lead",
+      "product_segment": "Gas-related / review",
+      "product_description": "Corrigendum1_xlsx_(3).pdf",
+      "qty": null,
+      "uom": null,
+      "winner": "Not found",
+      "brand": "Unknown",
+      "total_inr_basic": null,
+      "gst_inr": null,
+      "total_inr_incl_gst": null,
+      "fx_inr_eur": null,
+      "total_eur": null,
+      "unit_eur_basic": null,
+      "unit_eur_incl_gst": null,
+      "source_url": "https://tenders.iglonline.net/uploads/tender/Corrigendum1_xlsx_(3).pdf",
+      "pdf_saved": "No",
+      "notes": "Bot tarafindan tespit edildi (2026-07-01); Bot tespit/zenginlestirme (2026-07-01); meta:score=50;priority=Medium;source_type=html_table;closing_date=;equipment=Gas-related / review;reasons=equipment:Gas-related / review,document source,tender reference signal",
+      "lead_score": 50,
+      "priority": "Medium",
+      "source_type": "html_table",
+      "closing_date": "",
+      "equipment": "Gas-related / review",
+      "quality_status": "non_target",
+      "market_relevance": "Low",
+      "document_type": "corrigendum",
+      "unit_price_inr": null,
+      "amount_label": "",
+      "extraction_scope": "market_intelligence_only",
+      "excluded_scope": "no_bid_or_offer_submission_automation",
+      "missing_ref": false,
+      "missing_date": true,
+      "missing_qty": true,
+      "missing_winner": true,
+      "missing_price": true,
+      "is_clean_market_target": false,
+      "needs_quality_review": false
+    },
     {
       "tender_id": "T-1276",
       "company": "Indraprastha Gas (IGL)",
@@ -124011,49 +124140,6 @@
       "needs_quality_review": false
     },
     {
-      "tender_id": "T-1895",
-      "company": "Vadodara Gas Limited",
-      "portal": "Vadodara Gas Limited",
-      "tender_ref": "Bidders",
-      "tender_date": "02/01/2024",
-      "status": "Awarded",
-      "product_segment": "Gas-related / review",
-      "product_description": "Replies to Bidders Queries for the Purchase of 16 Nos. Dual ARM Car/ Auto Dispenser with\n                05 year AMC For New CNG Station, Upgradation of Existing CNG Station ARC Basis vide Tender No.:\n                VGL/CO/C&P-CNG/BD202312P095 Dated 02/01/2024 and Tender ID: 616119",
-      "qty": null,
-      "uom": null,
-      "winner": "Not found",
-      "brand": "Unknown",
-      "total_inr_basic": null,
-      "gst_inr": null,
-      "total_inr_incl_gst": null,
-      "fx_inr_eur": null,
-      "total_eur": null,
-      "unit_eur_basic": null,
-      "unit_eur_incl_gst": null,
-      "source_url": "https://www.vgl.co.in/wp-content/uploads/2025/pdf/Replies-to-Bidders-16-NOS-DUAL-ARM-CARAUTO-DISPENSER.pdf",
-      "pdf_saved": "No",
-      "notes": "Bot tarafindan tespit edildi (2026-07-01) | Bot enrich; date=2026-07-01; type=pdf; score=230; Bot tespit/zenginlestirme (2026-07-01); meta:score=70;priority=High;source_type=html_link;closing_date=None;equipment=Gas-related / review;reasons=equipment:Gas-related / review,document source,quantity signal,tender reference signal",
-      "lead_score": 70,
-      "priority": "High",
-      "source_type": "html_link",
-      "closing_date": "None",
-      "equipment": "Gas-related / review",
-      "quality_status": "non_target",
-      "market_relevance": "Low",
-      "document_type": "award",
-      "unit_price_inr": null,
-      "amount_label": "",
-      "extraction_scope": "market_intelligence_only",
-      "excluded_scope": "no_bid_or_offer_submission_automation",
-      "missing_ref": false,
-      "missing_date": false,
-      "missing_qty": true,
-      "missing_winner": true,
-      "missing_price": true,
-      "is_clean_market_target": false,
-      "needs_quality_review": false
-    },
-    {
       "tender_id": "T-1898",
       "company": "Vadodara Gas Limited",
       "portal": "Vadodara Gas Limited",
@@ -144722,6 +144808,25 @@
       "notes": "Bot clean extraction (2026-08-15); meta:score=100;priority=Low;source_type=html_link;closing_date=None;equipment=Regulating / metering station;quality_status=market_target;market_relevance=High;document_type=unknown;unit_price_inr=0.06060606060606061;amount_label=currency_near_total;matched_terms=Regulating / metering station,Skid / gas train,Gas filter station / filter equipment,Safety / shut-off equipment;reject_reasons=retail/cng station noise,civil/electrical only;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
       "quality_status": "market_target",
       "equipment": "Skid / gas train"
+    },
+    {
+      "tender_id": "T-2536",
+      "company": "Maharashtra Natural Gas (MNGL)",
+      "year": 2026,
+      "product_segment": "Regulating / metering station",
+      "capacity": null,
+      "qty": null,
+      "winner": "shall be measured through an authorized competent person and the payment shall be made by MNGL",
+      "brand": "Unknown",
+      "total_inr_basic": null,
+      "total_eur_basic": null,
+      "unit_eur_basic": null,
+      "unit_eur_incl_gst": null,
+      "confidence": "Medium",
+      "source_url": "https://mngl.in/storage/193889/120_Tender-Document-for-CGS-in-Hadapsar-area-of-Pune-GA.pdf",
+      "notes": "Bot clean extraction (2026-10-05); meta:score=90;priority=High;source_type=html_table;closing_date=None;equipment=Regulating / metering station;quality_status=market_target;market_relevance=High;document_type=award;unit_price_inr=;amount_label=;matched_terms=Regulating / metering station;reject_reasons=employment/corporate;scope=market_intelligence_only;excluded_scope=no_bid_or_offer_submission_automation",
+      "quality_status": "market_target",
+      "equipment": "Regulating / metering station"
     }
   ],
   "competitors": [
@@ -144826,11 +144931,6 @@
     }
   ],
   "source_log": [
-    {
-      "timestamp": "2026-07-01 10:55",
-      "message": "Otomatik tarama: 84 yeni ihale, 0 yeni fiyat kaydi, 362 mevcut satir zenginlestirildi",
-      "actor": "bot"
-    },
     {
       "timestamp": "2026-07-01 11:19",
       "message": "Otomatik tarama: 45 yeni ihale, 0 yeni fiyat kaydi, 736 satir zenginlestirildi",
@@ -145325,6 +145425,11 @@
       "timestamp": "2026-10-04 10:54",
       "message": "Clean tarama: 1 yeni ihale, 0 yeni fiyat kaydi, 0 zenginlestirme, 98 non-target atlandi",
       "actor": "bot"
+    },
+    {
+      "timestamp": "2026-10-05 12:08",
+      "message": "Clean tarama: 1 yeni ihale, 1 yeni fiyat kaydi, 1 zenginlestirme, 105 non-target atlandi",
+      "actor": "bot"
     }
   ],
   "source_failures": [
@@ -145341,8 +145446,8 @@
       "retry_strategy": "follow_final_url",
       "signals": [],
       "note": "",
-      "count": 86,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 87,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145361,8 +145466,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 96,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145382,8 +145487,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145402,8 +145507,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.gglonline.net', port=443): Max retries exceeded with url: /tender (Caused by NameResolutionError(\"HTTPSConnection(host='www.gglonline.net', port=443): Failed to resolve 'www.gglonline.net' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145423,8 +145528,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 98,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 99,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145444,8 +145549,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145465,8 +145570,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 89,
-      "last_seen": "2026-10-02 10:47 UTC",
+      "count": 90,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145488,8 +145593,8 @@
         "login_signal"
       ],
       "note": "",
-      "count": 92,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 93,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145509,8 +145614,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 94,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 95,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145530,8 +145635,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 92,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 93,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145551,8 +145656,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145572,8 +145677,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 98,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 99,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145613,8 +145718,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145653,8 +145758,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='bengalgas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='bengalgas.com', port=443): Failed to resolve 'bengalgas.com' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145673,8 +145778,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.purbabharatigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='www.purbabharatigas.in', port=443): Failed to resolve 'www.purbabharatigas.in' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145713,8 +145818,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145733,8 +145838,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='naveriyagas.com', port=443): Max retries exceeded with url: /tenders (Caused by NameResolutionError(\"HTTPSConnection(host='naveriyagas.com', port=443): Failed to resolve 'naveriyagas.com' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145753,8 +145858,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145774,8 +145879,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 98,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 99,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145794,8 +145899,8 @@
         "ssl"
       ],
       "note": "HTTPSConnectionPool(host='www.meconlimited.co.in', port=443): Max retries exceeded with url: /tenders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)')))",
-      "count": 93,
-      "last_seen": "2026-10-03 10:07 UTC",
+      "count": 94,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145814,8 +145919,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145835,8 +145940,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145855,8 +145960,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='www.dineshengineers.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.dineshengineers.com', port=443): Failed to resolve 'www.dineshengineers.com' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145875,8 +145980,8 @@
         "dns"
       ],
       "note": "HTTPSConnectionPool(host='resonanceenergy.in', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='resonanceenergy.in', port=443): Failed to resolve 'resonanceenergy.in' ([Errno -2] Name or service not known)\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145895,8 +146000,8 @@
         "connection_refused"
       ],
       "note": "HTTPSConnectionPool(host='gem.gov.in', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host='gem.gov.in', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145915,8 +146020,8 @@
         "ssl"
       ],
       "note": "HTTPSConnectionPool(host='www.nprocure.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
-      "count": 99,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 100,
+      "last_seen": "2026-10-05 11:56 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145935,8 +146040,8 @@
         "doc"
       ],
       "note": "",
-      "count": 88,
-      "last_seen": "2026-10-03 10:12 UTC",
+      "count": 89,
+      "last_seen": "2026-10-05 12:01 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145955,8 +146060,8 @@
         "doc"
       ],
       "note": "",
-      "count": 88,
-      "last_seen": "2026-10-03 10:12 UTC",
+      "count": 89,
+      "last_seen": "2026-10-05 12:01 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145975,8 +146080,8 @@
         "doc"
       ],
       "note": "",
-      "count": 88,
-      "last_seen": "2026-10-03 10:13 UTC",
+      "count": 89,
+      "last_seen": "2026-10-05 12:01 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -145995,8 +146100,8 @@
         "pdf"
       ],
       "note": "",
-      "count": 88,
-      "last_seen": "2026-10-04 10:53 UTC",
+      "count": 89,
+      "last_seen": "2026-10-05 12:08 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146197,8 +146302,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146215,8 +146320,8 @@
       "retry_strategy": "follow_final_url",
       "signals": [],
       "note": "",
-      "count": 84,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 85,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146236,8 +146341,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146256,8 +146361,8 @@
         "xls"
       ],
       "note": "",
-      "count": 85,
-      "last_seen": "2026-10-03 10:10 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 11:58 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146276,8 +146381,8 @@
         "xls"
       ],
       "note": "",
-      "count": 85,
-      "last_seen": "2026-10-03 10:11 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 12:00 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146296,8 +146401,8 @@
         "xls"
       ],
       "note": "",
-      "count": 85,
-      "last_seen": "2026-10-03 10:15 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 12:04 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146316,8 +146421,8 @@
         "xls"
       ],
       "note": "",
-      "count": 85,
-      "last_seen": "2026-10-03 10:15 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 12:04 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146336,8 +146441,8 @@
         "http_403"
       ],
       "note": "",
-      "count": 95,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 96,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146356,8 +146461,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 91,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 92,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146698,8 +146803,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 68,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 69,
+      "last_seen": "2026-10-05 11:53 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -146719,8 +146824,8 @@
         "http_404"
       ],
       "note": "",
-      "count": 68,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 69,
+      "last_seen": "2026-10-05 11:53 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147060,8 +147165,8 @@
         "connection_refused"
       ],
       "note": "HTTPSConnectionPool(host='www.godavarigas.in', port=443): Max retries exceeded with url: /tenders (Caused by NewConnectionError(\"HTTPSConnection(host='www.godavarigas.in', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
-      "count": 15,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 16,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -147990,8 +148095,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:53 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148016,8 +148121,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148040,8 +148145,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 92,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 93,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148068,8 +148173,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148094,8 +148199,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148122,8 +148227,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148198,8 +148303,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148222,8 +148327,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148248,8 +148353,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 95,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 96,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148274,8 +148379,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 86,
-      "last_seen": "2026-10-03 10:06 UTC",
+      "count": 87,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148300,8 +148405,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 91,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 92,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148326,8 +148431,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 91,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 92,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148350,8 +148455,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 87,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 88,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148374,8 +148479,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148398,8 +148503,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148424,8 +148529,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148452,8 +148557,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 85,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 11:56 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148476,8 +148581,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:56 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -148524,8 +148629,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 93,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 94,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149422,8 +149527,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:53 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149448,8 +149553,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149472,8 +149577,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 92,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 93,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149500,8 +149605,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149526,8 +149631,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149554,8 +149659,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149630,8 +149735,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149654,8 +149759,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149680,8 +149785,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 95,
-      "last_seen": "2026-10-04 10:47 UTC",
+      "count": 96,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149706,8 +149811,8 @@
         "credential_area",
         "registration_area"
       ],
-      "count": 86,
-      "last_seen": "2026-10-03 10:06 UTC",
+      "count": 87,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149732,8 +149837,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 91,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 92,
+      "last_seen": "2026-10-05 11:54 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149758,8 +149863,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 91,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 92,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149782,8 +149887,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 87,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 88,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149806,8 +149911,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149830,8 +149935,8 @@
       "signals": [
         "protected_source"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149856,8 +149961,8 @@
         "credential_area",
         "protected_source"
       ],
-      "count": 97,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 98,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149884,8 +149989,8 @@
         "protected_source",
         "registration_area"
       ],
-      "count": 85,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 86,
+      "last_seen": "2026-10-05 11:56 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149908,8 +150013,8 @@
       "signals": [
         "registration_area"
       ],
-      "count": 96,
-      "last_seen": "2026-10-04 10:49 UTC",
+      "count": 97,
+      "last_seen": "2026-10-05 11:56 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -149956,8 +150061,8 @@
       "signals": [
         "browser_rendered"
       ],
-      "count": 93,
-      "last_seen": "2026-10-04 10:48 UTC",
+      "count": 94,
+      "last_seen": "2026-10-05 11:55 UTC",
       "scope": "market_intelligence_only",
       "excluded_scope": "no_procurement_transaction_automation"
     },
@@ -150204,7 +150309,7 @@
       "tier": "Tier 2",
       "relevance": "High",
       "status": "Access Review",
-      "lead_count": 4,
+      "lead_count": 5,
       "failure_count": 2,
       "open_access_review_count": 4,
       "top_failure": "timeout",
