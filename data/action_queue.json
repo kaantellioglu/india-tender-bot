@@ -842,8 +842,8 @@
     "signals": [
       "browser_rendered"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:21 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:41 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -868,8 +868,8 @@
       "credential_area",
       "registration_area"
     ],
-    "count": 111,
-    "last_seen": "2026-10-19 10:21 UTC",
+    "count": 112,
+    "last_seen": "2026-10-20 09:41 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -920,8 +920,8 @@
       "protected_source",
       "registration_area"
     ],
-    "count": 111,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 112,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -946,8 +946,8 @@
       "credential_area",
       "registration_area"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -974,8 +974,8 @@
       "protected_source",
       "registration_area"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1050,8 +1050,8 @@
     "signals": [
       "browser_rendered"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1074,8 +1074,8 @@
     "signals": [
       "browser_rendered"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1100,8 +1100,8 @@
       "credential_area",
       "protected_source"
     ],
-    "count": 110,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 111,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1126,8 +1126,8 @@
       "credential_area",
       "registration_area"
     ],
-    "count": 99,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 100,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1152,8 +1152,8 @@
       "credential_area",
       "protected_source"
     ],
-    "count": 105,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 106,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1178,8 +1178,8 @@
       "credential_area",
       "protected_source"
     ],
-    "count": 105,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 106,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1202,8 +1202,8 @@
     "signals": [
       "registration_area"
     ],
-    "count": 102,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 103,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1226,8 +1226,8 @@
     "signals": [
       "protected_source"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1250,8 +1250,8 @@
     "signals": [
       "protected_source"
     ],
-    "count": 111,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 112,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1276,8 +1276,8 @@
       "credential_area",
       "protected_source"
     ],
-    "count": 112,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 113,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1304,8 +1304,8 @@
       "protected_source",
       "registration_area"
     ],
-    "count": 99,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 100,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1328,8 +1328,8 @@
     "signals": [
       "registration_area"
     ],
-    "count": 111,
-    "last_seen": "2026-10-19 10:23 UTC",
+    "count": 112,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1376,8 +1376,8 @@
     "signals": [
       "browser_rendered"
     ],
-    "count": 108,
-    "last_seen": "2026-10-19 10:22 UTC",
+    "count": 109,
+    "last_seen": "2026-10-20 09:42 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   },
@@ -1448,8 +1448,8 @@
     "signals": [
       "registration_area"
     ],
-    "count": 6,
-    "last_seen": "2026-10-18 09:13 UTC",
+    "count": 7,
+    "last_seen": "2026-10-20 09:43 UTC",
     "scope": "market_intelligence_only",
     "excluded_scope": "no_procurement_transaction_automation"
   }
