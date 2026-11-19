@@ -31,14 +31,14 @@ jobs:
       - run: python -m scripts.export_to_json
       - run: python -m scripts.verify_india_pilot
       - name: Run India agent team
-        if: (github.event_name == 'workflow_dispatch' && inputs.run_agents) || (github.event_name == 'pull_request' && github.event.pull_request.number == 1 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/india-24-month-pilot')
+        if: github.event_name == 'workflow_dispatch' && inputs.run_agents
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || secrets.OPEN_API_KEY }}
           TENDER_SUPERVISOR_MODEL: ${{ vars.TENDER_SUPERVISOR_MODEL || 'gpt-6.1-terra' }}
           TENDER_WORKER_MODEL: ${{ vars.TENDER_WORKER_MODEL || 'gpt-6-luna' }}
         run: python -m scripts.india_agents --output output/india-agent-report.json
       - uses: actions/upload-artifact@v4
-        if: (github.event_name == 'workflow_dispatch' && inputs.run_agents) || (github.event_name == 'pull_request' && github.event.pull_request.number == 1 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/india-24-month-pilot')
+        if: github.event_name == 'workflow_dispatch' && inputs.run_agents
         with:
           name: india-agent-report
           path: output/india-agent-report.json
