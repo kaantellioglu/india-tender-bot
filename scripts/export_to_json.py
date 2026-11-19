@@ -2,7 +2,9 @@
 from __future__ import annotations
 import argparse, json, re
 from collections import Counter, defaultdict
+from calendar import monthrange
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import openpyxl, yaml
 from src.quality.market_filter import classify_market_record
@@ -88,15 +90,50 @@ def clean_price_rows(rows):
         if q.quality_status=='market_target': r['quality_status']=q.quality_status; r['equipment']=q.equipment_segment; out.append(r)
     return out
 
+def pilot_window(today):
+    year = today.year - 2
+    return today.replace(year=year, day=min(today.day, monthrange(year, today.month)[1]))
+
+
+def tender_date(row):
+    value = str(row.get('tender_date') or '').strip()
+    for pattern in ('%Y-%m-%d', '%d/%m/%Y', '%d.%m.%Y', '%d-%m-%Y'):
+        try:
+            return datetime.strptime(value, pattern).date()
+        except ValueError:
+            continue
+    return None
+
+
+def filter_pilot(rows, today):
+    cutoff = pilot_window(today)
+    dated, undated = [], []
+    for row in rows:
+        published = tender_date(row)
+        if published is None:
+            undated.append({**row, 'needs_quality_review': True, 'is_clean_market_target': False})
+        elif cutoff <= published <= today:
+            dated.append(row)
+    return dated, undated
+
+
 def export(workbook_path,out_path):
     wb=openpyxl.load_workbook(workbook_path,data_only=True)
     portals=rows_as_dicts(wb['01 Portal Master'],3,['tier','name','type','website','tender_search_url','award_url','login_requirement','relevance','note','next_action'])
     raw=[derive_tender_fields(t) for t in rows_as_dicts(wb['04 Tender Register'],3,['tender_id','company','portal','tender_ref','tender_date','status','product_segment','product_description','qty','uom','winner','brand','total_inr_basic','gst_inr','total_inr_incl_gst','fx_inr_eur','total_eur','unit_eur_basic','unit_eur_incl_gst','source_url','pdf_saved','notes'])]
-    clean=[t for t in raw if t.get('is_clean_market_target')]; review=[t for t in raw if t.get('needs_quality_review')]; rejected=[t for t in raw if t.get('quality_status')=='non_target']
+    today = datetime.now(ZoneInfo('Asia/Kolkata')).date()
+    dated, undated = filter_pilot(raw, today)
+    raw = dated + undated
+    clean = [t for t in dated if t.get('is_clean_market_target')]
+    review = [t for t in raw if t.get('needs_quality_review')]
+    rejected = [t for t in dated if t.get('quality_status') == 'non_target']
     price=clean_price_rows(rows_as_dicts(wb['06 Price Intelligence'],3,['tender_id','company','year','product_segment','capacity','qty','winner','brand','total_inr_basic','total_eur_basic','unit_eur_basic','unit_eur_incl_gst','confidence','source_url','notes']))
+    dated_ids = {str(t['tender_id']).strip() for t in clean if t.get('tender_id')}
+    price = [r for r in price if str(r.get('tender_id') or '').strip() in dated_ids]
     comps=rows_as_dicts(wb['07 Competitor DB'],3,['name','country','role','segment','website','relevance','notes']); log=rows_as_dicts(wb['08 Source Log'],3,['timestamp','message','actor'])[-100:]
     failures=load_json_list(FAILURES_PATH); actions=load_json_list(ACTIONS_PATH); cleanup=load_source_cleanup(); health=build_portal_health(portals,clean,failures,actions,cleanup)
     dashboard={'generated_at':datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),'portal_count':len(portals),'raw_tender_count':len(raw),'tender_count':len(clean),'review_tender_count':len(review),'rejected_tender_count':len(rejected),'price_row_count':len(price),'competitor_count':len(comps),'awarded_count':sum(1 for t in clean if 'award' in str(t.get('status') or '').lower()),'high_priority_count':sum(1 for t in clean if t.get('priority')=='High'),'medium_priority_count':sum(1 for t in clean if t.get('priority')=='Medium'),'failure_count':len(failures),'open_access_review_count':len([a for a in actions if a.get('status','open')=='open']),'portal_access_review_count':sum(1 for p in health if p.get('status') in {'Access Review','Access Problem','Broken URL','Source Cleanup'}),'source_cleanup_count':len(cleanup),'missing_ref_count':sum(1 for t in clean if t.get('missing_ref')),'missing_date_count':sum(1 for t in clean if t.get('missing_date')),'missing_qty_count':sum(1 for t in clean if t.get('missing_qty')),'missing_price_count':sum(1 for t in clean if t.get('missing_price')),'scope':'market_intelligence_only','excluded_scope':'no_bid_or_offer_submission_automation'}
+    dashboard.update({'lookback_months': 24, 'archive_start': pilot_window(today).isoformat(), 'undated_count': len(undated)})
     payload={'dashboard':dashboard,'portals':portals,'tenders':clean,'raw_tenders':raw[-2000:],'quality_review':review[-1000:],'rejected_tenders':rejected[-1000:],'price_intelligence':price,'competitors':comps,'source_log':log,'source_failures':failures[-1000:],'action_queue':actions[-1000:],'access_queue':actions[-1000:],'portal_health':health,'source_cleanup':cleanup}
     out_path.parent.mkdir(parents=True,exist_ok=True); text=json.dumps(payload,ensure_ascii=False,indent=2)
     if len(text)<100: raise RuntimeError('Export produced suspiciously small data.json')
