@@ -27,6 +27,8 @@ jobs:
           cache: "pip"
       - name: Bagimliliklari kur
         run: pip install -r requirements.txt
+      - name: Tarama öncesi arşivi kopyala
+        run: cp data/India_Procurement_Intelligence_Database.xlsx "$RUNNER_TEMP/india-before.xlsx"
       - name: Taramayi calistir
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -37,32 +39,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -m src.main --max-pdf-parses 120
-      - name: Dashboard JSON uret
-        run: python -m scripts.export_to_json
-      - name: Dashboard verisini dogrula
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          p = Path("docs/data.json")
-          if not p.exists():
-              raise SystemExit("docs/data.json olusmadi")
-          raw = p.read_text(encoding="utf-8")
-          if len(raw.strip()) < 100:
-              raise SystemExit("docs/data.json bos veya gecersiz gorunuyor")
-          data = json.loads(raw)
-          dashboard = data.get("dashboard", {})
-          print("generated_at:", dashboard.get("generated_at"))
-          print("clean_tender_count:", dashboard.get("tender_count"))
-          print("raw_tender_count:", dashboard.get("raw_tender_count"))
-          print("review_tender_count:", dashboard.get("review_tender_count"))
-          print("rejected_tender_count:", dashboard.get("rejected_tender_count"))
-          print("price_row_count:", dashboard.get("price_row_count"))
-          required = ["dashboard", "portals", "tenders", "raw_tenders", "quality_review", "price_intelligence", "portal_health", "source_failures", "access_queue", "source_cleanup"]
-          missing = [k for k in required if k not in data]
-          if missing:
-              raise SystemExit(f"data.json eksik alanlar: {missing}")
-          PY
+      - name: Son tarama sonuçlarını üret
+        run: python -m scripts.export_live_scan --before "$RUNNER_TEMP/india-before.xlsx" --after data/India_Procurement_Intelligence_Database.xlsx --out docs/data.json
       - name: Guncellenen dosyalari commitle ve pushla
         run: |
           git config user.name "eska-tender-bot"
