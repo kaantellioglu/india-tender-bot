@@ -1,114 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ESKA Global Gas Tender Intelligence</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hindistan İhale Takibi · ESKA Valve</title>
 <style>
-:root{--bg:#0f1417;--panel:#171e23;--panel2:#1f2a31;--line:#2d3a43;--text:#edeae2;--muted:#94a3ad;--amber:#ff8a3d;--cyan:#4fb8d0;--green:#6fcf97;--red:#e8664f;--yellow:#f2c94c}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Arial,Helvetica,sans-serif}header{background:var(--panel);border-bottom:1px solid var(--line);padding:24px 28px}h1{margin:0;text-transform:uppercase;letter-spacing:.04em;font-size:28px}.sub{color:var(--muted);margin-top:6px}.wrap{max-width:1500px;margin:0 auto;padding:22px 28px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:20px}.stat{background:var(--panel);padding:14px}.stat b{display:block;font-size:28px;color:var(--amber)}.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.tabs{display:flex;gap:2px;overflow:auto;border-bottom:1px solid var(--line);margin:18px 0}.tab{border:0;background:transparent;color:var(--muted);padding:12px 16px;cursor:pointer;text-transform:uppercase;font-size:12px;letter-spacing:.04em}.tab.active{color:var(--amber);border-bottom:2px solid var(--amber)}.view{display:none}.view.active{display:block}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}.toolbar input,.toolbar select{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:8px 10px;min-width:160px}.toolbar input{flex:1;min-width:260px}.count{margin-left:auto;color:var(--muted);font-family:monospace}.tablewrap{overflow:auto;border:1px solid var(--line);background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}th{position:sticky;top:0;background:var(--panel2);color:var(--muted);text-align:left;font-size:11px;text-transform:uppercase;cursor:pointer}tr:hover{background:#20303a}a{color:var(--cyan)}.pill{display:inline-block;border:1px solid var(--line);border-radius:14px;padding:2px 8px;font-size:11px;white-space:nowrap}.High{color:var(--green);border-color:rgba(111,207,151,.45)}.Medium{color:var(--yellow);border-color:rgba(242,201,76,.45)}.Low{color:var(--muted)}.bad{color:var(--red)}.ok{color:var(--green)}.mono{font-family:monospace}.muted{color:var(--muted)}footer{padding:20px 28px;border-top:1px solid var(--line);color:var(--muted)}
+:root{color-scheme:light;--paper:#f5f7f5;--white:#fff;--ink:#172721;--quiet:#50625a;--line:#dce4de;--green:#176447}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+header{background:var(--white);border-bottom:1px solid var(--line)}.brand,main{max-width:1200px;margin:auto;padding:0 clamp(16px,4vw,52px)}.brand{min-height:64px;display:flex;align-items:center;gap:14px}.brand strong{letter-spacing:.05em}.brand span{color:var(--quiet);border-left:1px solid var(--line);padding-left:14px}
+main{padding-top:clamp(22px,5vw,50px);padding-bottom:48px}h1{font-size:clamp(23px,4vw,32px);letter-spacing:-.035em;margin:0 0 4px}p{margin:0}.muted{color:var(--quiet)}.metrics{display:flex;flex-wrap:wrap;gap:16px 42px;margin:22px 0;padding:12px 0;border-block:1px solid var(--line)}.metrics div{min-width:100px}.metrics dt{color:var(--quiet);font-size:13px}.metrics dd{margin:0;font-size:27px;font-variant-numeric:tabular-nums}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:15px 17px}h2{margin:0;font-size:17px}input{border-radius:5px;border:1px solid #a8b7ad;font:inherit;padding:7px 10px;max-width:100%;width:248px}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:650px;text-align:left}td,th{padding:10px 16px;border-top:1px solid var(--line);vertical-align:top}th{font-size:13px;font-weight:600;color:var(--quiet)}td:first-child{width:44%;overflow-wrap:anywhere}td small{display:block;color:var(--quiet);margin-top:3px}a{color:var(--green);text-underline-offset:3px}#message{padding:24px 17px;border-top:1px solid var(--line);color:var(--quiet)}[hidden]{display:none!important}
 </style>
 </head>
 <body>
-<header><h1>ESKA Global Gas Tender Intelligence</h1><div class="sub">India pilot · gas regulators, skids, stations, valves · son güncelleme: <span id="generatedAt">—</span> · <span id="status">veri yükleniyor…</span></div></header>
-<div class="wrap">
-  <section id="stats" class="stats"></section>
-  <nav class="tabs" id="tabs">
-    <button class="tab active" data-tab="high">High Priority</button>
-    <button class="tab" data-tab="tenders">Tender Register</button>
-    <button class="tab" data-tab="prices">Price Intelligence</button>
-    <button class="tab" data-tab="health">Portal Health</button>
-    <button class="tab" data-tab="cleanup">Source Cleanup</button>
-    <button class="tab" data-tab="actions">Access Review</button>
-    <button class="tab" data-tab="failures">Failure Queue</button>
-    <button class="tab" data-tab="competitors">Competitors</button>
-    <button class="tab" data-tab="log">Source Log</button>
-  </nav>
-  <section id="view-high" class="view active"></section>
-  <section id="view-tenders" class="view"></section>
-  <section id="view-prices" class="view"></section>
-  <section id="view-health" class="view"></section>
-  <section id="view-cleanup" class="view"></section>
-  <section id="view-actions" class="view"></section>
-  <section id="view-failures" class="view"></section>
-  <section id="view-competitors" class="view"></section>
-  <section id="view-log" class="view"></section>
-</div>
-<footer>Dashboard data comes from docs/data.json generated by GitHub Actions. Use Access Review + Failure Queue to improve public market-intelligence extraction. Procurement transaction automation is out of scope.</footer>
+<header><div class="brand"><strong>ESKA Valve</strong><span>İhale Takibi / Hindistan</span></div></header>
+<main>
+<h1>Son tarama sonuçları</h1>
+<p class="muted" id="scanned">Tarama bilgisi yükleniyor…</p>
+<dl class="metrics"><div><dt>Yeni kayıt</dt><dd id="new">—</dd></div><div><dt>Güncellenen</dt><dd id="updated">—</dd></div></dl>
+<section class="panel" aria-labelledby="results-title">
+<div class="toolbar"><h2 id="results-title">İhale kayıtları</h2><input type="search" id="search" aria-label="İhale ara" placeholder="Kurum, ürün veya referans ara" disabled></div>
+<div class="scroll" id="table" hidden><table><thead><tr><th scope="col">İhale ve referans</th><th scope="col">Kurum</th><th scope="col">İlan tarihi</th><th scope="col">Tarama sonucu</th><th scope="col">Kaynak</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p id="message" role="status">Son tarama yükleniyor…</p>
+</section>
+</main>
 <script>
-const state={data:null,sort:{}};
-const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const num=v=>v==null||v===''?'—':(Number.isNaN(Number(v))?esc(v):Number(v).toLocaleString('en-US',{maximumFractionDigits:2}));
-const link=u=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">open ↗</a>`:'—';
-const pill=v=>`<span class="pill ${esc(v||'Low')}">${esc(v||'—')}</span>`;
-function table(container, id, rows, cols){
-  const qid=id+'q', cid=id+'count';
-  container.innerHTML=`<div class="toolbar"><input id="${qid}" placeholder="Ara / filter…"><span class="count" id="${cid}"></span></div><div class="tablewrap"><table id="${id}"><thead><tr>${cols.map(c=>`<th data-k="${c.k}">${c.h}</th>`).join('')}</tr></thead><tbody></tbody></table></div>`;
-  const input=document.getElementById(qid), tbody=container.querySelector('tbody'), count=document.getElementById(cid);
-  function render(){
-    const q=input.value.toLowerCase();
-    let data=rows.filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q));
-    const s=state.sort[id];
-    if(s){data=[...data].sort((a,b)=>String(a[s.k]??'').localeCompare(String(b[s.k]??''),undefined,{numeric:true})*(s.d==='desc'?-1:1));}
-    count.textContent=`${data.length} / ${rows.length}`;
-    tbody.innerHTML=data.map(r=>`<tr>${cols.map(c=>`<td>${c.f?c.f(r[c.k],r):esc(r[c.k]??'')}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${cols.length}" class="muted">Kayıt yok.</td></tr>`;
+const get = id => document.getElementById(id);
+let entries = [];
+const searchable = row => [row.buyer,row.reference,row.description,row.equipment].join(' ').toLocaleLowerCase('tr');
+function render() {
+  const query = get('search').value.trim().toLocaleLowerCase('tr');
+  const visible = entries.filter(row => searchable(row).includes(query));
+  const output = document.createDocumentFragment();
+  for (const row of visible) {
+    const tr = document.createElement('tr');
+    const values = [row.description || row.equipment, row.buyer, row.date, row.change === 'new' ? 'Yeni kayıt' : 'Güncellendi'];
+    values.forEach(value => {
+      const cell = tr.insertCell();
+      cell.textContent = value || '—';
+    });
+    const detail = document.createElement('small');
+    detail.textContent = [row.reference,row.status].filter(Boolean).join(' · ');
+    tr.cells[0].append(detail);
+    const cell = tr.insertCell();
+    const source = document.createElement('a');
+    source.href = row.source;
+    if (['http:', 'https:'].includes(source.protocol)) {
+      source.textContent = 'İlanı aç';
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+      cell.append(source);
+    }
+    output.append(tr);
   }
-  input.addEventListener('input',render);
-  container.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;const cur=state.sort[id];state.sort[id]={k,d:cur&&cur.k===k&&cur.d==='asc'?'desc':'asc'};render();}));
-  render();
+  get('rows').replaceChildren(output);
+  get('table').hidden = !visible.length;
+  get('message').hidden = Boolean(visible.length);
+  get('message').textContent = entries.length ? 'Aramanızla eşleşen ihale bulunamadı.' : 'Son taramada yeni veya güncellenen ihale bulunmadı.';
 }
-function renderStats(d){
-  const x=d.dashboard||{};
-  const items=[['Portal',x.portal_count],['Tender',x.tender_count],['High Priority',x.high_priority_count],['Price Rows',x.price_row_count],['Access Reviews',x.open_access_review_count],['Source Cleanup',x.source_cleanup_count],['Failures',x.failure_count],['Missing Ref',x.missing_ref_count],['Missing Price',x.missing_price_count]];
-  document.getElementById('stats').innerHTML=items.map(([l,n])=>`<div class="stat"><b>${num(n||0)}</b><span>${esc(l)}</span></div>`).join('');
-}
-const tenderCols=[
-  {k:'priority',h:'Priority',f:v=>pill(v)},{k:'lead_score',h:'Score',f:num},{k:'company',h:'Buyer/Portal'},
-  {k:'tender_ref',h:'Tender Ref',f:v=>esc(v||'—')},{k:'tender_date',h:'Date',f:v=>esc(v||'—')},{k:'closing_date',h:'Closing',f:v=>esc(v||'—')},
-  {k:'equipment',h:'Equipment',f:v=>esc(v||'—')},{k:'product_description',h:'Title / Description',f:v=>`<div style="max-width:520px">${esc(v||'')}</div>`},
-  {k:'qty',h:'Qty',f:v=>esc(v||'—')},{k:'winner',h:'Winner',f:v=>esc(v||'—')},{k:'total_inr_basic',h:'INR',f:num},{k:'source_type',h:'Source'},
-  {k:'source_url',h:'URL',f:link}
-];
-function init(d){
-  state.data=d;document.getElementById('generatedAt').textContent=d.dashboard.generated_at||'—';document.getElementById('status').textContent='veri yüklendi';renderStats(d);
-  table(document.getElementById('view-high'),'tblHigh',(d.tenders||[]).filter(x=>x.priority==='High'),tenderCols);
-  table(document.getElementById('view-tenders'),'tblTender',d.tenders||[],tenderCols);
-  table(document.getElementById('view-prices'),'tblPrice',d.price_intelligence||[],[
-    {k:'tender_id',h:'ID'},{k:'company',h:'Company'},{k:'product_segment',h:'Segment'},{k:'qty',h:'Qty'},{k:'winner',h:'Winner'},{k:'total_inr_basic',h:'INR',f:num},{k:'confidence',h:'Confidence'},{k:'source_url',h:'URL',f:link}
-  ]);
-  table(document.getElementById('view-health'),'tblHealth',d.portal_health||[],[
-    {k:'status',h:'Status',f:v=>`<span class="${v==='OK'?'ok':(v==='Access Review'?'Medium':'bad')}">${esc(v)}</span>`},{k:'portal',h:'Portal'},{k:'tier',h:'Tier'},{k:'lead_count',h:'Leads',f:num},{k:'failure_count',h:'Failures',f:num},{k:'open_access_review_count',h:'Access Reviews',f:num},{k:'top_failure',h:'Top Failure'},{k:'data_access_status',h:'Data Access'},{k:'market_intelligence_priority',h:'MI Priority'},{k:'next_action',h:'Technical Fix'},{k:'public_tender_url',h:'Tender URL',f:link},{k:'archive_award_url',h:'Archive/Award',f:link}
-  ]);
-
-  table(document.getElementById('view-cleanup'),'tblCleanup',d.source_cleanup||[],[
-    {k:'market_intelligence_priority',h:'Priority',f:v=>pill(v||'Medium')},{k:'portal',h:'Portal'},{k:'status',h:'Status'},{k:'data_access_status',h:'Data Access'},
-    {k:'technical_fix_needed',h:'Technical Fix Needed'},{k:'target_data',h:'Target Data',f:v=>esc(Array.isArray(v)?v.join(', '):(v||''))},{k:'notes',h:'Notes'},
-    {k:'public_tender_url',h:'Tender URL',f:link},{k:'archive_award_url',h:'Archive/Award URL',f:link},{k:'excluded_scope',h:'Excluded Scope'}
-  ]);
-  table(document.getElementById('view-actions'),'tblAccess',d.access_queue||d.action_queue||[],[
-    {k:'last_seen',h:'Last Seen'},
-    {k:'portal',h:'Portal'},
-    {k:'action_type',h:'Access Type'},
-    {k:'data_access',h:'Data Access'},
-    {k:'required_items',h:'Requirement',f:v=>esc((v||[]).join(', '))},
-    {k:'automation_possible',h:'Extraction Scope'},
-    {k:'next_technical_action',h:'Technical Action'},
-    {k:'next_business_action',h:'Source Check'},
-    {k:'excluded_scope',h:'Excluded Scope'},
-    {k:'confidence',h:'Confidence'},
-    {k:'url',h:'URL',f:link}
-  ]);
-  table(document.getElementById('view-failures'),'tblFailures',d.source_failures||[],[
-    {k:'last_seen',h:'Last Seen'},{k:'portal',h:'Portal'},{k:'failure_type',h:'Failure'},{k:'http_status',h:'HTTP',f:num},{k:'content_type',h:'Content Type'},{k:'action_required',h:'Extraction Action'},{k:'retry_strategy',h:'Retry Strategy'},{k:'excluded_scope',h:'Excluded Scope'},{k:'count',h:'Count',f:num},{k:'url',h:'URL',f:link}
-  ]);
-  table(document.getElementById('view-competitors'),'tblComp',d.competitors||[],[
-    {k:'name',h:'Name'},{k:'country',h:'Country'},{k:'role',h:'Role'},{k:'segment',h:'Segment'},{k:'relevance',h:'Relevance'},{k:'website',h:'Site',f:link}
-  ]);
-  table(document.getElementById('view-log'),'tblLog',(d.source_log||[]).slice().reverse(),[
-    {k:'timestamp',h:'Time'},{k:'message',h:'Message'},{k:'actor',h:'Actor'}
-  ]);
-}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('view-'+b.dataset.tab).classList.add('active');}));
-fetch('data.json?_='+Date.now()).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(init).catch(e=>{document.getElementById('status').textContent='HATA: '+e.message;});
+get('search').addEventListener('input', render);
+fetch('data.json?t=' + Date.now(), {cache:'no-store'})
+  .then(response => {
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return response.json();
+  }).then(data => {
+    if (!data.scanned_at || !Array.isArray(data.results)) throw new Error('Eksik tarama çıktısı');
+    const stamp = new Intl.DateTimeFormat('tr-TR', {dateStyle:'long', timeStyle:'short', timeZone:'Europe/Istanbul'}).format(new Date(data.scanned_at));
+    entries = data.results;
+    get('scanned').textContent = 'Son tarama · ' + stamp + ' (TSİ)';
+    get('new').textContent = entries.filter(row => row.change === 'new').length;
+    get('updated').textContent = entries.filter(row => row.change === 'updated').length;
+    get('search').disabled = !entries.length;
+    render();
+  }).catch(() => {
+    get('scanned').textContent = 'Tarama bilgisi şu anda alınamadı.';
+    get('message').textContent = 'Sonuçlar yüklenemedi. Sayfayı yenileyin.';
+  });
 </script>
 </body>
 </html>
