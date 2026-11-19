@@ -46,7 +46,7 @@ def verify_browser(payload):
         thread.start()
         try:
             with sync_playwright() as playwright:
-                browser = playwright.chromium.launch()
+                browser = playwright.chromium.launch(channel="chrome")
                 page = browser.new_page()
                 errors = []
                 page.on("pageerror", lambda error: errors.append(str(error)))
