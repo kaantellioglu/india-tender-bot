@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,8 +87,17 @@ def ask(model, task, data):
         data=json.dumps(body).encode(),
         headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}", "Content-Type": "application/json"},
     )
-    with urlopen(request, timeout=90) as response:
-        result = json.load(response)
+    try:
+        with urlopen(request, timeout=90) as response:
+            result = json.load(response)
+    except HTTPError as error:
+        try:
+            code = json.load(error).get("error", {}).get("code")
+        except (ValueError, AttributeError):
+            code = None
+        known_codes = {"insufficient_quota", "rate_limit_exceeded", "invalid_api_key", "model_not_found"}
+        label = code if isinstance(code, str) and code in known_codes else "unclassified"
+        raise RuntimeError(f"OpenAI API HTTP {error.code} ({label})") from None
     if result.get("status") != "completed":
         raise RuntimeError("Agent response did not finish")
     output = "".join(
