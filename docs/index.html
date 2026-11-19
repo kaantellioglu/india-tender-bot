@@ -23,9 +23,20 @@ main{padding-top:clamp(22px,5vw,50px);padding-bottom:48px}h1{font-size:clamp(23p
 <div class="scroll" id="table" hidden><table><thead><tr><th scope="col">İhale ve referans</th><th scope="col">Kurum</th><th scope="col">İlan tarihi</th><th scope="col">Tarama sonucu</th><th scope="col">Kaynak</th></tr></thead><tbody id="rows"></tbody></table></div>
 <p id="message" role="status">Son tarama yükleniyor…</p>
 </section>
+<section class="panel" id="reported" aria-labelledby="reported-title" style="margin-top:20px" hidden>
+<div class="toolbar"><h2 id="reported-title">Elle bildirilen açık fırsat</h2></div>
+<div style="padding:0 17px 17px">
+<p><strong>GAIL (India) Limited · Ev tipi doğalgaz regülatörü</strong></p>
+<p>GEM/2026/B/8276663 · 27.000 adet · 0,5–4 bar giriş · 21 mbar çıkış · 2,5 m³/saat</p>
+<p>Son teklif 30 Kasım 2026, 14:30 TSİ (17:00 IST)</p>
+<p class="muted">Tenderkart ve Atlenza kayıtlarına göre. Resmî GeM belgesi ayrıca kontrol edilmeli.</p>
+<p><a href="https://tenderkart.in/tender/c3d24300-0cd8-4201-865b-1515ca966539">İlanı incele</a> · <a href="https://bidplus.gem.gov.in/all-bids">GeM’de referansı ara</a></p>
+</div>
+</section>
 </main>
 <script>
 const get = id => document.getElementById(id);
+get('reported').hidden = Date.now() >= Date.parse('2026-11-30T17:00:00+05:30');
 let entries = [];
 const searchable = row => [row.buyer,row.reference,row.description,row.equipment].join(' ').toLocaleLowerCase('tr');
 function render() {
