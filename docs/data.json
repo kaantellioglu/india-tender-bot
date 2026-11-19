@@ -1,16 +1,4 @@
 {
   "scanned_at": "2026-11-19T10:45:21+00:00",
-  "results": [
-    {
-      "id": "T-2544",
-      "change": "new",
-      "buyer": "Hindustan Petroleum (HPCL CGD)",
-      "reference": null,
-      "date": null,
-      "status": "New Lead",
-      "equipment": "Regulating / metering station",
-      "description": "Forms for KYC Updation & Other Service Requests",
-      "source": "https://www.hindustanpetroleum.com/forms-for-kyc-updation-&-other-service-requests"
-    }
-  ]
+  "results": []
 }
