@@ -33,7 +33,7 @@ def public_snapshot(before, after, scanned_at):
         if row == old:
             continue
         source = source_link(row[19])
-        if not source:
+        if not source or not (row[3] or row[4]):
             continue
         results.append({
             "id": identifier,
