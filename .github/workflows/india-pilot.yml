@@ -1,0 +1,53 @@
+name: India pilot verification
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'src/**'
+      - 'docs/index.html'
+      - 'data/India_Procurement_Intelligence_Database.xlsx'
+      - '.github/workflows/india-pilot.yml'
+  workflow_dispatch:
+    inputs:
+      run_agents:
+        description: Run the five agents against the exported pilot data
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt playwright
+      - run: python -m scripts.export_to_json
+      - run: python -m scripts.verify_india_pilot
+      - name: Generate the India evidence report without API credits
+        run: python -m scripts.india_offline_report --output output/india-evidence-report.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: india-evidence-report
+          path: output/india-evidence-report.md
+          if-no-files-found: error
+          retention-days: 14
+      - name: Run India agent team
+        if: github.event_name == 'workflow_dispatch' && inputs.run_agents
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || secrets.OPEN_API_KEY }}
+          TENDER_SUPERVISOR_MODEL: ${{ vars.TENDER_SUPERVISOR_MODEL || 'gpt-6.1-terra' }}
+          TENDER_WORKER_MODEL: ${{ vars.TENDER_WORKER_MODEL || 'gpt-6-luna' }}
+        run: python -m scripts.india_agents --output output/india-agent-report.json
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'workflow_dispatch' && inputs.run_agents
+        with:
+          name: india-agent-report
+          path: output/india-agent-report.json
+          retention-days: 14
